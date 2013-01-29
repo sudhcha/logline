@@ -1,6 +1,5 @@
 package com.vrc.logline.container;
 
-
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 import org.simpleframework.http.core.Container;
@@ -13,7 +12,7 @@ import java.io.PrintStream;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 
-public class FrontContainer implements Container{
+public class SynchContainer implements Container{
 
     @Override
     public void handle(Request request, Response response) {
@@ -33,11 +32,4 @@ public class FrontContainer implements Container{
         }
     }
 
-    public static void main(String[] list) throws Exception {
-        Container container = new FrontContainer();
-        Server server = new ContainerServer(container);
-        Connection connection = new SocketConnection(server);
-        SocketAddress address = new InetSocketAddress(8080);
-        connection.connect(address);
-    }
 }
