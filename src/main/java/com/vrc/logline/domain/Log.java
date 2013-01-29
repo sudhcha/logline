@@ -1,4 +1,4 @@
-package com.vrc.logline.container.domain;
+package com.vrc.logline.domain;
 
 public class Log {
     private String line;

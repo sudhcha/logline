@@ -2,7 +2,7 @@ Feature list:
 
 #R1:
 must run executable jar
-must open window in browser
+must open window in browser      - done
 must take in folder path
 must read all files and process them (timeline + thread+transaction grouping)
 must show output in browser

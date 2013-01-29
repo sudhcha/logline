@@ -1,4 +1,4 @@
-package com.vrc.logline.container.domain;
+package com.vrc.logline.domain;
 
 import org.apache.commons.lang.StringUtils;
 
