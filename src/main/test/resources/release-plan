@@ -1,0 +1,10 @@
+Feature list:
+
+#R1:
+must run executable jar
+must open window in browser
+must take in folder path
+must read all files and process them (timeline + thread+transaction grouping)
+must show output in browser
+
+

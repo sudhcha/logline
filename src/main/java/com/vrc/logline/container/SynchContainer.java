@@ -32,4 +32,12 @@ public class SynchContainer implements Container{
         }
     }
 
+    public static void main(String[] list) throws Exception {
+        Container container = new SynchContainer();
+        Server server = new ContainerServer(container);
+        Connection connection = new SocketConnection(server);
+        SocketAddress address = new InetSocketAddress(8080);
+        connection.connect(address);
+
+    }
 }
