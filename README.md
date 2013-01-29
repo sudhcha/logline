@@ -1,0 +1,4 @@
+logline
+=======
+
+visualization of logs
