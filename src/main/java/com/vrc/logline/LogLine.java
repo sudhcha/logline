@@ -2,8 +2,10 @@ package com.vrc.logline;
 
 import com.vrc.logline.domain.AppServer;
 import com.vrc.logline.domain.Browser;
+import org.apache.log4j.Logger;
 
 public class LogLine {
+    private static final Logger log = Logger.getLogger(LogLine.class);
 
     public static void main(String[] list) throws Exception {
         final AppServer appServer = new AppServer();
@@ -16,7 +18,7 @@ public class LogLine {
                 try {
                     appServer.stop();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    log.error(e);
                 }
             }
         }));

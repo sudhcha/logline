@@ -1,6 +1,7 @@
 package com.vrc.logline.domain;
 
 import com.vrc.logline.container.AsynchContainer;
+import org.apache.log4j.Logger;
 import org.simpleframework.http.core.Container;
 import org.simpleframework.http.core.ContainerServer;
 import org.simpleframework.transport.Server;
@@ -12,6 +13,7 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 
 public class AppServer {
+    private static final Logger log = Logger.getLogger(AppServer.class);
 
     private Server server;
 
@@ -21,9 +23,11 @@ public class AppServer {
         Connection connection = new SocketConnection(server);
         SocketAddress address = new InetSocketAddress(8080);
         connection.connect(address);
+        log.info("logline server started, ready to process request...");
     }
 
     public void stop() throws Exception {
         server.stop();
+        log.info("logline server stopped");
     }
 }
