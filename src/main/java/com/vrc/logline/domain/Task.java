@@ -1,5 +1,7 @@
 package com.vrc.logline.domain;
 
+import com.vrc.logline.controller.Controller;
+import com.vrc.logline.controller.HomeController;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 
@@ -17,16 +19,9 @@ public class Task implements Runnable {
     @Override
     public void run() {
         try {
-            PrintStream body = response.getPrintStream();
-            long time = System.currentTimeMillis();
-
-            response.setValue("Content-Type", "text/plain");
-            response.setValue("Server", "HelloWorld/1.0 (Simple 4.0)");
-            response.setDate("Date", time);
-            response.setDate("Last-Modified", time);
-
-            body.println("Hello World");
-            body.close();
+            Controller controller = new HomeController();
+            controller.act(request,response);
+            System.out.println("pr2");
         } catch (Exception e) {
             e.printStackTrace();
         }

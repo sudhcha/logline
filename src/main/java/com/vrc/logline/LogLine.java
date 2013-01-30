@@ -6,7 +6,19 @@ import com.vrc.logline.domain.Browser;
 public class LogLine {
 
     public static void main(String[] list) throws Exception {
-        new AppServer().start();
+        final AppServer appServer = new AppServer();
+        appServer.start();
         new Browser().start();
+
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    appServer.stop();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }));
     }
 }

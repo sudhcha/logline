@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TimeLine {
-    private List<Log> logs = new ArrayList<Log>();
+    private List<LogLine> logs = new ArrayList<LogLine>();
     private List<String> keys;
 
     public TimeLine(String keys) {
@@ -17,7 +17,7 @@ public class TimeLine {
 
     public TimeLine add(String line) {
         if (StringUtils.isNotBlank(line) && containsKey(line))
-            logs.add(new Log(line));
+            logs.add(new LogLine(line));
         return this;
     }
 
