@@ -13,9 +13,6 @@ public class HomeController extends BaseController implements Controller {
     @Override
     public void act(Request request, Response response) throws Exception {
         setHeaders(response);
-        PrintStream body = response.getPrintStream();
-        body.append("<html><body>oh oh ooh</body></html>");
-        body.close();
-        log.info("processed request");
+        renderer.render("home",null,response);
     }
 }
