@@ -2,6 +2,7 @@ package com.vrc.logline.domain;
 
 import com.vrc.logline.controller.Controller;
 import com.vrc.logline.controller.HomeController;
+import com.vrc.logline.repository.AllControllers;
 import org.apache.log4j.Logger;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
@@ -13,6 +14,7 @@ public class Task implements Runnable {
 
     private final Request request;
     private final Response response;
+    private AllControllers allControllers = new AllControllers();
 
     public Task(Request request, Response response) {
         this.request = request;
@@ -24,8 +26,7 @@ public class Task implements Runnable {
         String reqStr = "[" + request.getPath() + "|" + request.getRequestTime() + "]";
         try {
             log.info(reqStr + "start");
-            Controller controller = new HomeController();
-            controller.act(request, response);
+            allControllers.act(request, response);
             log.info(reqStr + "end");
         } catch (Exception e) {
             log.error(reqStr + "error", e);

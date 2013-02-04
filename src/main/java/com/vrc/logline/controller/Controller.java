@@ -6,4 +6,5 @@ import org.simpleframework.http.Response;
 public interface Controller {
 
     void act(Request request, Response response) throws Exception;
+    boolean canTake(Request request);
 }

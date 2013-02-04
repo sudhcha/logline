@@ -1,11 +1,18 @@
 package com.vrc.logline.controller;
 
 import com.vrc.logline.domain.Renderer;
+import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 
-public abstract class BaseController {
+public abstract class BaseController implements Controller{
 
     protected Renderer renderer = new Renderer("/views/");
+
+    private String urlKey;
+
+    protected BaseController(String urlKey) {
+        this.urlKey = urlKey;
+    }
 
     protected void setHeaders(Response response) {
         long time = System.currentTimeMillis();
@@ -17,4 +24,11 @@ public abstract class BaseController {
         response.setValue("Cache-Control", "post-check=0, pre-check=0");
         response.setValue("Pragma", "no-cache");
     }
+
+    @Override
+    public boolean canTake(Request request) {
+        return request.getPath().toString().contains(urlKey);
+    }
+
+
 }
