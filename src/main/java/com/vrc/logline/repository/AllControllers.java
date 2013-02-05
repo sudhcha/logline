@@ -3,7 +3,7 @@ package com.vrc.logline.repository;
 import com.vrc.logline.controller.AnalysisController;
 import com.vrc.logline.controller.Controller;
 import com.vrc.logline.controller.HomeController;
-import com.vrc.logline.controller.StaticResourceController;
+import com.vrc.logline.controller.StaticController;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 
@@ -14,7 +14,7 @@ public class AllControllers {
     private List<Controller> controllers = new ArrayList<Controller>();
 
     public AllControllers() {
-        controllers.add(new StaticResourceController());
+        controllers.add(new StaticController());
         controllers.add(new AnalysisController());
         controllers.add(new HomeController());
     }

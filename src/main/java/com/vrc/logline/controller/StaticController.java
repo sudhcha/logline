@@ -10,10 +10,10 @@ import java.io.File;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
-public class StaticResourceController extends BaseController{
+public class StaticController extends BaseController{
     private static final Logger log = Logger.getLogger(HomeController.class);
 
-    public StaticResourceController() {
+    public StaticController() {
         super("static");
     }
 

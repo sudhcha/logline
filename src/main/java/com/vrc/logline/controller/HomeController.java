@@ -17,7 +17,7 @@ public class HomeController extends BaseController{
 
     @Override
     public void act(Request request, Response response) throws Exception {
-        setHeaders(response);
+        addHeaders(response);
         Map<String, Object> model = new HashMap<String, Object>();
         renderer.render("home",model,response);
         log.info("[" + request.getPath() + "|" + request.getRequestTime() + "]processed");

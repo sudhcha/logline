@@ -1,1 +1,6 @@
-<p>hoho</p>
+<h1>Analysis Log</h1>
+<ul>
+    #foreach( $line in $lines )
+    <li>$line</li>
+    #end
+</ul>

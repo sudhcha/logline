@@ -1,5 +1,6 @@
 package com.vrc.logline.controller;
 
+import com.vrc.logline.domain.TimeLine;
 import org.apache.log4j.Logger;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
@@ -17,8 +18,15 @@ public class AnalysisController extends BaseController implements Controller {
 
     @Override
     public void act(Request request, Response response) throws Exception {
-        setHeaders(response);
+        addHeaders(response);
+        String keys = request.getParameter("keys");
+        String folder = request.getParameter("folder");
+
+        TimeLine timeLine = new TimeLine(keys, folder);
+        timeLine.process();
+
         Map<String, Object> model = new HashMap<String, Object>();
+        model.put("lines", timeLine.lines());
         renderer.render("results", model, response);
         log.info("[" + request.getPath() + "|" + request.getRequestTime() + "]processed");
     }

@@ -14,7 +14,7 @@ public abstract class BaseController implements Controller{
         this.urlKey = urlKey;
     }
 
-    protected void setHeaders(Response response) {
+    protected void addHeaders(Response response) {
         long time = System.currentTimeMillis();
         response.setValue("Content-Type", "text/html");
         response.setValue("Server", "Logline-VRC");
