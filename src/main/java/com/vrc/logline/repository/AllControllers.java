@@ -1,5 +1,6 @@
 package com.vrc.logline.repository;
 
+import com.vrc.logline.controller.AnalysisController;
 import com.vrc.logline.controller.Controller;
 import com.vrc.logline.controller.HomeController;
 import com.vrc.logline.controller.StaticResourceController;
@@ -14,6 +15,7 @@ public class AllControllers {
 
     public AllControllers() {
         controllers.add(new StaticResourceController());
+        controllers.add(new AnalysisController());
         controllers.add(new HomeController());
     }
 
