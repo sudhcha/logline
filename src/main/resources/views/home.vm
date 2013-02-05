@@ -1,9 +1,48 @@
 <html>
 <head>
-    <script src="/static/logline.js" type="text/javascript"></script>
+    <link href="/static/css/bootstrap.css" rel="stylesheet"/>
+    <link href="/static/css/bootstrap-responsive.css" rel="stylesheet"/>
+    <link href="/static/css/prettify.css" rel="stylesheet"/>
+    <link href="/static/css/jquery-ui-1.9.2.custom.css" rel="stylesheet"/>
+    <link href="/static/css/jquery-ui.css" rel="stylesheet"/>
+    <link href="/static/css/datepicker.css" rel="stylesheet"/>
+    <link href="/static/css/logline.css" rel="stylesheet"/>
+
+    <script src="/static/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="/static/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="/static/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/static/js/date-time-picker.js" type="text/javascript"></script>
+    <script src="/static/js/html5.js" type="text/javascript"></script>
+    <script src="/static/js/jquery-ui-1.9.2.custom.js" type="text/javascript"></script>
+    <script src="/static/js/logline.js" type="text/javascript"></script>
     <title>Logline</title>
 </head>
 <body>
-<p>Velo</p>
+<div class="container-fluid">
+    <div class="row-fluid mainbox">
+        <fieldset>
+            <legend class="legend_Bold">Log TimeLine</legend>
+            <div id="form_table">
+                <form id="log_form" class="form-horizontal" action="">
+                    <div class="control-group">
+                        <label for="folder" class="control-label">Logs Folder</label>
+                        <div class="controls">
+                            <input id="folder" type="text" class="required"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="keys" class="control-label">Keys</label>
+                        <div class="controls">
+                            <input id="keys" type="text" class="required"/>
+                        </div>
+                    </div>
+                    <div id="buttons" class="form-actions">
+                        <input type="button" id="start" value="Start"/>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+    </div>
+</div>
 </body>
 </html>
