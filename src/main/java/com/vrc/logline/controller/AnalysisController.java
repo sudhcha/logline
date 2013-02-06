@@ -21,12 +21,13 @@ public class AnalysisController extends BaseController implements Controller {
         addHeaders(response);
         String keys = request.getParameter("keys");
         String folder = request.getParameter("folder");
-
         TimeLine timeLine = new TimeLine(keys, folder);
         timeLine.process();
 
         Map<String, Object> model = new HashMap<String, Object>();
-        model.put("lines", timeLine.lines());
+        model.put("keyLines", timeLine.keyLines());
+        model.put("errorLines", timeLine.errorLines());
+
         renderer.render("results", model, response);
         log.info("[" + request.getPath() + "|" + request.getRequestTime() + "]processed");
     }

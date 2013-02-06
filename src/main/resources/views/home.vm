@@ -21,7 +21,7 @@
 <div class="container-fluid">
     <div class="row-fluid mainbox">
         <fieldset>
-            <h1>Log Timeline</h1>
+            <h2>Log Timeline</h2>
             <div id="form_table">
                 <form id="log_form" class="form-horizontal" action="">
                     <div class="control-group">

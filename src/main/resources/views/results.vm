@@ -1,6 +1,6 @@
-<h1>Analysis Log</h1>
+<h2>Analysis Log</h2>
 <ul>
-    #foreach( $line in $lines )
-    <li>$line</li>
+    #foreach( $line in $keyLines )
+       <li>$line.html()</li>
     #end
 </ul>

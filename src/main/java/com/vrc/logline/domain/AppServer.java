@@ -23,7 +23,7 @@ public class AppServer {
         Connection connection = new SocketConnection(server);
         SocketAddress address = new InetSocketAddress(8080);
         connection.connect(address);
-        log.info("logline server started, ready to process request...");
+        log.info("logline server started, ready to apply request...");
     }
 
     public void stop() throws Exception {
