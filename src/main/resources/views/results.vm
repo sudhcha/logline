@@ -1,6 +1,13 @@
-<h2>Analysis Log</h2>
-<ul>
-    #foreach( $line in $keyLines )
-       <li>$line.html()</li>
-    #end
-</ul>
+<h2>Analysis</h2>
+#foreach( $key in $keyLines.keySet() )
+    <div class="threadbox">
+    <p class="expand"><a href="#">Transaction</a> <img src="/static/images/arrow.gif"/></p>
+    <div class="content">
+        <ul>
+        #foreach($line in $keyLines.get($key))
+            <li>$line.html()</li>
+        #end
+        </ul>
+    </div>
+    </div>
+#end

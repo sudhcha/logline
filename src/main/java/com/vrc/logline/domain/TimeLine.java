@@ -3,21 +3,21 @@ package com.vrc.logline.domain;
 import com.vrc.logline.repository.AllRules;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class TimeLine {
-
+    private static final Logger log = Logger.getLogger(TimeLine.class);
     private String folder;
     private AllRules allRules;
 
     private List<String> keys = new ArrayList<String>();
-    private List<Line> outputLines = new ArrayList<Line>();
-    private List<Line> keyLines = new ArrayList<Line>();
-    private List<Line> errorLines = new ArrayList<Line>();
+    private Set<Line> outputLines = new HashSet<Line>();
+    private Set<Line> keyLines = new HashSet<Line>();
+    private Set<Line> errorLines = new HashSet<Line>();
 
     public TimeLine(String keys, String folder) {
         this.folder = folder;
@@ -39,30 +39,21 @@ public class TimeLine {
         recurse(logDir);
     }
 
-    private void recurse(File logDir) throws IOException {
-        for (File file : logDir.listFiles()) {
-            if (file.isDirectory())
-                recurse(file);
-            else
-                for (String inputLine : FileUtils.readLines(file))
-                    allRules.apply(inputLine, outputLines);
-        }
+    private void recurse(File logDir) throws Exception {
+        for (File file : logDir.listFiles())
+            if (file.isDirectory()) recurse(file);
+            else allRules.apply(file, outputLines);
+
         for (Line outputLine : outputLines)
-            if (outputLine.isError())
-                errorLines.add(outputLine);
-            else
-                keyLines.add(outputLine);
+            if (outputLine.isError()) errorLines.add(outputLine);
+            else keyLines.add(outputLine);
     }
 
-    public List<Line> outputLines() {
-        return outputLines;
+    public Map<String, List<Line>> keyLines() {
+        return new LineGroup(keyLines).byThread();
     }
 
-    public List<Line> keyLines() {
-        return keyLines;
-    }
-
-    public List<Line> errorLines() {
+    public Set<Line> errorLines() {
         return errorLines;
     }
 

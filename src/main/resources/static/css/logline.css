@@ -10,3 +10,8 @@ color: #0099cc;
 .red-line{
  color:red;
 }
+
+.threadbox{
+ padding-bottom: 30px;
+ border-bottom: 1px;
+}

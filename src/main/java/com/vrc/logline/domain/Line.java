@@ -3,7 +3,10 @@ package com.vrc.logline.domain;
 import org.apache.commons.lang.StringEscapeUtils;
 
 public class Line {
+
+    private String file;
     private String value;
+    private String thread;
     private boolean error;
 
     public Line(String value) {
@@ -44,5 +47,19 @@ public class Line {
     @Override
     public int hashCode() {
         return value != null ? value.hashCode() : 0;
+    }
+
+    public Line ofThread(String thread) {
+        this.thread = thread;
+        return this;
+    }
+
+    public Line ofFile(String file) {
+        this.file = file;
+        return this;
+    }
+
+    public String getThread() {
+        return thread;
     }
 }
