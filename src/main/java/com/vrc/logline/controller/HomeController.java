@@ -7,7 +7,7 @@ import org.simpleframework.http.Response;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HomeController extends BaseController{
+public class HomeController extends BaseController {
 
     private static final Logger log = Logger.getLogger(HomeController.class);
 
@@ -19,7 +19,7 @@ public class HomeController extends BaseController{
     public void act(Request request, Response response) throws Exception {
         addHeaders(response);
         Map<String, Object> model = new HashMap<String, Object>();
-        renderer.render("home",model,response);
-        log.info("[" + request.getPath() + "|" + request.getRequestTime() + "]processed");
+        renderer.render("home", model, response);
+        log.info(request.getPath());
     }
 }

@@ -29,6 +29,6 @@ public class AnalysisController extends BaseController implements Controller {
         model.put("errorLines", timeLine.errorLines());
 
         renderer.render("results", model, response);
-        log.info("[" + request.getPath() + "|" + request.getRequestTime() + "]processed");
+        log.info(request.getPath());
     }
 }

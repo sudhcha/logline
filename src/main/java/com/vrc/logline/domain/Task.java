@@ -23,13 +23,10 @@ public class Task implements Runnable {
 
     @Override
     public void run() {
-        String reqStr = "[" + request.getPath() + "|" + request.getRequestTime() + "]";
         try {
-            log.info(reqStr + "start");
             allControllers.act(request, response);
-            log.info(reqStr + "end");
         } catch (Exception e) {
-            log.error(reqStr + "error", e);
+            log.error(request.getPath(), e);
         }
     }
 }

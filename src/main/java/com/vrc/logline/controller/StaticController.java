@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
-public class StaticController extends BaseController{
+public class StaticController extends BaseController {
     private static final Logger log = Logger.getLogger(HomeController.class);
 
     public StaticController() {
@@ -26,6 +26,6 @@ public class StaticController extends BaseController{
         Writer writer = new OutputStreamWriter(response.getPrintStream());
         writer.write(fileContent);
         writer.close();
-        log.info("[" + request.getPath() + "|" + request.getRequestTime() + "]processed");
+        log.info(request.getPath());
     }
 }

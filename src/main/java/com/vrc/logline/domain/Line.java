@@ -2,7 +2,7 @@ package com.vrc.logline.domain;
 
 import org.apache.commons.lang.StringEscapeUtils;
 
-public class Line {
+public class Line implements Comparable<Line> {
 
     private String file;
     private String value;
@@ -61,5 +61,10 @@ public class Line {
 
     public String getThread() {
         return thread;
+    }
+
+    @Override
+    public int compareTo(Line line) {
+        return this.value.compareTo(line.value);
     }
 }

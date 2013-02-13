@@ -17,7 +17,8 @@ public class LineGroup {
                 groups.put(line.getThread(), new ArrayList<Line>());
             groups.get(line.getThread()).add(line);
         }
-        System.out.println(groups.keySet().size() + " " + groups.values().size());
+        for (List<Line> lines : groups.values())
+           Collections.sort(lines);
         return groups;
     }
 }
