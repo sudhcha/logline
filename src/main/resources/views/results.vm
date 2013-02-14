@@ -1,6 +1,6 @@
 <h2>Analysis</h2>
 #foreach( $key in $keyLines.keySet() )
-    <div class="threadbox">
+    <div class="thread-box">
     <p class="expand"><a href="#">Transaction</a> <img src="/static/images/arrow.gif"/></p>
     <div class="content">
         <ul>

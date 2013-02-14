@@ -11,7 +11,11 @@ color: #0099cc;
  color:red;
 }
 
-.threadbox{
+.thread-box{
  padding-bottom: 30px;
  border-bottom: 1px;
+}
+
+.highlight {
+    background-color: #FFFF88;
 }

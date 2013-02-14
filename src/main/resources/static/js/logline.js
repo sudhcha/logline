@@ -1,7 +1,6 @@
 LogForm = function(){
     var folder, keys;
 
-
     var pick = function() {
 		folder = $("#folder").val();
 		keys = $("#keys").val();
@@ -21,7 +20,7 @@ LogForm = function(){
 
     var displayResults = function(response){
       $("#results").html(response);
-      new LogAnalysis().boot();
+      new LogAnalysis().boot(keys);
     };
 
     this.boot = function(){
@@ -37,8 +36,13 @@ LogAnalysis = function(){
         });
     };
 
-    this.boot = function(){
+    var lightUp = function(keys){
+      $("#results").highlight(keys.split(","));
+    };
+
+    this.boot = function(keys){
         threadTabs();
+        lightUp(keys);
     };
 };
 
