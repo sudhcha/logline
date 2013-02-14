@@ -6,7 +6,10 @@ import org.apache.log4j.Logger;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
@@ -19,13 +22,20 @@ public class StaticController extends BaseController {
 
     @Override
     public void act(Request request, Response response) throws Exception {
+        String path = request.getPath().toString();
+        String fileName = StringUtils.substringAfter(path, "static");
         String directory = ClassLoader.getSystemResource("static").getPath();
-        String fileName = StringUtils.substringAfter(request.getPath().toString(), "static");
-        String fileContent = FileUtils.readFileToString(new File(directory + fileName));
+        File file = new File(directory + fileName);
 
-        Writer writer = new OutputStreamWriter(response.getPrintStream());
-        writer.write(fileContent);
-        writer.close();
+        if (path.contains("images")) {
+            OutputStream out = response.getOutputStream();
+            ImageIO.write(ImageIO.read(file), "gif", out);
+            out.close();
+        } else {
+            Writer writer = new OutputStreamWriter(response.getPrintStream());
+            writer.write(FileUtils.readFileToString(file));
+            writer.close();
+        }
         log.info(request.getPath());
     }
 }

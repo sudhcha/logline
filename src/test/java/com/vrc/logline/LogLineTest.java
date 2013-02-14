@@ -28,4 +28,15 @@ public class LogLineTest {
         assertTrue(matcher != null && matcher.find());
         System.out.println(matcher.toMatchResult().toString());
     }
+
+    //"[[0-9]{1,2}/[0-9]{1,2}/[0-9]{2,4}\\s*[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}:.*]\\s*.*\\s*SystemOut\\s*O"
+    @Test
+    public void shouldMatchLogPattern3() throws ParseException {
+        String regex = "[[0-9]{1,2}/[0-9]{1,2}/[0-9]{2,4}\\s*[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}:.*]\\s*.*\\s*SystemOut\\s*O";
+        String sample = "[1/26/13 8:14:20:706 EST] 00010113 SystemOut     O [2013-01-26 08:14:20,706] [WebContainer : 64071] INFO  com.bcbsa.blue2.web.action.SccfSearchAction - DisplayList.size() 4".replaceAll(regex,"XX");
+        System.out.println(sample);
+
+        String result = "1104 [pool-1-thread-8] INFO  com.vrc.logline.controller.HomeController".replaceAll("(INFO|ERROR)","XX");
+        System.out.println(result);
+    }
 }

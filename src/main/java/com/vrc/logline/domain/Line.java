@@ -1,6 +1,10 @@
 package com.vrc.logline.domain;
 
 import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.StringUtils;
+
+import java.util.List;
+import java.util.Map;
 
 public class Line implements Comparable<Line> {
 
@@ -66,5 +70,10 @@ public class Line implements Comparable<Line> {
     @Override
     public int compareTo(Line line) {
         return this.value.compareTo(line.value);
+    }
+
+    public void replace(Map<String, String> shorts) {
+        for (String key : shorts.keySet())
+            value = value.replaceAll(key, shorts.get(key));
     }
 }

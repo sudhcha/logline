@@ -7,6 +7,7 @@ LogForm = function(){
 	};
 
     var post = function(){
+    $("#loading-div-background").show();
         pick();
         $.ajax({
         	url : "analyse",
@@ -19,12 +20,14 @@ LogForm = function(){
     };
 
     var displayResults = function(response){
-      $("#results").html(response);
-      new LogAnalysis().boot(keys);
+        $("#results").html(response);
+        $("#loading-div-background").hide();
+        new LogAnalysis().boot(keys);
     };
 
     this.boot = function(){
-      $("#analyse").click(post);
+        $("#analyse").click(post);
+        $("#loading-div-background").css({ opacity: 0.7 });
     };
 };
 

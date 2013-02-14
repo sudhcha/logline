@@ -47,10 +47,11 @@ public class TimeLine {
         for (Line outputLine : outputLines)
             if (outputLine.isError()) errorLines.add(outputLine);
             else keyLines.add(outputLine);
+        log.info("Timeline completed");
     }
 
     public Map<String, List<Line>> keyLines() {
-        return new LineGroup(keyLines).byThread();
+        return new LineGroup(keyLines).strip().byThread();
     }
 
     public Set<Line> errorLines() {

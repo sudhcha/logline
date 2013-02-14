@@ -4,6 +4,7 @@ import java.util.*;
 
 public class LineGroup {
 
+    private Settings settings = new Settings();
     private Set<Line> lines;
 
     public LineGroup(Set<Line> lines) {
@@ -18,7 +19,13 @@ public class LineGroup {
             groups.get(line.getThread()).add(line);
         }
         for (List<Line> lines : groups.values())
-           Collections.sort(lines);
+            Collections.sort(lines);
         return groups;
+    }
+
+    public LineGroup strip() {
+        for (Line line : lines)
+            line.replace(settings.shorts());
+        return this;
     }
 }
