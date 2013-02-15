@@ -20,7 +20,6 @@ public class LogLineTest {
         System.out.println(matcher.toMatchResult().toString()+"---"+matcher.group("thread"));
     }
 
-    ///04 Feb 2013 09:55:10
     @Test
     public void shouldMatchDatePattern2() throws ParseException {
         Pattern pattern = Pattern.compile("[0-9]{2}\\s*(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\s*[0-9]{4}\\s*[0-9]{1,2}:[0-9]{2}:[0-9]{2}");
@@ -29,7 +28,6 @@ public class LogLineTest {
         System.out.println(matcher.toMatchResult().toString());
     }
 
-    //"[[0-9]{1,2}/[0-9]{1,2}/[0-9]{2,4}\\s*[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}:.*]\\s*.*\\s*SystemOut\\s*O"
     @Test
     public void shouldMatchLogPattern3() throws ParseException {
         String regex = "[[0-9]{1,2}/[0-9]{1,2}/[0-9]{2,4}\\s*[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}:.*]\\s*.*\\s*SystemOut\\s*O";

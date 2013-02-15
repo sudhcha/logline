@@ -3,7 +3,10 @@ package com.vrc.logline.domain;
 import com.vrc.logline.repository.AllRules;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.lang.time.StopWatch;
 import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,9 +37,13 @@ public class TimeLine {
     }
 
     public void process() throws Exception {
+        StopWatch watch = new StopWatch();
+        watch.start();
         File logDir = new File(folder);
         if (!logDir.exists()) return;
         recurse(logDir);
+        watch.stop();
+        log.info("Time taken to timeline: "+ watch);
     }
 
     private void recurse(File logDir) throws Exception {
@@ -47,7 +54,6 @@ public class TimeLine {
         for (Line outputLine : outputLines)
             if (outputLine.isError()) errorLines.add(outputLine);
             else keyLines.add(outputLine);
-        log.info("Timeline completed");
     }
 
     public Map<String, List<Line>> keyLines() {

@@ -1,9 +1,11 @@
 package com.vrc.logline.domain;
 
+import org.apache.log4j.Logger;
+
 import java.util.*;
 
 public class LineGroup {
-
+    private static final Logger log = Logger.getLogger(LineGroup.class);
     private Settings settings = new Settings();
     private Set<Line> lines;
 

@@ -23,6 +23,7 @@ LogForm = function(){
         $("#results").html(response);
         $("#loading-div-background").hide();
         new LogAnalysis().boot(keys);
+        new LogLight().boot();
     };
 
     this.boot = function(){
@@ -33,7 +34,7 @@ LogForm = function(){
 
 LogAnalysis = function(){
     var threadTabs = function(){
-       $('.content').slideToggle('fast');
+//       $('.content').slideToggle('fast');
        $('.expand').click(function(){
           $(this).siblings('.content').slideToggle('slow');
         });
@@ -48,6 +49,22 @@ LogAnalysis = function(){
         lightUp(keys);
     };
 };
+
+LogLight = function(){
+  this.boot = function(){
+    //sql hits
+    $("li").each(function(){
+      if($(this).text().match("Blue2Dao*")){$(this).css("color","#104E8B")}}
+    );
+    //message posted
+    $("li").each(function(){
+      if($(this).text().match("JMSSender|DispatchQSender|MessageDispatcher|jms/")){$(this).css("color","#1874CD")}}
+    );
+    //
+
+  };
+};
+
 
 $(document).ready(function() {
 	new LogForm().boot();
