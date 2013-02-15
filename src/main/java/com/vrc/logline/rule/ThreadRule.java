@@ -5,8 +5,11 @@ import org.apache.commons.lang.time.StopWatch;
 import org.apache.log4j.Logger;
 
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public class ThreadRule extends BaseRule {
+
+    private Pattern xmlStartPattern = Pattern.compile("<\\?xml\\s+");
 
     @Override
     public void apply(String inputLine, RulePackage rulePackage, Set<Line> outputLines, String file) {

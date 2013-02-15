@@ -36,5 +36,10 @@ public class LogLineTest {
 
         String result = "1104 [pool-1-thread-8] INFO  com.vrc.logline.controller.HomeController".replaceAll("(INFO|ERROR)","XX");
         System.out.println(result);
+
+        Pattern pattern = Pattern.compile("<\\?xml\\s+");
+        Matcher matcher = pattern.matcher("[2013-01-23 10:43:07,544] [WebContainer : 23606] INFO  com.bcbsa.blue2.web.action.SccfSearchAction - SDO Output <?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+        assertTrue(matcher != null && matcher.find());
+        System.out.println(matcher.toMatchResult().toString());
     }
 }

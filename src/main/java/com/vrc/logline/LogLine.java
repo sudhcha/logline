@@ -10,7 +10,7 @@ public class LogLine {
     public static void main(String[] list) throws Exception {
         final AppServer appServer = new AppServer();
         appServer.start();
-        new Browser().start();
+        //new Browser().start();
 
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             @Override

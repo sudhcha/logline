@@ -22,8 +22,8 @@ LogForm = function(){
     var displayResults = function(response){
         $("#results").html(response);
         $("#loading-div-background").hide();
-        new LogAnalysis().boot(keys);
-        new LogLight().boot();
+        new LogTabs().boot();
+        new LogLight().boot(keys);
     };
 
     this.boot = function(){
@@ -31,41 +31,52 @@ LogForm = function(){
         $("#loading-div-background").css({ opacity: 0.7 });
     };
 };
-
-LogAnalysis = function(){
+//-------------------------------------------------------------------------------------------------
+LogTabs = function(){
     var threadTabs = function(){
-//       $('.content').slideToggle('fast');
+     //$('.content').slideToggle('fast');
        $('.expand').click(function(){
           $(this).siblings('.content').slideToggle('slow');
         });
     };
 
-    var lightUp = function(keys){
-      $("#results").highlight(keys.split(","));
-    };
-
-    this.boot = function(keys){
+    this.boot = function(){
         threadTabs();
-        lightUp(keys);
     };
 };
-
+//-------------------------------------------------------------------------------------------------
 LogLight = function(){
-  this.boot = function(){
-    //sql hits
-    $("li").each(function(){
-      if($(this).text().match("Blue2Dao*")){$(this).css("color","#104E8B")}}
-    );
-    //message posted
-    $("li").each(function(){
-      if($(this).text().match("JMSSender|DispatchQSender|MessageDispatcher|jms/")){$(this).css("color","#1874CD")}}
-    );
-    //
+  var timePattern = new RegExp("([.*])+",'gi');
 
+  var specials = function(){
+    $("li").each(function(){
+        if($(this).text().match("Blue2Dao*"))
+            {$(this).css("color","#104E8B");}
+
+        if($(this).text().match("JMSSender|DispatchQSender|MessageDispatcher|jms/"))
+            {$(this).css("color","#1874CD");}
+
+        var match = $(this).text().match("[0-9]{17}");
+        if(match)
+            {$(this).html($(this).text().replace(match[0],"<span class='sccf'>"+match[0]+"</span>"))}
+
+
+
+        }//end of each function
+    );// end of each li
+  };
+
+  var keysUp = function(keys){
+    $("#results").highlight(keys.split(","));
+  };
+
+  this.boot = function(keys){
+     specials();
+     keysUp(keys);
   };
 };
 
-
+//-------------------------------------------------------------------------------------------------
 $(document).ready(function() {
 	new LogForm().boot();
 });
