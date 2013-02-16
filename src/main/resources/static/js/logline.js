@@ -47,32 +47,46 @@ LogTabs = function(){
 //-------------------------------------------------------------------------------------------------
 LogLight = function(){
   var timePattern = new RegExp("([.*])+",'gi');
+  var searchKeys;
 
   var specials = function(){
     $("li").each(function(){
-        if($(this).text().match("Blue2Dao*"))
-            {$(this).css("color","#104E8B");}
+        //sql
+        var dbMatch = $(this).text().match("Blue2Dao*");
+        if(dbMatch){
+            $(this).css("color","#104E8B");
+            //$(this).html($(this).text().replace("PNASCO","<span class='sccf'>"+XX+"</span>"));
+        }
+        //jms message
+        if($(this).text().match("JMSSender|DispatchQSender|MessageDispatcher|jms/")){
+            $(this).css("color","#1874CD");
+        }
+        //sccf
+        var sccfMatch = $(this).text().match("[0-9]{17}");
+        if(sccfMatch){
+          var keyNotMatch = searchKeys.split(",").indexOf(sccfMatch[0])== -1;
+          if(keyNotMatch){
+            $(this).html($(this).text().replace(sccfMatch[0],"<span class='sccf'>"+sccfMatch[0]+"</span>"));
+          }
+        }
+        //user-ids
 
-        if($(this).text().match("JMSSender|DispatchQSender|MessageDispatcher|jms/"))
-            {$(this).css("color","#1874CD");}
 
-        var match = $(this).text().match("[0-9]{17}");
-        if(match)
-            {$(this).html($(this).text().replace(match[0],"<span class='sccf'>"+match[0]+"</span>"))}
-
+        //time-color
 
 
         }//end of each function
     );// end of each li
   };
 
-  var keysUp = function(keys){
-    $("#results").highlight(keys.split(","));
+  var keysUp = function(){
+    $("#results").highlight(searchKeys.split(","));
   };
 
   this.boot = function(keys){
+     searchKeys = keys;
      specials();
-     keysUp(keys);
+     keysUp();
   };
 };
 

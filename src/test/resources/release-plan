@@ -8,8 +8,15 @@ must read all files and process them - done
 must show output in browser      - done
 
 #R2
-identify timestamp patterns
-identify thread numbers,
-group them as transactions based on timestamp
+identify timestamp patterns     - done
+identify thread numbers,        - done
+group them as transactions based on timestamp - done
 get key interaction points from config file like other web-services, db and jms.
+    1) other userids
+    2) sccf
+    3) table names
+    4) time color
+
+get xml file dropdown
+get exception analysis and stacktrace
 get a presentation form for user interaction diagram
