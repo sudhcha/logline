@@ -26,12 +26,16 @@ public class StaticController extends BaseController {
         String fileName = StringUtils.substringAfter(path, "static");
         String directory = ClassLoader.getSystemResource("static").getPath();
         File file = new File(directory + fileName);
+        if (!file.exists()) return;
+        addHeaders(response);
 
         if (path.contains("images")) {
+            response.setValue("Content-Type", "image/GIF");
             OutputStream out = response.getOutputStream();
             ImageIO.write(ImageIO.read(file), "gif", out);
             out.close();
         } else {
+            response.setValue("Content-Type", "text/plain");
             Writer writer = new OutputStreamWriter(response.getPrintStream());
             writer.write(FileUtils.readFileToString(file));
             writer.close();

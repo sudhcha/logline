@@ -16,7 +16,6 @@ public abstract class BaseController implements Controller{
 
     protected void addHeaders(Response response) {
         long time = System.currentTimeMillis();
-        response.setValue("Content-Type", "text/html");
         response.setValue("Server", "Logline-VRC");
         response.setDate("Date", time);
         response.setDate("Last-Modified", time);

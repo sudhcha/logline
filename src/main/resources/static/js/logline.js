@@ -98,13 +98,13 @@ ToolDialog = function(){
   this.boot = function(){
      toolDialog = $("#tool-dialog").dialog({
                         autoOpen: true,
-                        width: 350,
+                        width: 200,
                         height: 200,
-                        position: 'top',
+                        position: 'right top',
                         resizable: 'false',
-                        draggable: true });
+                        draggable: false });
      $(window).scroll(function () {
-        toolDialog .dialog("option","position","top");
+        toolDialog .dialog("option","position","right top");
      });
 
   };//end of boot

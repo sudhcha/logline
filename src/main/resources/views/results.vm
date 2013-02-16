@@ -1,22 +1,35 @@
 <h2>Analysis</h2>
-#set( $count = 1 )
-#foreach($key in $keyLines.keySet())
-    <div class="thread-box">
-    <p class="expand"><a href="#">Transaction ${count}</a> <img src="/static/images/arrow.gif"/></p>
-    <div class="content">
-        <ul>
+        #set( $count = 1 )
+        #foreach($key in $keyLines.keySet())
+<div class="thread-box">
+<p class="expand"><a href="#">Thread ${count}</a> <img src="/static/images/arrow.gif"/></p>
+
+<div class="content">
+    <ul>
         #foreach($line in $keyLines.get($key))
-            <li>$line.html()</li>
+        <li>$line.html()</li>
         #end
-        </ul>
-    </div>
-    </div>
-#set($count = $count+1)
-#end
+    </ul>
+</div>
+</div>
+        #set($count = $count+1)
+        #end
 
 <div id="tool-dialog" title="ToolBox">
-    <div id="key-buttons" class="form-actions">
-        <input type="button" id="key_prev" value="<="/>
-        <input type="button" id="key_next" value="=>"/>
-    </div>
+<table>
+    <tr>
+        <td class="tool-table-column">Keys: </td>
+        <td class="tool-table-column">
+            <input type="button" id="key_prev" value="<"/>
+            <input type="button" id="key_next" value=">"/>
+        </td>
+    </tr>
+    <tr>
+        <td class="tool-table-column">Thread: </td>
+        <td class="tool-table-column">
+            <input type="button" id="thread_prev" value="<"/>
+            <input type="button" id="thread_next" value=">"/>
+        </td>
+    </tr>
+</table>
 </div>
