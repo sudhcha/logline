@@ -13,3 +13,10 @@
     </div>
 #set($count = $count+1)
 #end
+
+<div id="tool-dialog" title="ToolBox">
+    <div id="key-buttons" class="form-actions">
+        <input type="button" id="key_prev" value="<="/>
+        <input type="button" id="key_next" value="=>"/>
+    </div>
+</div>

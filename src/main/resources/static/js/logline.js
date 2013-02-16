@@ -24,6 +24,7 @@ LogForm = function(){
         $("#loading-div-background").hide();
         new LogTabs().boot();
         new LogLight().boot(keys);
+        new ToolDialog().boot();
     };
 
     this.boot = function(){
@@ -46,7 +47,6 @@ LogTabs = function(){
 };
 //-------------------------------------------------------------------------------------------------
 LogLight = function(){
-  var timePattern = new RegExp("([.*])+",'gi');
   var searchKeys;
 
   var specials = function(){
@@ -81,6 +81,8 @@ LogLight = function(){
 
   var keysUp = function(){
     $("#results").highlight(searchKeys.split(","));
+    $(".highlight").wrap("<a class='search'></a>");
+
   };
 
   this.boot = function(keys){
@@ -89,7 +91,25 @@ LogLight = function(){
      keysUp();
   };
 };
+//-------------------------------------------------------------------------------------------------
+ToolDialog = function(){
+  var allKeys = $(".search");
+  var toolDialog;
+  this.boot = function(){
+     toolDialog = $("#tool-dialog").dialog({
+                        autoOpen: true,
+                        width: 350,
+                        height: 200,
+                        position: 'top',
+                        resizable: 'false',
+                        draggable: true });
+     $(window).scroll(function () {
+        toolDialog .dialog("option","position","top");
+     });
 
+  };//end of boot
+
+  };
 //-------------------------------------------------------------------------------------------------
 $(document).ready(function() {
 	new LogForm().boot();

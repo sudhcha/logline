@@ -12,8 +12,9 @@ identify timestamp patterns     - done
 identify thread numbers,        - done
 group them as transactions based on timestamp - done
 get key interaction points from config file like other web-services, db and jms.
+    0) next find dialog
     1) other userids
-    2) sccf
+    2) sccf     - done
     3) table names
     4) time color
 
