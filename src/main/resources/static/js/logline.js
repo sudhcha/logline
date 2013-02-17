@@ -56,7 +56,8 @@ LogLight = function(){
         var dbMatch = $(this).text().match("Blue2Dao*");
         if(dbMatch){
             $(this).css("color","#104E8B");
-            //$(this).html($(this).text().replace("PNASCO","<span class='sccf'>"+XX+"</span>"));
+            var schemaMatch = $(this).text().match("PNASCO.[A-Z|_]+");
+            if(schemaMatch){ $(this).html($(this).text().replace(schemaMatch[0],"<span class='sccf'>"+schemaMatch[0]+"</span>"))};
         }
         //jms message
         if($(this).text().match("JMSSender|DispatchQSender|MessageDispatcher|jms/")){
@@ -72,7 +73,7 @@ LogLight = function(){
         }
         //sccf
         var sccfMatch = $(this).text().match("[0-9]{17}");
-        if(sccfMatch){
+        if(sccfMatch && !dbMatch){
           var keyNotMatch = splits.indexOf(sccfMatch[0])== -1;
           if(keyNotMatch){
                 $(this).html($(this).text().replace(sccfMatch[0],"<span class='sccf'>"+sccfMatch[0]+"</span>"));

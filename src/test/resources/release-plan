@@ -13,11 +13,11 @@ identify thread numbers,        - done
 group them as transactions based on timestamp - done
 get key interaction points from config file like other web-services, db and jms.
     0) next find dialog
-    1) other userids
+    1) other userids   - done
     2) sccf     - done
     3) table names
     4) time color
-
+#R3
 get xml file dropdown
 get exception analysis and stacktrace
 get a presentation form for user interaction diagram
