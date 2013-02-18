@@ -52,38 +52,40 @@ LogLight = function(){
   var specials = function(){
     var splits = searchKeys.split(",");
     $("li").each(function(){
+        var html = $(this).text();
+
         //sql
-        var dbMatch = $(this).text().match("Blue2Dao*");
+        var dbMatch = html.match("Blue2Dao*");
         if(dbMatch){
             $(this).css("color","#104E8B");
-            var schemaMatch = $(this).text().match("PNASCO.[A-Z|_]+");
-            if(schemaMatch){ $(this).html($(this).text().replace(schemaMatch[0],"<span class='sccf'>"+schemaMatch[0]+"</span>"))};
+            var schemaMatch = html.match("PNASCO.[A-Z|_]+");
+            if(schemaMatch){ html = html.replace(schemaMatch[0],"<span class='sccf'>"+schemaMatch[0]+"</span>")};
         }
         //jms message
-        if($(this).text().match("JMSSender|DispatchQSender|MessageDispatcher|jms/")){
+        if(html.match("JMSSender|DispatchQSender|MessageDispatcher|jms/")){
             $(this).css("color","#1874CD");
         }
-        //userid
-        var userMatch = $(this).text().match("[A-Z0-9]{6,7}")
+        //user-id
+        var userMatch = html.match("[A-Z0-9]{6,7}")
         if(userMatch){
            var keyNotMatch = splits.indexOf(userMatch[0])== -1;
            if(keyNotMatch && userMatch[0].match('[A-Z]+')&& userMatch[0].match('[0-9]*')&& !userMatch[0].match('SELECT|INSERT|UPDATE') ){
-                $(this).html($(this).text().replace(userMatch[0],"<span class='sccf'>"+userMatch[0]+"</span>"));
+                html = html.replace(userMatch[0],"<span class='sccf'>"+userMatch[0]+"</span>");
            }
         }
         //sccf
-        var sccfMatch = $(this).text().match("[0-9]{17}");
+        var sccfMatch = html.match("[0-9]{17}");
         if(sccfMatch && !dbMatch){
           var keyNotMatch = splits.indexOf(sccfMatch[0])== -1;
           if(keyNotMatch){
-                $(this).html($(this).text().replace(sccfMatch[0],"<span class='sccf'>"+sccfMatch[0]+"</span>"));
+                html = html.replace(sccfMatch[0],"<span class='sccf'>"+sccfMatch[0]+"</span>");
           }
         }
-        //user-ids
-
-
         //time-color
+        var timeMatch = html.match("[0-9]{4}-[0-9]{2}-[0-9]{2}\\s*[0-9]{1,2}:[0-9]{2}:[0-9]{2},[0-9]{0,3}");
+        if(timeMatch){html = html.replace(timeMatch[0],"<span class='time'>"+timeMatch[0]+"</span>")};
 
+        $(this).html(html);
 
         }//end of each function
     );// end of each li
