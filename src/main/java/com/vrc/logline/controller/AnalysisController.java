@@ -18,7 +18,9 @@ public class AnalysisController extends BaseController implements Controller {
 
     @Override
     public void act(Request request, Response response) throws Exception {
+        log.info(request.getPath());
         addHeaders(response);
+
         String keys = request.getParameter("keys");
         String folder = request.getParameter("folder");
         TimeLine timeLine = new TimeLine(keys, folder);
@@ -27,8 +29,6 @@ public class AnalysisController extends BaseController implements Controller {
         Map<String, Object> model = new HashMap<String, Object>();
         model.put("keyLines", timeLine.keyLines());
         model.put("errorLines", timeLine.errorLines());
-
         renderer.render("results", model, response);
-        log.info(request.getPath());
     }
 }

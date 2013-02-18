@@ -16,8 +16,14 @@ get key interaction points from config file like other web-services, db and jms.
     1) other userids   - done
     2) sccf     - done
     3) table names - done
-    4) time color
+    4) time color  - done
+    5) boid - done
 #R3
+get context
 get xml file dropdown
 get exception analysis and stacktrace
+get messages posted
 get a presentation form for user interaction diagram
+
+#R4
+performance improvement

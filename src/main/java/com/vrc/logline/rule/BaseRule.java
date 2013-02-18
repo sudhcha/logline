@@ -4,7 +4,7 @@ import org.apache.commons.lang.time.StopWatch;
 import org.apache.log4j.Logger;
 
 public abstract class BaseRule implements LineRule {
-    private static final Logger log = Logger.getLogger(ExceptionRule.class);
+    private static final Logger log = Logger.getLogger(BaseRule.class);
 
     private StopWatch watch = new StopWatch();
 
