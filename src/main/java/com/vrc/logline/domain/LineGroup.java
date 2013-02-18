@@ -1,5 +1,6 @@
 package com.vrc.logline.domain;
 
+import org.apache.commons.lang.time.StopWatch;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -14,6 +15,8 @@ public class LineGroup {
     }
 
     public Map<String, List<Line>> byThread() {
+        StopWatch watch = new StopWatch();
+        watch.start();
         Map<String, List<Line>> groups = new HashMap<String, List<Line>>();
         for (Line line : lines) {
             if (!groups.containsKey(line.getThread()))
@@ -22,12 +25,18 @@ public class LineGroup {
         }
         for (List<Line> lines : groups.values())
             Collections.sort(lines);
+        watch.stop();
+        log.info("Time taken to group: "+watch);
         return groups;
     }
 
     public LineGroup strip() {
+        StopWatch watch = new StopWatch();
+        watch.start();
         for (Line line : lines)
             line.replace(settings.shorts());
+        watch.stop();
+        log.info("Time taken to strip: "+watch);
         return this;
     }
 }
