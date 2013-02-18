@@ -46,7 +46,7 @@
         <div id="results"></div>
         <div id="loading-div-background">
             <div id="loading-div" class="ui-corner-all">
-                <img src="/static/images/loading.gif" alt="Processing.."/>
+                <img src="http://www.jakobfolin.com/images/loading.gif" alt="Processing.."/>
                 <h2 style="color:gray;font-weight:normal;">Please wait....</h2>
             </div>
         </div>
