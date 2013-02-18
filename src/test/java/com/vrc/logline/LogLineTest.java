@@ -68,42 +68,74 @@ public class LogLineTest {
         System.out.println("Total Execution Time : " + results.getTotalExecutionTime());
     }
 
+    //whole file leads to heap space bomb
     @Test
-    public void shouldTestPerformance() throws IOException {
+    public void shouldTestPerformanceWithWholeFileReading() throws IOException {
         File dir = new File("C:\\Users\\vchakrav\\Documents\\b2-errors\\prod-abends");
-        List<String> lines = new ArrayList<String>();
-        Matcher matcher = null;
         Pattern pattern = Pattern.compile("74820130210002100|FZCTF2");
+        Matcher matcher = null;
         StopWatch watch = new StopWatch();
         watch.start();
+        List<String> lines = new ArrayList<String>();
         for (File file : dir.listFiles()) {
-            if(file.isDirectory()) continue;
-            System.out.println("processing "+file.getName());
+            if (file.isDirectory()) continue;
+            System.out.println("processing " + file.getName());
             String fileContent = FileUtils.readFileToString(file);
             matcher = pattern.matcher(fileContent);
-            while (matcher.find()) {
+            while (matcher.find())
                 lines.add(matcher.toMatchResult().toString());
+        }
+        watch.stop();
+        System.out.println("Matched " + lines.size() + "|" + watch);
+    }
+
+    //fine ..takes 13-20 sec for 2 keys, 700MB
+    @Test
+    public void shouldTestPerformanceWithLineByLineReading() throws IOException {
+        File dir = new File("C:\\Users\\vchakrav\\Documents\\b2-errors\\prod-abends");
+        Pattern pattern = Pattern.compile("74820130210002100|FZCTF2|securityb2-780home");
+        Matcher matcher = null;
+        StopWatch watch = new StopWatch();
+        watch.start();
+
+        List<String> lines = new ArrayList<String>();
+        for (File file : dir.listFiles()) {
+            if (file.isDirectory()) continue;
+            System.out.println("processing " + file.getName());
+            List<String> fileLines = FileUtils.readLines(file);
+            for (String fileLine : fileLines) {
+                matcher = pattern.matcher(fileLine);
+                if (matcher.find())
+                    lines.add(fileLine);
             }
         }
         watch.stop();
         System.out.println("Matched " + lines.size() + "|" + watch);
-
         watch.reset();
-        List<String> lines2 = new ArrayList<String>();
+    }
+
+    //fine ..takes 30 sec for 2 keys, 700MB
+    @Test
+    public void shouldTestPerformanceWitJRegex() throws IOException {
+        File dir = new File("C:\\Users\\vchakrav\\Documents\\b2-errors\\prod-abends");
+        jregex.Pattern pattern = new jregex.Pattern("74820130210002100|FZCTF2");
+        jregex.Matcher matcher = null;
+        StopWatch watch = new StopWatch();
         watch.start();
+
+        List<String> lines = new ArrayList<String>();
         for (File file : dir.listFiles()) {
-            if(file.isDirectory()) continue;
-            System.out.println("processing "+file.getName());
+            if (file.isDirectory()) continue;
+            System.out.println("processing " + file.getName());
             List<String> fileLines = FileUtils.readLines(file);
             for (String fileLine : fileLines) {
                 matcher = pattern.matcher(fileLine);
-                if (matcher.find()) {
-                    lines2.add(matcher.toMatchResult().toString());
-                }
+                if (matcher.find())
+                    lines.add(fileLine);
             }
         }
         watch.stop();
-        System.out.println("Matched " + lines2.size() + "|" + watch);
+        System.out.println("Matched " + lines.size() + "|" + watch);
         watch.reset();
     }
 
