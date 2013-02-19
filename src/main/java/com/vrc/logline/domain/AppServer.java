@@ -21,7 +21,7 @@ public class AppServer {
         Container container = new AsynchContainer(10);
         server = new ContainerServer(container);
         Connection connection = new SocketConnection(server);
-        SocketAddress address = new InetSocketAddress(8080);
+        SocketAddress address = new InetSocketAddress(Settings.PORT);
         connection.connect(address);
         log.info("logline server started, ready to process request...");
     }

@@ -43,7 +43,7 @@ public class TimeLine {
         if (!logDir.exists()) return;
         recurse(logDir);
         watch.stop();
-        log.info("Time taken to timeline: "+ watch);
+        log.info("Time taken to timeline: " + watch);
     }
 
     private void recurse(File logDir) throws Exception {
@@ -57,7 +57,7 @@ public class TimeLine {
     }
 
     public Map<String, List<Line>> keyLines() {
-        return new LineGroup(keyLines).strip().byThread();
+        return new LineGroup(keyLines).byThread();
     }
 
     public Set<Line> errorLines() {

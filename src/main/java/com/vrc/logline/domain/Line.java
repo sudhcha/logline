@@ -1,9 +1,7 @@
 package com.vrc.logline.domain;
 
 import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
 
-import java.util.List;
 import java.util.Map;
 
 public class Line implements Comparable<Line> {
@@ -18,7 +16,9 @@ public class Line implements Comparable<Line> {
     }
 
     public String html() {
-        return file() + StringEscapeUtils.escapeHtml(value);
+        String s = StringEscapeUtils.escapeXml(value);
+        System.out.println(s);
+        return file() + s;
     }
 
     @Override

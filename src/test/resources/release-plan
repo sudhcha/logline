@@ -20,11 +20,12 @@ get key interaction points from config file like other web-services, db and jms.
     5) boid - done
     6) get fie name  - done
 #R3
-get context
-get xml file dropdown
+get context - done
+get xml file dropdown -
 get exception analysis and stacktrace
 get messages posted
 get a presentation form for user interaction diagram
 
 #R4
-performance improvement
+performance improvement  - guava
+contextkey to sent via web

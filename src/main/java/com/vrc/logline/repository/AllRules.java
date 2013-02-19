@@ -18,9 +18,9 @@ public class AllRules {
 
     public AllRules(List<String> keys) {
         this.keys = keys;
-        this.lineRules.add(new KeyRule(keys));
-//        this.lineRules.add(new ThreadRule());
-        this.lineRules.add(new ExceptionRule());
+//        this.lineRules.add(new KeyRule(keys));
+        this.lineRules.add(new XMLRule());
+//        this.lineRules.add(new ExceptionRule());
     }
 
     public void apply(File file, Set<Line> outputLines) throws Exception {
