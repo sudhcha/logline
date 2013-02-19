@@ -7,7 +7,7 @@ import java.util.Set;
 
 public interface LineRule {
 
-    void apply(String inputLine, RulePackage rulePackage, Set<Line> outputLines, String file);
+    void apply(String file, List<String> inputLines, Set<Line> outputLines, RulePackage rulePackage);
 
     void end();
 

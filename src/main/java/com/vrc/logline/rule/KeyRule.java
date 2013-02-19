@@ -2,8 +2,6 @@ package com.vrc.logline.rule;
 
 import com.vrc.logline.domain.Line;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.time.StopWatch;
-import org.apache.log4j.Logger;
 
 import java.util.List;
 import java.util.Set;
@@ -22,16 +20,18 @@ public class KeyRule extends BaseRule {
     }
 
     @Override
-    public void apply(String inputLine, RulePackage rulePackage, Set<Line> outputLines, String file) {
-        if (!keyPattern.matcher(inputLine).find())
-            return;
-        Matcher matcher = threadPattern.matcher(inputLine);
-        if (matcher != null && matcher.find()) {
-            String thread = matcher.group("thread");
-            rulePackage.addThread(thread);
-            outputLines.add(new Line(inputLine).ofFile(file).ofThread(thread));
-        } else {
-            outputLines.add(new Line(inputLine).ofFile(file));
+    public void apply(String file, List<String> inputLines, Set<Line> outputLines, RulePackage rulePackage) {
+        for (String inputLine : inputLines) {
+            if (!keyPattern.matcher(inputLine).find())
+                continue;
+            Matcher matcher = threadPattern.matcher(inputLine);
+            if (matcher != null && matcher.find()) {
+                String thread = matcher.group("thread");
+                rulePackage.addThread(thread);
+                outputLines.add(new Line(inputLine).ofFile(file).ofThread(thread));
+            } else {
+                outputLines.add(new Line(inputLine).ofFile(file));
+            }
         }
     }
 

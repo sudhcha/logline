@@ -26,10 +26,10 @@ public class AllRules {
     public void apply(File file, Set<Line> outputLines) throws Exception {
         log.info("processing " + file.getName() + " ...");
         RulePackage rulePackage = new RulePackage().addKeys(keys);
-        for (LineRule lineRule : lineRules)  {
+        for (LineRule lineRule : lineRules) {
+            List<String> inputLines = FileUtils.readLines(file);
             lineRule.start();
-            for (String inputLine : FileUtils.readLines(file))
-                lineRule.apply(inputLine, rulePackage, outputLines, file.getName());
+            lineRule.apply(file.getName(), inputLines, outputLines, rulePackage);
             lineRule.end();
         }
     }
