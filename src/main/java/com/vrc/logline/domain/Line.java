@@ -18,7 +18,7 @@ public class Line implements Comparable<Line> {
     }
 
     public String html() {
-        return StringEscapeUtils.escapeHtml(value);
+        return file() + StringEscapeUtils.escapeHtml(value);
     }
 
     @Override
@@ -75,5 +75,9 @@ public class Line implements Comparable<Line> {
     public void replace(Map<String, String> shorts) {
         for (String key : shorts.keySet())
             value = value.replaceAll(key, shorts.get(key));
+    }
+
+    public String file() {
+        return "[" + file + "]";
     }
 }

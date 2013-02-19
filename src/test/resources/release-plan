@@ -14,10 +14,11 @@ group them as transactions based on timestamp - done
 get key interaction points from config file like other web-services, db and jms.
     0) next find dialog
     1) other userids   - done
-    2) sccf     - done
+    2) sccf  - done
     3) table names - done
     4) time color  - done
     5) boid - done
+    6) get fie name
 #R3
 get context
 get xml file dropdown

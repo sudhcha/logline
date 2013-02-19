@@ -15,7 +15,7 @@ public class KeyRule extends BaseRule {
     private Pattern keyPattern;
 
     public KeyRule(List<String> keys) {
-        threadPattern = Pattern.compile("\\s*(?<thread>.*)\\s*(INFO|ERROR)");
+        threadPattern = Pattern.compile("[0-9]{4}-[0-9]{2}-[0-9]{2}\\s*[0-9]{1,2}:[0-9]{2}:[0-9]{2},[0-9]{0,3}\\s*(?<thread>.*)\\s*(INFO|ERROR)");
         for (int i = 0; i < keys.size(); i++)
             keys.set(i, StringUtils.trimToEmpty(keys.get(i)));
         keyPattern = Pattern.compile("(?i)" + StringUtils.join(keys.toArray(), "|"));

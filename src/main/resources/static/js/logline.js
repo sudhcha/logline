@@ -89,8 +89,12 @@ LogLight = function(){
         if(timeMatch){html = html.replace(timeMatch[0],"<span class='time'>"+timeMatch[0]+"</span>")};
 
         //boid
-        var boidMatch = html.match("780[12]|534[12]|542[12]|560[12]|690[12]|090[12]|580[12]|671[12]|701[12]|710[12]|430[12]|936[12]|134[12]|104[12]|834[12]|184[12]|273[12]|064[12]|308[12]|428[12]|104[12]|249[12]|456[12]|268[12]|053[12]|046[12]|720[12]");
+        var boidMatch = html.match("780[12][\D]+|534[12]|542[12]|560[12]|690[12]|090[12]|580[12]|671[12]|701[12]|710[12]|430[12]|936[12]|134[12]|104[12]|834[12]|184[12]|273[12]|064[12]|308[12]|428[12]|104[12]|249[12]|456[12]|268[12]|053[12]|046[12]|720[12]");
         if(boidMatch){html = html.replace(boidMatch[0],"<span class='sccf'>"+boidMatch[0]+"</span>")};
+
+        //file
+        var fileMatch = html.match("\\[.*?\\]");
+        if(fileMatch){html = html.replace(fileMatch[0],"<span class='file'>"+fileMatch[0]+"</span>")};
 
         $(this).html(html);
 
