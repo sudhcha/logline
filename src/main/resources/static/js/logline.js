@@ -23,7 +23,7 @@ LogForm = function(){
         $("#results").html(response);
         $("#loading-div-background").hide();
         new LogTabs().boot();
-//        new LogLight().boot(keys);
+        new LogLight().boot(keys);
         new ToolDialog().boot();
     };
 
@@ -57,13 +57,19 @@ LogLight = function(){
     $("li").each(function(){
         var html = $(this).text();
 
+        //xml
+        var xmlMatch = html.match("XML");
+        if(xmlMatch){
+            $(this).css("color","#8B1C62");
+            return;
+        }
         //sql
         var dbMatch = html.match("Blue2Dao*");
-        if(dbMatch){
+         if(dbMatch){
             $(this).css("color","#104E8B");
             var schemaMatch = html.match("PNASCO.[A-Z|_]+");
             if(schemaMatch){ html = html.replace(schemaMatch[0],"<span class='sccf'>"+schemaMatch[0]+"</span>")};
-        }
+         }
         //jms message
         if(html.match("JMSSender|DispatchQSender|MessageDispatcher|jms/")){
             $(this).css("color","#1874CD");
