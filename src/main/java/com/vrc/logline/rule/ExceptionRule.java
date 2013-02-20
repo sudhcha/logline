@@ -1,6 +1,7 @@
 package com.vrc.logline.rule;
 
 import com.vrc.logline.domain.Line;
+import com.vrc.logline.repository.AllLines;
 
 import java.util.List;
 import java.util.Set;
@@ -15,17 +16,16 @@ public class ExceptionRule extends BaseRule {
     }
 
     @Override
-    public void apply(String file, List<String> inputLines, Set<Line> outputLines, RulePackage rulePackage) {
-        for (String inputLine : inputLines) {
-            if (!pattern.matcher(inputLine).find()) continue;
-            Line outputLine = new Line(inputLine).ofFile(file).markError();
-            if (!outputLines.contains(outputLine))
-                outputLines.add(outputLine);
-        }
+    protected String name() {
+        return "ExceptionRule";
     }
 
     @Override
-    protected String name() {
-        return "ExceptionRule";
+    public void process(AllLines allLines) {
+        for (String processedLine : allLines.processedLines()) {
+            if (!pattern.matcher(processedLine).find()) continue;
+            Line errorLine = new Line(processedLine).ofFile(allLines.file()).markError();
+            allLines.addErrorLine(errorLine);
+        }
     }
 }

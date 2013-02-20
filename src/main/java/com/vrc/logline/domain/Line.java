@@ -17,17 +17,12 @@ public class Line implements Comparable<Line> {
 
     public String html() {
         String s = StringEscapeUtils.escapeXml(value);
-        System.out.println(s);
         return file() + s;
     }
 
     @Override
     public String toString() {
         return value;
-    }
-
-    public boolean isBig() {
-        return value.length() > 1000;
     }
 
     public boolean isError() {

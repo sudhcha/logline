@@ -2,10 +2,10 @@ package com.vrc.logline.rule;
 
 import com.vrc.logline.domain.Line;
 import com.vrc.logline.domain.Settings;
+import com.vrc.logline.repository.AllLines;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.List;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,36 +22,37 @@ public class KeyRule extends BaseRule {
     }
 
     @Override
-    public void apply(String file, List<String> inputLines, Set<Line> outputLines, RulePackage rulePackage) {
-        for (int i = 0; i < inputLines.size(); i++) {
-            String inputLine = inputLines.get(i);
-            if (!keyPattern.matcher(inputLine).find()) continue;
-            Matcher matcher = threadPattern.matcher(inputLine);
-
-            if (matcher != null && matcher.find()) {
-                String thread = matcher.group("thread");
-                rulePackage.addThread(thread);
-                outputLines.add(new Line(inputLine).ofFile(file).ofThread(thread));
-                for (int j = i + Settings.contextSize; j != i && j < inputLines.size(); j--)
-                    if (inputLines.get(j).contains(thread))
-                        outputLines.add(new Line(inputLines.get(j)).ofFile(file).ofThread(thread));
-                for (int k = i - Settings.contextSize; k != i && k < 0; k++)
-                    if (inputLines.get(k).contains(thread))
-                        outputLines.add(new Line(inputLines.get(k)).ofFile(file).ofThread(thread));
-            } else {
-                outputLines.add(new Line(inputLine).ofFile(file));
-                for (int j = i + Settings.contextSize; j != i && j < inputLines.size(); j--)
-                    if (!threadPattern.matcher(inputLines.get(j)).find())
-                        outputLines.add(new Line(inputLines.get(j)).ofFile(file));
-                for (int k = i - Settings.contextSize; k != i && k < 0; k++)
-                    if (!threadPattern.matcher(inputLines.get(k)).find())
-                        outputLines.add(new Line(inputLines.get(k)).ofFile(file));
-            }
-        }
+    protected String name() {
+        return "KeyRule";
     }
 
     @Override
-    protected String name() {
-        return "KeyRule";
+    public void process(AllLines allLines) {
+
+        List<String> processedLines = allLines.processedLines();
+        for (int i = 0; i < processedLines.size(); i++) {
+            String processedLine = processedLines.get(i);
+            if (!keyPattern.matcher(processedLine).find()) continue;
+            Matcher matcher = threadPattern.matcher(processedLine);
+
+            if (matcher != null && matcher.find()) {
+                String thread = matcher.group("thread");
+                allLines.addKeyLine(new Line(processedLine).ofThread(thread));
+                for (int j = i + Settings.context; j != i && j < processedLines.size(); j--)
+                    if (processedLines.get(j).contains(thread))
+                        allLines.addKeyLine(new Line(processedLines.get(j)).ofThread(thread));
+                for (int k = i - Settings.context; k != i && k < 0; k++)
+                    if (processedLines.get(k).contains(thread))
+                        allLines.addKeyLine(new Line(processedLines.get(k)).ofThread(thread));
+            } else {
+                allLines.addKeyLine(new Line(processedLine));
+                for (int j = i + Settings.context; j != i && j < processedLines.size(); j--)
+                    if (!threadPattern.matcher(processedLines.get(j)).find())
+                        allLines.addKeyLine(new Line(processedLines.get(j)));
+                for (int k = i - Settings.context; k != i && k < 0; k++)
+                    if (!threadPattern.matcher(processedLines.get(k)).find())
+                        allLines.addKeyLine(new Line(processedLines.get(k)));
+            }
+        }
     }
 }

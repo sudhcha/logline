@@ -1,38 +1,34 @@
 package com.vrc.logline.domain;
 
+import com.vrc.logline.repository.AllLines;
+import com.vrc.logline.repository.AllProcessors;
 import com.vrc.logline.repository.AllRules;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.time.DateUtils;
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.log4j.Logger;
-import org.joda.time.DateTime;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 public class TimeLine {
     private static final Logger log = Logger.getLogger(TimeLine.class);
     private String folder;
     private AllRules allRules;
-
-    private List<String> keys = new ArrayList<String>();
-    private Set<Line> outputLines = new HashSet<Line>();
-    private Set<Line> keyLines = new HashSet<Line>();
-    private Set<Line> errorLines = new HashSet<Line>();
+    private AllLines allLines;
+    private AllProcessors allProcessors;
 
     public TimeLine(String keys, String folder) {
         this.folder = folder;
-        this.keys = split(keys);
-        this.allRules = new AllRules(this.keys);
+        this.allLines = new AllLines();
+        this.allProcessors = new AllProcessors();
+        this.allRules = new AllRules(split(keys));
     }
 
     private List<String> split(String keys) {
         List<String> splitKeys = new ArrayList<String>();
         for (String key : StringUtils.split(keys, ","))
             if (StringUtils.isNotBlank(key))
-                splitKeys.add(key);
+                splitKeys.add(key.trim());
         return splitKeys;
     }
 
@@ -47,22 +43,22 @@ public class TimeLine {
     }
 
     private void recurse(File logDir) throws Exception {
-        for (File file : logDir.listFiles())
+        for (File file : logDir.listFiles()) {
             if (file.isDirectory()) recurse(file);
-            else allRules.apply(file, outputLines);
-
-        for (Line outputLine : outputLines)
-            if (outputLine.isError()) errorLines.add(outputLine);
-            else keyLines.add(outputLine);
+            allLines.addFileLinesFrom(file);
+            allProcessors.process(allLines);
+            allLines.flushFileLines();
+            allRules.process(allLines);
+            allLines.flushProcessedLines();
+        }
     }
 
     public Map<String, List<Line>> keyLines() {
-        System.out.println(keyLines.size());
-        return new LineGroup(keyLines).byThread();
+        return new LineGroup(allLines.keyLines()).strip().byThread();
     }
 
     public Set<Line> errorLines() {
-        return errorLines;
+        return allLines.errorLines();
     }
 
 }

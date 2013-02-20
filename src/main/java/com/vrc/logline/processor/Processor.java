@@ -1,7 +1,7 @@
 package com.vrc.logline.processor;
 
-import java.util.List;
+import com.vrc.logline.repository.AllLines;
 
 public interface Processor {
-    List<String> apply(List<String> inputLines);
+    void process(AllLines inputLines);
 }

@@ -1,7 +1,7 @@
 package com.vrc.logline.processor;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.vrc.logline.repository.AllLines;
+
 import java.util.regex.Pattern;
 
 public class XMLProcessor implements Processor {
@@ -10,31 +10,28 @@ public class XMLProcessor implements Processor {
     private final String xmlStart = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 
     @Override
-    public List<String> apply(List<String> inputLines) {
-        List<String> outputLines = new ArrayList<>();
+    public void process(AllLines allLines) {
         StringBuffer xmlString = null;
         boolean inXml = false;
 
-        for (String inputLine : inputLines) {
-            if (startPattern.matcher(inputLine).find()) {
-                xmlString = new StringBuffer().append(inputLine);
+        for (String fileLine : allLines.fileLines()) {
+            if (startPattern.matcher(fileLine).find()) {
+                xmlString = new StringBuffer().append(fileLine);
                 inXml = true;
                 continue;
             }
             if (inXml) {
-                if (pattern.matcher(inputLine).find()){
-                    xmlString.append(inputLine);
-                }
-                else {
+                if (pattern.matcher(fileLine).find()) {
+                    xmlString.append(fileLine);
+                } else {
                     String xml = xmlString.toString().replace(xmlStart, "[XML]") + "[/XML]";
-                    outputLines.add(xml);
+                    allLines.addProcessedLine(xml);
                     inXml = false;
                 }
-            }else{
-                outputLines.add(inputLine);
+            } else {
+                allLines.addProcessedLine(fileLine);
             }
         }
-        return outputLines;
     }
 
 }
