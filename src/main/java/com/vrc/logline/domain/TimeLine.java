@@ -27,8 +27,7 @@ public class TimeLine {
     private List<String> split(String keys) {
         List<String> splitKeys = new ArrayList<String>();
         for (String key : StringUtils.split(keys, ","))
-            if (StringUtils.isNotBlank(key))
-                splitKeys.add(key.trim());
+            splitKeys.add(StringUtils.deleteWhitespace(key));
         return splitKeys;
     }
 
@@ -44,7 +43,10 @@ public class TimeLine {
 
     private void recurse(File logDir) throws Exception {
         for (File file : logDir.listFiles()) {
-            if (file.isDirectory()) recurse(file);
+            if (file.isDirectory()) {
+                recurse(file);
+                continue;
+            }
             allLines.addFileLinesFrom(file);
             allProcessors.process(allLines);
             allLines.flushFileLines();
@@ -54,7 +56,7 @@ public class TimeLine {
     }
 
     public Map<String, List<Line>> keyLines() {
-        return new LineGroup(allLines.keyLines()).strip().byThread();
+        return new LineGroup(allLines.keyLines()).byThread();
     }
 
     public Set<Line> errorLines() {

@@ -2,11 +2,14 @@ package com.vrc.logline;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,7 +51,7 @@ public class LogPatternTest {
         System.out.println(matcher.toMatchResult().toString());
 
         pattern = Pattern.compile("(:?<.+>)");
-        String path = this.getClass().getResource("/sample.log").getFile();
+        String path = this.getClass().getResource("/sample.txt").getFile();
         matcher = pattern.matcher(FileUtils.readFileToString(new File(path)));
         assertTrue(matcher != null && matcher.find());
         while(matcher.find()){
@@ -56,5 +59,12 @@ public class LogPatternTest {
         }
     }
 
+    @Test
+    public void splitString(){
+        String keys = "42320130170009000,   JZW2CM";
+        for (String key : StringUtils.split(keys, ",")) {
+            System.out.println(StringUtils.deleteWhitespace(key));
+        }
+    }
 
 }

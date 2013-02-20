@@ -56,11 +56,10 @@ LogLight = function(){
     }
     $("li").each(function(){
         var html = $(this).text();
-
         //xml
         var xmlMatch = html.match("XML");
         if(xmlMatch){
-            $(this).css("color","#8B1C62");
+            $(this).css("color","#006400");
             return;
         }
         //sql
@@ -92,7 +91,11 @@ LogLight = function(){
         }
         //time-color
         var timeMatch = html.match("[0-9]{4}-[0-9]{2}-[0-9]{2}\\s*[0-9]{1,2}:[0-9]{2}:[0-9]{2},[0-9]{0,3}");
-        if(timeMatch){html = html.replace(timeMatch[0],"<span class='time'>"+timeMatch[0]+"</span>")};
+        if(timeMatch){html = html.replace(timeMatch[0],"<span class='time'>"+timeMatch[0]+"</span>")}
+        else{
+            timeMatch = html.match("[0-9]{2}\\s*(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\s*[0-9]{4}\\s*[0-9]{1,2}:[0-9]{2}:[0-9]{2}");
+            if(timeMatch){html = html.replace(timeMatch[0],"<span class='time'>"+timeMatch[0]+"</span>")}
+        }
 
         //boid
         var boidMatch = html.match("780[12][\D]+|534[12]|542[12]|560[12]|690[12]|090[12]|580[12]|671[12]|701[12]|710[12]|430[12]|936[12]|134[12]|104[12]|834[12]|184[12]|273[12]|064[12]|308[12]|428[12]|104[12]|249[12]|456[12]|268[12]|053[12]|046[12]|720[12]");

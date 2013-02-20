@@ -1,5 +1,6 @@
 package com.vrc.logline.repository;
 
+import com.vrc.logline.processor.ExceptionProcessor;
 import com.vrc.logline.processor.Processor;
 import com.vrc.logline.processor.XMLProcessor;
 import org.apache.log4j.Logger;
@@ -13,6 +14,7 @@ public class AllProcessors {
 
     public AllProcessors() {
         this.processors.add(new XMLProcessor());
+        this.processors.add(new ExceptionProcessor());
     }
 
     public void process(AllLines allLines) {

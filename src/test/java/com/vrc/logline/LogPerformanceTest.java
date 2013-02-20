@@ -95,7 +95,7 @@ public class LogPerformanceTest {
     public void shouldUseGrep4J() {
         Profile localProfile = ProfileBuilder.newBuilder()
                 .name("Local server log")
-                .filePath("C:/Work/test/b2_node1.log.2")
+                .filePath("C:/Work/test/b2_node1.txt")
                 .onLocalhost()
                 .build();
 

@@ -15,9 +15,7 @@ public class KeyRule extends BaseRule {
     private Pattern keyPattern;
 
     public KeyRule(List<String> keys) {
-        threadPattern = Pattern.compile(Settings.THREAD_REGEX);
-        for (int i = 0; i < keys.size(); i++)
-            keys.set(i, StringUtils.trimToEmpty(keys.get(i)));
+        threadPattern = Pattern.compile(Settings.DATE_REGEX1);
         keyPattern = Pattern.compile("(?i)" + StringUtils.join(keys.toArray(), "|"));
     }
 
