@@ -18,8 +18,7 @@ public class AllRules {
 
     public AllRules(List<String> keys) {
         this.keys = keys;
-//        this.lineRules.add(new KeyRule(keys));
-        this.lineRules.add(new XMLRule());
+        this.lineRules.add(new KeyRule(keys));
 //        this.lineRules.add(new ExceptionRule());
     }
 
