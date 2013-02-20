@@ -26,6 +26,7 @@ public class LineGroup {
         for (List<Line> lines : groups.values())
             Collections.sort(lines);
         watch.stop();
+        System.out.println(groups.size());
         log.info("Time taken to group: "+watch);
         return groups;
     }

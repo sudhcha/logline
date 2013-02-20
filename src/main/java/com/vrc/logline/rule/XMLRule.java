@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class XMLRule extends BaseRule {
+public class    XMLRule extends BaseRule {
 
     private Pattern pattern = Pattern.compile("(:?<.+>)");
     private Pattern startPattern = Pattern.compile("<\\?xml\\s+");
@@ -27,12 +27,15 @@ public class XMLRule extends BaseRule {
                 Matcher matcher = threadPattern.matcher(inputLine);
                 thread = (matcher != null && matcher.find()) ? matcher.group("thread") : null;
                 inXml = true;
+                continue;
             }
             if (inXml) {
-                if (pattern.matcher(inputLine).find())
+                if (pattern.matcher(inputLine).find()){
                     xmlString.append(inputLine);
+                }
                 else {
                     String xml = xmlString.toString().replace(xmlStart, "[XML]") + "[/XML]";
+                    System.out.println(xml);
                     outputLines.add(new Line(xml).ofThread(thread).ofFile(file));
                     inXml = false;
                 }

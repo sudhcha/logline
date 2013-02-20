@@ -23,7 +23,7 @@ LogForm = function(){
         $("#results").html(response);
         $("#loading-div-background").hide();
         new LogTabs().boot();
-        new LogLight().boot(keys);
+        //new LogLight().boot(keys);
         new ToolDialog().boot();
     };
 

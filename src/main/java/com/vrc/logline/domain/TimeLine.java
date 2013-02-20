@@ -57,6 +57,7 @@ public class TimeLine {
     }
 
     public Map<String, List<Line>> keyLines() {
+        System.out.println(keyLines.size());
         return new LineGroup(keyLines).byThread();
     }
 
