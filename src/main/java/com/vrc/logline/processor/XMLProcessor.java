@@ -1,12 +1,14 @@
 package com.vrc.logline.processor;
 
 import com.vrc.logline.repository.AllLines;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.regex.Pattern;
 
 public class XMLProcessor implements Processor {
     private Pattern pattern = Pattern.compile("(:?<.+>)");
     private Pattern startPattern = Pattern.compile("<\\?xml\\s+");
+    private Pattern invalidPattern = Pattern.compile("[><]{2,5}\\s*Start|End");
     private final String xmlStart = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 
     @Override
@@ -21,7 +23,7 @@ public class XMLProcessor implements Processor {
                 continue;
             }
             if (inXml) {
-                if (pattern.matcher(fileLine).find()) {
+                if (pattern.matcher(fileLine).find() && !invalidPattern.matcher(fileLine).find()) {
                     xmlString.append(fileLine);
                 } else {
                     String xml = xmlString.toString().replace(xmlStart, "[XML]") + "[/XML]";

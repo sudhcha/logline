@@ -48,7 +48,7 @@ public class LogPatternTest {
         System.out.println(matcher.toMatchResult().toString());
 
         pattern = Pattern.compile("(:?<.+>)");
-        String path = this.getClass().getResource("/xmlfile.log").getFile();
+        String path = this.getClass().getResource("/sample.log").getFile();
         matcher = pattern.matcher(FileUtils.readFileToString(new File(path)));
         assertTrue(matcher != null && matcher.find());
         while(matcher.find()){
