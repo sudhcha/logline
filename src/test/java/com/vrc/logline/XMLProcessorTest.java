@@ -18,7 +18,7 @@ public class XMLProcessorTest {
 
     @Test
     public void shouldGetXML() throws Exception {
-        String path = this.getClass().getResource("/sample.txt").getFile();
+        String path = this.getClass().getResource("/postprocess.txt").getFile();
         AllLines allLines = new AllLines();
         allLines.addFileLinesFrom(new File(path));
 

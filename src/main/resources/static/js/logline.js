@@ -70,7 +70,7 @@ LogLight = function(){
         //xml
         var xmlMatch = html.match("XML");
         if(xmlMatch){
-            $(this).css("color","#006400");
+            $(this).css("color","#006400").css("padding-bottom", "10px").css("padding-top", "10px");
             return;
         }
         //sql
