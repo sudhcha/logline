@@ -1,8 +1,11 @@
 package com.vrc.logline;
 
+import com.vrc.logline.domain.Settings;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
+import org.joda.time.DateTime;
 import org.junit.Test;
 
 import java.io.File;
@@ -19,15 +22,16 @@ public class LogPatternTest {
 
     @Test
     public void shouldMatchDatePattern1AndPickThreadName() throws ParseException {
-        Pattern pattern = Pattern.compile("[0-9]{4}-[0-9]{2}-[0-9]{2}\\s*[0-9]{1,2}:[0-9]{2}:[0-9]{2},[0-9]{0,3}]\\s*(?<thread>.*)\\s*INFO");
+        Pattern pattern = Pattern.compile(Settings.DATE_REGEX1);
         Matcher matcher = pattern.matcher("[2013-02-04 09:57:58,574] [WebContainer : 3538] INFO  com.xxx.xxx.web.action.SFClaimSummaryAction - UI sccfNum input:2345343");
         assertTrue(matcher != null && matcher.find());
         System.out.println(matcher.group("thread"));
+        System.out.println(DateUtils.parseDate(matcher.group("timestamp"), new String[]{"yyyy-MM-dd HH:mm:ss,SSS"}));
     }
 
     @Test
     public void shouldMatchDatePattern2() throws ParseException {
-        Pattern pattern = Pattern.compile("[0-9]{2}\\s*(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\s*[0-9]{4}\\s*[0-9]{1,2}:[0-9]{2}:[0-9]{2}");
+        Pattern pattern = Pattern.compile(Settings.DATE_REGEX2);
         Matcher matcher = pattern.matcher("04 Feb 2013 09:55:10  INFO JaxmRouterManager:64 - authority is matching.");
         assertTrue(matcher != null && matcher.find());
         System.out.println(matcher.toMatchResult().toString());

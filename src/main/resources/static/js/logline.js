@@ -68,7 +68,7 @@ LogLight = function(){
     $("li.key-item").each(function(){
         var html = $(this).text();
         //xml
-        var xmlMatch = html.match("XML");
+        var xmlMatch = html.match("\\[XML\\]");
         if(xmlMatch){
             $(this).css("color","#006400").css("padding-bottom", "10px").css("padding-top", "10px");
             return;
@@ -79,6 +79,11 @@ LogLight = function(){
             $(this).css("color","#104E8B");
             var schemaMatch = html.match("PNASCO.[A-Z|_]+");
             if(schemaMatch){ html = html.replace(schemaMatch[0],"<span class='sccf'>"+schemaMatch[0]+"</span>")};
+         }
+        //error
+        var errorMatch = html.match("\\[ERROR\\]");
+         if(errorMatch){
+            $(this).css("color","maroon");
          }
         //jms message
         if(html.match("JMSSender|DispatchQSender|MessageDispatcher|jms/")){
@@ -93,7 +98,7 @@ LogLight = function(){
            }
         }
         //sccf
-        var sccfMatch = html.match("[0-9]{17}");
+        var sccfMatch = html.match("[0-9]{15,17}");
         if(sccfMatch){
           var keyNotMatch = splits.indexOf(sccfMatch[0])== -1;
           if(keyNotMatch){

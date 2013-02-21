@@ -2,6 +2,7 @@ package com.vrc.logline.rule;
 
 import com.vrc.logline.domain.Line;
 import com.vrc.logline.domain.Settings;
+import com.vrc.logline.domain.TimeBag;
 import com.vrc.logline.repository.AllLines;
 import org.apache.commons.lang.StringUtils;
 
@@ -26,7 +27,6 @@ public class KeyRule extends BaseRule {
 
     @Override
     public void process(AllLines allLines) {
-
         List<String> processedLines = allLines.processedLines();
         for (int i = 0; i < processedLines.size(); i++) {
             String processedLine = processedLines.get(i);
