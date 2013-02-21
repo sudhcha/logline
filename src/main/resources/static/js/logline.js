@@ -35,15 +35,25 @@ LogForm = function(){
 //-------------------------------------------------------------------------------------------------
 LogTabs = function(){
     var threadTabs = function(){
-     //$('.content').slideToggle('fast');
        $('.expand').click(function(){
           $(this).siblings('.content').slideToggle('slow');
         });
+    };
+    var errorTabs = function(){
+       $('.expand-error').click(function(){
+          $(this).siblings('.content-error').slideToggle('slow');
+       });
+    };
+
+    var closeAllTabs = function(){
+       $('.content-error').slideToggle('fast');
     };
 
     this.boot = function(){
         $( "#tabs" ).tabs();
         threadTabs();
+        errorTabs();
+        $("#errors_close").click(closeAllTabs);
     };
 };
 //-------------------------------------------------------------------------------------------------

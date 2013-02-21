@@ -99,5 +99,10 @@ h2{
     border-bottom-left-radius: 0px !important;
     border-top-left-radius: 0px !important;
     border-top-right-radius: 0px !important;
+}
 
+.error-title{
+    color: maroon;
+    font-size: 16px;
+    font-weight: normal;
 }

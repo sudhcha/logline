@@ -1,6 +1,7 @@
 package com.vrc.logline.domain;
 
 import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.Map;
 
@@ -74,5 +75,9 @@ public class Line implements Comparable<Line> {
 
     public String file() {
         return "[" + file + "]";
+    }
+
+    public String errorTitle() {
+        return StringUtils.substringBefore(this.html(), "\n");
     }
 }

@@ -9,7 +9,7 @@ public class XMLProcessor implements Processor {
     private Pattern pattern = Pattern.compile("(:?<.+>)");
     private Pattern startPattern = Pattern.compile("<\\?xml\\s+");
     private Pattern invalidPattern = Pattern.compile("[><]{2,5}\\s*Start|End");
-    private final String xmlStart = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+    private final String xmlStart = "<?xml version=\"1.0\"";
 
     @Override
     public void process(AllLines allLines) {
