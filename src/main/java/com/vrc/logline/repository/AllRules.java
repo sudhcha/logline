@@ -11,10 +11,8 @@ import java.util.List;
 public class AllRules {
     private static final Logger log = Logger.getLogger(AllRules.class);
     private List<LineRule> lineRules = new ArrayList<LineRule>();
-    private List<String> keys;
 
     public AllRules(List<String> keys) {
-        this.keys = keys;
         this.lineRules.add(new KeyRule(keys));
         this.lineRules.add(new ExceptionRule());
     }

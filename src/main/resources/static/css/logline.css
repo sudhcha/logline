@@ -16,6 +16,11 @@ h2{
     border-bottom: 3px solid black;
 }
 
+.error-item{
+    padding-bottom: 30px;
+    border-bottom: 3px solid black;
+}
+
 .highlight {
     background-color: #FFFF88 !important;
     font-weight:bold !important;

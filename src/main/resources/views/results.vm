@@ -6,20 +6,20 @@
     <div class="content">
         <ul>
             #foreach($line in $keyLines.get($key))
-            <li>$line.html()</li>
+            <li class="key-item">$line.html()</li>
             #end
         </ul>
     </div>
 #set($count = $count+1)
 #end
 </div>
-
+<h2>Errors</h2>
 <div class="error-box">
     <ul>
         #foreach($line in $errorLines)
-        <li>
+        <li class="error-item">
             <p class="expand"><a href="#">Error:</a> <img src="/static/images/arrow.gif"/></p>
-            <div class="content">$line.html()</div>
+            <div class="content"><pre>$line.html()</pre></div>
         </li>
         #end
     </ul>

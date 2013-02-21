@@ -54,7 +54,7 @@ LogLight = function(){
     for(var i=0, len=splits.length; i < len; i++) {
       splits[i] = splits[i].trim();
     }
-    $("li").each(function(){
+    $("li.key-item").each(function(){
         var html = $(this).text();
         //xml
         var xmlMatch = html.match("XML");

@@ -25,7 +25,7 @@ public class ExceptionProcessor implements Processor {
             }
             if (inStack) {
                 if (pattern.matcher(fileLine).find() || !(datePattern1.matcher(fileLine).find() || datePattern2.matcher(fileLine).find())) {
-                    errorString.append(fileLine);
+                    errorString.append(fileLine+"\n");
                 } else {
                     allLines.addProcessedLine("[ERROR]" + errorString.toString() + "[/ERROR]");
                     inStack = false;
