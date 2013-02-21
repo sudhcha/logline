@@ -42,6 +42,7 @@ LogTabs = function(){
     };
 
     this.boot = function(){
+        $( "#tabs" ).tabs();
         threadTabs();
     };
 };

@@ -79,3 +79,9 @@ h2{
 .file{
   color:green;
 }
+
+#tabs-1,#tabs-2, #tabs-3{
+  background:#fff !important;
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif !important;
+}
+

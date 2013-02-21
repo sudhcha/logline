@@ -1,30 +1,22 @@
-<h2>Analysis</h2>
-#set( $count = 1 )
-#foreach($key in $keyLines.keySet())
-<div class="thread-box">
-    <p class="expand"><a href="#">Thread ${count}</a> <img src="/static/images/arrow.gif"/></p>
-    <div class="content">
-        <ul>
-            #foreach($line in $keyLines.get($key))
-            <li class="key-item">$line.html()</li>
-            #end
-        </ul>
-    </div>
-#set($count = $count+1)
-#end
-</div>
-<h2>Errors</h2>
-<div class="error-box">
+<div id="tabs">
     <ul>
-        #foreach($line in $errorLines)
-        <li class="error-item">
-            <p class="expand"><a href="#">Error:</a> <img src="/static/images/arrow.gif"/></p>
-            <div class="content"><pre>$line.html()</pre></div>
-        </li>
-        #end
+        <li><a href="#tabs-1">Errors</a></li>
+        <li><a href="#tabs-2">Search Results</a></li>
+        <li><a href="#tabs-3">Settings</a></li>
     </ul>
+    <div id="tabs-1">
+       #errorResults()
+    </div>
+    <div id="tabs-2">
+       #searchResults()
+    </div>
+    <div id="tabs-3">
+        <p>Under 3</p>
+    </div>
 </div>
+#toolbox()
 
+#macro(toolbox)
 <div id="tool-dialog" title="ToolBox">
 <table>
     <tr>
@@ -43,3 +35,35 @@
     </tr>
 </table>
 </div>
+#end
+
+#macro(searchResults)
+    <h2>Analysis</h2>
+    #set( $count = 1 )
+    #foreach($key in $keyLines.keySet())
+    <div class="thread-box">
+    <p class="expand"><a href="#">Thread ${count}</a> <img src="/static/images/arrow.gif"/></p>
+    <div class="content">
+        <ul>
+            #foreach($line in $keyLines.get($key))
+            <li class="key-item">$line.html()</li>
+            #end
+        </ul>
+    </div>
+    #set($count = $count+1)
+    #end
+    </div>
+#end
+#macro(errorResults)
+    <h2>Errors</h2>
+    <div class="error-box">
+        <ul>
+            #foreach($line in $errorLines)
+            <li class="error-item">
+                <p class="expand"><a href="#">Error:</a> <img src="/static/images/arrow.gif"/></p>
+                <div class="content"><pre>$line.html()</pre></div>
+            </li>
+            #end
+        </ul>
+    </div>
+#end
