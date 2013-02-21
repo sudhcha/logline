@@ -30,7 +30,7 @@ public class XMLProcessor implements Processor {
                 if (pattern.matcher(fileLine).find()
                         || !(datePattern1.matcher(fileLine).find() || datePattern2.matcher(fileLine).find())
                         && !invalidPattern.matcher(fileLine).find()) {
-                    xmlString.append(fileLine);
+                    xmlString.append(fileLine + "\n");
                 } else {
                     String xml = xmlString.toString().replace(xmlStart1, "[XML]").replace(xmlStart2, "[XML]") + "[/XML]";
                     allLines.addProcessedLine(xml);

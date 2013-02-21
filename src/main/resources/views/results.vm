@@ -53,7 +53,7 @@
     <div class="content">
         <ul>
             #foreach($line in $keyLines.get($key))
-            <li class="key-item">$line.html()</li>
+            <li class="key-item"><pre>$line.html()</pre></li>
             #end
         </ul>
     </div>
