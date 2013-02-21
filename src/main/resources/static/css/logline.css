@@ -49,8 +49,9 @@ h2{
 }
 
 .expand{
-    font-size: 26px;
+    font-size: 20px;
     font-weight: bold;
+    text-decoration:underline;
 }
 
 .sccf{
@@ -85,3 +86,18 @@ h2{
   font-family:"Helvetica Neue",Helvetica,Arial,sans-serif !important;
 }
 
+.ui-widget-header{
+ border: none !important;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited{
+   font-family:"Helvetica Neue",Helvetica,Arial,sans-serif !important;
+}
+
+.ui-corner-all{
+    border-bottom-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+
+}

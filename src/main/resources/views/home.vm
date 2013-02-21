@@ -19,7 +19,7 @@
 <div class="container-fluid">
     <div class="row-fluid mainbox">
         <fieldset>
-            <h2>Log Timeline</h2>
+            <h2>Blue2 Support</h2>
 
             <div id="form_table">
                 <form id="log_form" class="form-horizontal" action="">
