@@ -39,7 +39,7 @@ public class KeyRule extends BaseRule {
                 for (int j = i + Settings.context; j != i && j < processedLines.size(); j--)
                     if (processedLines.get(j).contains(thread))
                         allLines.addKeyLine(new Line(processedLines.get(j)).ofThread(thread));
-                for (int k = i - Settings.context; k != i && k < 0; k++)
+                for (int k = i - Settings.context; k != i && k > 0; k++)
                     if (processedLines.get(k).contains(thread))
                         allLines.addKeyLine(new Line(processedLines.get(k)).ofThread(thread));
             } else {
@@ -47,7 +47,7 @@ public class KeyRule extends BaseRule {
                 for (int j = i + Settings.context; j != i && j < processedLines.size(); j--)
                     if (!threadPattern.matcher(processedLines.get(j)).find())
                         allLines.addKeyLine(new Line(processedLines.get(j)));
-                for (int k = i - Settings.context; k != i && k < 0; k++)
+                for (int k = i - Settings.context; k != i && k > 0; k++)
                     if (!threadPattern.matcher(processedLines.get(k)).find())
                         allLines.addKeyLine(new Line(processedLines.get(k)));
             }

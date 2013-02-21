@@ -84,6 +84,11 @@ LogLight = function(){
         if(html.match("JMSSender|DispatchQSender|MessageDispatcher|jms/")){
             $(this).css("color","#1874CD");
         }
+        //error
+        if(html.match("\\[ERROR\\]")){
+            $(this).css("color","maroon");
+        }
+
         //user-id
         var userMatch = html.match("[A-Z0-9]{6,7}");
         if(userMatch){
