@@ -18,7 +18,7 @@
 
 #macro(toolbox)
 <div id="tool-dialog" title="ToolBox">
-<table>
+<table id="tool-table">
     <tr>
         <td class="tool-table-column">Keys:</td>
         <td class="tool-table-column">
@@ -36,7 +36,7 @@
     <tr>
         <td class="tool-table-column">Errors:</td>
         <td class="tool-table-column">
-            <input type="button" id="errors_close" value="toggle"/>
+            <input type="button" id="errors_close" value="*"/>
         </td>
     </tr>
 </table>

@@ -1,7 +1,9 @@
 input{
     width:500px;
 }
-
+input, button, select, textarea {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+}
 h2{
     padding-bottom: 10px;
     color: #0099cc;
@@ -17,7 +19,7 @@ h2{
 }
 
 .error-item{
-    padding-bottom: 30px;
+    padding-bottom: 20px;
     border-bottom: 3px solid black;
 }
 
@@ -103,10 +105,14 @@ h2{
 
 .error-title{
     color: maroon;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: normal;
 }
 
 .ui-dialog-titlebar{
    background: none repeat scroll 0 0 #0099CC !important;
+}
+
+#tool-table{
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif !important;
 }

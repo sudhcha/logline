@@ -77,7 +77,7 @@ LogLight = function(){
         var dbMatch = html.match("Blue2Dao*");
          if(dbMatch){
             $(this).css("color","#104E8B");
-            var schemaMatch = html.match("PNASCO.[A-Z|_]+");
+            var schemaMatch = html.match("(PNASCO|PNASCMOD|T6QJDBA).[A-Z|_]+");
             if(schemaMatch){ html = html.replace(schemaMatch[0],"<span class='sccf'>"+schemaMatch[0]+"</span>")};
          }
         //jms message
