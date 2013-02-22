@@ -3,6 +3,8 @@ package com.vrc.logline;
 import com.vrc.logline.domain.AppServer;
 import org.apache.log4j.Logger;
 
+import java.io.File;
+
 public class LogLine {
     private static final Logger log = Logger.getLogger(LogLine.class);
 

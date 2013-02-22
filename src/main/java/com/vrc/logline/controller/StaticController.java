@@ -24,7 +24,7 @@ public class StaticController extends BaseController {
     public void act(Request request, Response response) throws Exception {
         String path = request.getPath().toString();
         String fileName = StringUtils.substringAfter(path, "static");
-        String directory = ClassLoader.getSystemResource("static").getPath();
+        String directory =  System.getProperty("user.dir");
         File file = new File(directory + fileName);
         if (!file.exists()) return;
         addHeaders(response);
