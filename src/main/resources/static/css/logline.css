@@ -106,3 +106,7 @@ h2{
     font-size: 16px;
     font-weight: normal;
 }
+
+.ui-dialog-titlebar{
+   background: none repeat scroll 0 0 #0099CC !important;
+}

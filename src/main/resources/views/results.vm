@@ -34,10 +34,9 @@
         </td>
     </tr>
     <tr>
-        <td class="tool-table-column">Error Tabs:</td>
+        <td class="tool-table-column">Errors:</td>
         <td class="tool-table-column">
-            <input type="button" id="errors_open" value="+"/>
-            <input type="button" id="errors_close" value="-"/>
+            <input type="button" id="errors_close" value="toggle"/>
         </td>
     </tr>
 </table>

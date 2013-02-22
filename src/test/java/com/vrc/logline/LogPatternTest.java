@@ -67,4 +67,21 @@ public class LogPatternTest {
         }
     }
 
+    @Test
+    public void shouldMatchException(){
+        Pattern invalidPattern = Pattern.compile("b2config.ConfigReader" +
+                "|ejb.ExceptionProcessorStartUpBeanBean" +
+                "|exception.processor.ejb.ExceptionProcessorBean" +
+                "|dao.util.ReportQueryReader" +
+                "|Claim type cannot be determined for SCCF" +
+                "|There is no data to display for this tab" +
+                "|No matching records found");
+        String line1 = "INFO com.bcbsa.blue2.xx.processor.common.configuration.b2config.ConfigReader - boid value: 7802[/ERROR]";
+        String line2 = "INFO com.bcbsa.blue2.xx.processor.common.configuration.ejb.ExceptionProcessorStartUpBeanBean - boid value: 7802[/ERROR]";
+        String line3 = "000100fe SystemOut O [2013-01-26 08:01:26,169] [MessageListenerThreadPool : 732] ERROR com.bcbsa.blue2.service.notification.ProcessInterplanMessageHandler - Blue2Exception in ProcessInterPlanMessageHandler.com.bcbsa.blue2.common.Blue2Exception: No matching records found";
+        System.out.println(invalidPattern.matcher(line1).find());
+        System.out.println(invalidPattern.matcher(line2).find());
+        System.out.println(invalidPattern.matcher(line3).find());
+    }
+
 }
