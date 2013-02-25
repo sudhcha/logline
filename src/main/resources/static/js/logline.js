@@ -22,8 +22,8 @@ LogForm = function(){
     var displayResults = function(response){
         $("#results").html(response);
         $("#loading-div-background").hide();
-        new LogTabs().boot();
         new LogLight().boot(keys);
+        new LogTabs().boot();
         new ToolDialog().boot();
     };
 
@@ -44,16 +44,29 @@ LogTabs = function(){
           $(this).siblings('.content-error').slideToggle('slow');
        });
     };
+    var xmlTabs = function(){
+       $('.content-xml').each(function(){
+          $(this).before("<p class='expand-xml'><img src='/static/images/icon_xml.jpg'/></p>");
+       });
+       $('.expand-xml').click(function(){
+          $(this).siblings('.content-xml').slideToggle('slow');
+       });
+    };
 
-    var closeAllTabs = function(){
+    var closeAllErrorTabs = function(){
        $('.content-error').slideToggle('fast');
+    };
+    var closeAllXMLTabs = function(){
+       $('.content-xml').slideToggle('fast');
     };
 
     this.boot = function(){
         $( "#tabs" ).tabs();
         threadTabs();
         errorTabs();
-        $("#errors_close").click(closeAllTabs);
+        xmlTabs();
+        closeAllXMLTabs();
+        $("#errors_close").click(closeAllErrorTabs);
     };
 };
 //-------------------------------------------------------------------------------------------------
@@ -71,6 +84,7 @@ LogLight = function(){
         var xmlMatch = html.match("XML");
         if(xmlMatch){
             $(this).css("color","#006400").css("padding-bottom", "10px").css("padding-top", "10px");
+            $(this).wrap("<div class='content-xml'></div>");
             return;
         }
         //sql
