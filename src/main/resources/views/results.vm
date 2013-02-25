@@ -66,7 +66,7 @@
         <ul>
             #foreach($line in $errorLines)
             <li class="error-item">
-                <p class="expand-error"><a href="#">Error:</a><span class="error-title">$line.errorTitle()</span><img src="/static/images/arrow.gif"/></p>
+                <p class="expand-error"><img src="/static/images/error.png"/><span class="error-title">$line.errorTitle()</span></p><img src="/static/images/arrow.gif"/>
                 <div class="content-error"><pre>$line.html()</pre></div>
             </li>
             #end
