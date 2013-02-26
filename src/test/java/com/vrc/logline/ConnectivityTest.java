@@ -12,7 +12,7 @@ public class ConnectivityTest {
     public void shouldConnectViaFTPToFetchFile() throws Exception {
         FTPClient client = new FTPClient();
         client.connect("nasnmasdev");
-        client.login("vichakra", "bender555fry");
+        client.login("vichakra", "xxx");
 
         String filename = "healthcheck.log";
         FileOutputStream fos = new FileOutputStream(filename);
@@ -22,13 +22,18 @@ public class ConnectivityTest {
     }
 
     @Test
-    public void shouldConnectViaFTPToListFiles() throws Exception {
+    public void shouldConnectViaFTPToListAndDownloadSelectedFiles() throws Exception {
         FTPClient client = new FTPClient();
         client.connect("nasnmasdev");
-        client.login("vichakra", "bender555fry");
+        client.login("vichakra", "xxx");
 
         for (FTPFile ftpFile : client.listFiles("/was7blue2/logs/")) {
-            System.out.println(ftpFile.getName());
+            String name = ftpFile.getName();
+            if(!name.contains("router")) continue;
+            FileOutputStream fos = new FileOutputStream(name);
+            client.retrieveFile("/was7blue2/logs/"+name, fos);
+            System.out.println("downloaded "+name);
+            fos.close();
         }
         client.disconnect();
     }
