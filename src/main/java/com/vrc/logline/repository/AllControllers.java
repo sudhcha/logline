@@ -1,9 +1,6 @@
 package com.vrc.logline.repository;
 
-import com.vrc.logline.controller.AnalysisController;
-import com.vrc.logline.controller.Controller;
-import com.vrc.logline.controller.HomeController;
-import com.vrc.logline.controller.StaticController;
+import com.vrc.logline.controller.*;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 
@@ -16,6 +13,7 @@ public class AllControllers {
     public AllControllers() {
         controllers.add(new StaticController());
         controllers.add(new AnalysisController());
+        controllers.add(new FTPController());
         controllers.add(new HomeController());
     }
 

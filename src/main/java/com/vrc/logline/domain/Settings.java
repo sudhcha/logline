@@ -1,5 +1,7 @@
 package com.vrc.logline.domain;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,6 +17,9 @@ public class Settings {
     public static Integer PORT;
     public static Integer CONTEXT;
     public static Boolean RUN_MODE;
+    public static String USERNAME;
+    public static String PASSWORD;
+    public static String DIRECTORY;
 
     static {
         Properties config = new Properties();
@@ -27,6 +32,12 @@ public class Settings {
             PORT = Integer.parseInt((String) config.get("app.run.port"));
             RUN_MODE = (config.get("app.run.mode")).equals("jar");
             CONTEXT = Integer.parseInt((String) config.get("log.context"));
+            USERNAME = (String) config.get("user.name");
+            PASSWORD = (String) config.get("user.password");
+            DIRECTORY = (String) config.get("user.local.directory");
+            if (StringUtils.isBlank(DIRECTORY))
+                DIRECTORY = System.getProperty("user.dir")+"/logs";
+
         } catch (IOException e) {
             e.printStackTrace();
         }

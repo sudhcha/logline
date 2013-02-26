@@ -1,6 +1,6 @@
 package com.vrc.logline.container;
 
-import com.vrc.logline.domain.Task;
+import com.vrc.logline.domain.HttpTask;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 import org.simpleframework.http.core.Container;
@@ -18,7 +18,7 @@ public class AsynchContainer implements Container {
 
     @Override
     public void handle(Request request, Response response) {
-        Task task = new Task(request, response);
-        this.executor.execute(task);
+        HttpTask httpTask = new HttpTask(request, response);
+        this.executor.execute(httpTask);
     }
 }

@@ -30,6 +30,10 @@ h2{
     color: red !important;
 }
 
+#main_box{
+    padding-top:60px;
+}
+
 #loading-div-background {
     display:none;
     position:fixed;
