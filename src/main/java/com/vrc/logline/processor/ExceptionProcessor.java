@@ -33,7 +33,7 @@ public class ExceptionProcessor implements Processor {
         boolean inStack = false;
 
         for (String fileLine : allLines.fileLines()) {
-            if (startPattern.matcher(fileLine).find() && !inStack) {//&& !invalidPattern.matcher(fileLine).find()
+            if (startPattern.matcher(fileLine).find() && !inStack && !invalidPattern.matcher(fileLine).find()) {
                 errorString = new StringBuffer().append(fileLine);
                 inStack = true;
                 continue;

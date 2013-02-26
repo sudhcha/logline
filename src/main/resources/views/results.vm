@@ -1,7 +1,7 @@
 <div id="tabs">
     <ul>
-        <li><a href="#tabs-1">Errors</a></li>
-        <li><a href="#tabs-2">Search Results</a></li>
+        <li><a href="#tabs-1">Search Results</a></li>
+        <li><a href="#tabs-2">Errors</a></li>
         <li><a href="#tabs-3">Settings</a></li>
     </ul>
     <div id="tabs-1">
@@ -61,15 +61,19 @@
     #set( $count = 1 )
     #foreach($key in $errorLines.keySet())
         <div class="error-box">
-            <span class="error-no">$count</span><h4>$key</h4>
-            <ul>
-                #foreach($line in $errorLines.get($key))
-                <li>
-                    <p class="expand-error"><a class="error-time" href="#">$line.timestamp()</a></p>
-                    <div class="content-error"><pre>$line.html()</pre></div>
-                </li>
-                #end
-            </ul>
+            <p class="expand-error">
+                <a href="#" class="error-no">$count</a><div class="error-title">$key</div>
+            </p>
+            <div class="content-error">
+                <ul>
+                    #foreach($line in $errorLines.get($key))
+                    <li>
+                        <p class="expand-error"><a class="error-time" href="#">$line.timestamp()</a></p>
+                        <div class="content-error"><pre>$line.html()</pre></div>
+                    </li>
+                    #end
+                </ul>
+            </div>
             #set($count = $count+1)
         </div>
     #end

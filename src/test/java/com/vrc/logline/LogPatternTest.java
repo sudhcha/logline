@@ -30,7 +30,7 @@ public class LogPatternTest {
         Pattern pattern = Pattern.compile("[0-9]{2}\\s*(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\s*[0-9]{4}\\s*[0-9]{1,2}:[0-9]{2}:[0-9]{2}");
         Matcher matcher = pattern.matcher("04 Feb 2013 09:55:10  INFO JaxmRouterManager:64 - authority is matching.");
         assertTrue(matcher != null && matcher.find());
-        System.out.println(matcher.toMatchResult().toString());
+        System.out.println(matcher.group());
     }
 
     @Test
