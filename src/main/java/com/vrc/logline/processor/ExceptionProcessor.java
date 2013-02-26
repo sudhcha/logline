@@ -33,14 +33,14 @@ public class ExceptionProcessor implements Processor {
         boolean inStack = false;
 
         for (String fileLine : allLines.fileLines()) {
-            if (startPattern.matcher(fileLine).find() && !inStack && !invalidPattern.matcher(fileLine).find()) {
+            if (startPattern.matcher(fileLine).find() && !inStack) {//&& !invalidPattern.matcher(fileLine).find()
                 errorString = new StringBuffer().append(fileLine);
                 inStack = true;
                 continue;
             }
             if (inStack) {
                 if (pattern.matcher(fileLine).find() || !(datePattern1.matcher(fileLine).find() || datePattern2.matcher(fileLine).find())) {
-                    errorString.append(fileLine+"\n");
+                    errorString.append(fileLine + "\n");
                 } else {
                     allLines.addProcessedLine("[ERROR]" + errorString.toString() + "[/ERROR]");
                     inStack = false;

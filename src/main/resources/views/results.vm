@@ -5,10 +5,10 @@
         <li><a href="#tabs-3">Settings</a></li>
     </ul>
     <div id="tabs-1">
-       #errorResults()
+        #searchResults()
     </div>
     <div id="tabs-2">
-       #searchResults()
+        #errorResults()
     </div>
     <div id="tabs-3">
         <p>Under 3</p>
@@ -33,12 +33,6 @@
             <input type="button" id="thread_next" value=">"/>
         </td>
     </tr>
-    <tr>
-        <td class="tool-table-column">Errors:</td>
-        <td class="tool-table-column">
-            <input type="button" id="errors_close" value="*"/>
-        </td>
-    </tr>
 </table>
 </div>
 #end
@@ -48,17 +42,18 @@
     #set( $count = 1 )
     #foreach($key in $keyLines.keySet())
     <div class="thread-box">
-    <p class="expand"><a href="#">Thread ${count}</a> <img src="/static/images/arrow.gif"/></p>
-    <div class="content">
-        <ul>
-            #foreach($line in $keyLines.get($key))
-            <li class="key-item"><pre>$line.html()</pre></li>
-            #end
-        </ul>
+        <p class="expand"><a href="#">Thread ${count}</a> <img src="/static/images/arrow.gif"/></p>
+        <div class="content">
+            <ul>
+                #foreach($line in $keyLines.get($key))
+                <li class="key-item"><pre>$line.html()</pre></li>
+                #end
+            </ul>
+        </div>
     </div>
-    #set($count = $count+1)
-    #end
-    </div>
+     #set($count = $count+1)
+     #end
+
 #end
 
 #macro(errorResults)
@@ -66,16 +61,16 @@
     #set( $count = 1 )
     #foreach($key in $errorLines.keySet())
         <div class="error-box">
-        <span class="error-no">$count</span><h4>$key</h4>
-        <ul>
-            #foreach($line in $errorLines.get($key))
-            <li>
-                <p class="expand-error"><a class="error-time" href="#">$line.timestamp()</a></p>
-                <div class="content-error"><pre>$line.html()</pre></div>
-            </li>
-            #end
-        </ul>
-    #set($count = $count+1)
+            <span class="error-no">$count</span><h4>$key</h4>
+            <ul>
+                #foreach($line in $errorLines.get($key))
+                <li>
+                    <p class="expand-error"><a class="error-time" href="#">$line.timestamp()</a></p>
+                    <div class="content-error"><pre>$line.html()</pre></div>
+                </li>
+                #end
+            </ul>
+            #set($count = $count+1)
+        </div>
     #end
-    </div>
 #end

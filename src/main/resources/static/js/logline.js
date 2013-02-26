@@ -35,21 +35,24 @@ LogForm = function(){
 //-------------------------------------------------------------------------------------------------
 LogTabs = function(){
     var threadTabs = function(){
-       $('.expand').click(function(){
+       $('.expand').click(function(e){
           $(this).siblings('.content').slideToggle('slow');
+          e.preventDefault();
         });
     };
     var errorTabs = function(){
-       $('.expand-error').click(function(){
+       $('.expand-error').click(function(e){
           $(this).siblings('.content-error').slideToggle('slow');
+          e.preventDefault();
        });
     };
     var xmlTabs = function(){
-       $('.content-xml').each(function(){
+       $('.content-xml').each(function(e){
           $(this).before("<p class='expand-xml'><img src='/static/images/icon_xml.jpg'/></p>");
        });
-       $('.expand-xml').click(function(){
+       $('.expand-xml').click(function(e){
           $(this).siblings('.content-xml').slideToggle('slow');
+          e.preventDefault();
        });
     };
 
@@ -66,7 +69,7 @@ LogTabs = function(){
         errorTabs();
         xmlTabs();
         closeAllXMLTabs();
-        $("#errors_close").click(closeAllErrorTabs);
+        closeAllErrorTabs();
     };
 };
 //-------------------------------------------------------------------------------------------------
