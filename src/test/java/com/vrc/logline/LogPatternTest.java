@@ -82,6 +82,9 @@ public class LogPatternTest {
         System.out.println(invalidPattern.matcher(line1).find());
         System.out.println(invalidPattern.matcher(line2).find());
         System.out.println(invalidPattern.matcher(line3).find());
+
+        String toStrip = "[b2_node1.log.2][2013-01-23 10:43:24,606] [WebContainer : 23644] INFO com.bcbsa.blue2.service.dataservice.ClaimSummaryHandler - FindClaimDetailsInput.isRetrieveClaim = false";
+        System.out.println(toStrip.replaceAll("\\[.*\\]",""));
     }
 
 }

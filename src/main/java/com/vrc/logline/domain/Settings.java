@@ -10,7 +10,7 @@ import java.util.Properties;
 public class Settings {
     private Map<String, String> strips;
 
-    public static final String DATE_REGEX1 = "[0-9]{4}-[0-9]{2}-[0-9]{2}\\s*[0-9]{1,2}:[0-9]{2}:[0-9]{2},[0-9]{0,3}]\\s*(?<thread>.*)\\s*(INFO|WARN|FATAL|ERROR|DEBUG)";
+    public static final String DATE_REGEX1 = "(?<timestamp>[0-9]{4}-[0-9]{2}-[0-9]{2}\\s*[0-9]{1,2}:[0-9]{2}:[0-9]{2},[0-9]{0,3}])\\s*(?<thread>.*)\\s*(INFO|WARN|FATAL|ERROR|DEBUG)";
     public static final String DATE_REGEX2 = "[0-9]{2}\\s*(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\s*[0-9]{4}\\s*[0-9]{1,2}:[0-9]{2}:[0-9]{2}";
     public static Integer PORT;
     public static Integer CONTEXT;

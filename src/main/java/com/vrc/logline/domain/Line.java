@@ -10,6 +10,8 @@ public class Line implements Comparable<Line> {
     private String file;
     private String value;
     private String thread;
+    private String timestamp;
+    private String errorTitle;
     private boolean error;
 
     public Line(String value) {
@@ -78,6 +80,18 @@ public class Line implements Comparable<Line> {
     }
 
     public String errorTitle() {
-        return StringUtils.substringBefore(this.html(), "\n");
+        return errorTitle;
+    }
+
+    public String timestamp() {
+        return timestamp;
+    }
+
+    public void markTime(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public void markErrorTitle(String errorTitle) {
+        this.errorTitle = errorTitle;
     }
 }

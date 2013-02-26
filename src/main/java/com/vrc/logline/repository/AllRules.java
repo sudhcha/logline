@@ -17,7 +17,7 @@ public class AllRules {
         this.lineRules.add(new ExceptionRule());
     }
 
-    public void process(AllLines allLines) {
+    public void process(AllLines allLines) throws Exception {
         for (LineRule lineRule : lineRules)
             lineRule.process(allLines);
         log.info("rules done: " + allLines.file());
