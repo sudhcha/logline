@@ -59,8 +59,8 @@ public class TimeLine {
         return new LineGroup(allLines.keyLines()).byThread();
     }
 
-    public Set<Line> errorLines() {
-        return allLines.errorLines();
+    public Map<String, Set<Line>> errorLines() {
+        return new ErrorGroup(allLines.errorLines()).byTitle();
     }
 
 }

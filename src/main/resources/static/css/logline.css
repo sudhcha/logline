@@ -116,3 +116,12 @@ h2{
 #tool-table{
     font-family:"Helvetica Neue",Helvetica,Arial,sans-serif !important;
 }
+
+.error-no{
+    color: red;
+    font-size: 24px;
+}
+
+.error-time{
+   color:maroon !important;
+}

@@ -26,7 +26,7 @@ public class LineGroup {
         for (List<Line> lines : groups.values())
             Collections.sort(lines);
         watch.stop();
-        log.info("Time taken to group: "+watch);
+        log.info("Time taken to group: "+watch+"|groups="+groups.size());
         return groups;
     }
 

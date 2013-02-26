@@ -60,16 +60,22 @@
     #end
     </div>
 #end
+
 #macro(errorResults)
     <h2>Errors</h2>
-    <div class="error-box">
+    #set( $count = 1 )
+    #foreach($key in $errorLines.keySet())
+        <div class="error-box">
+        <span class="error-no">$count</span><h4>$key</h4>
         <ul>
-            #foreach($line in $errorLines)
-            <li class="error-item">
-                <p class="expand-error"><img src="/static/images/error.png"/><span class="error-title">$line.errorTitle()</span></p><img src="/static/images/arrow.gif"/>
+            #foreach($line in $errorLines.get($key))
+            <li>
+                <p class="expand-error"><a class="error-time" href="#">$line.timestamp()</a></p>
                 <div class="content-error"><pre>$line.html()</pre></div>
             </li>
             #end
         </ul>
+    #set($count = $count+1)
+    #end
     </div>
 #end

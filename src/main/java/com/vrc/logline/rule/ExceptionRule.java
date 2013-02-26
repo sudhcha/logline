@@ -27,14 +27,14 @@ public class ExceptionRule extends BaseRule {
             if (!processedLine.contains("[/ERROR]"))
                 continue;
             String title = StringUtils.substringBefore(processedLine, "\n");
-            String timeStamp =  "";
+            String timeStamp = "XXXX-XX-XX";
 
             Matcher matcher = datePattern1.matcher(title);
             if (matcher.find()) {
                 timeStamp = matcher.group("timestamp");
             } else {
                 matcher = datePattern2.matcher(title);
-                timeStamp = matcher.toMatchResult().toString();
+                if (matcher.find()) timeStamp = matcher.toMatchResult().toString();
             }
             Line errorLine = new Line(processedLine).ofFile(allLines.file()).markError();
             errorLine.markTime(timeStamp);
