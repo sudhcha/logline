@@ -12,8 +12,8 @@ public class AllControllers {
 
     public AllControllers() {
         controllers.add(new StaticController());
-        controllers.add(new AnalysisController());
-        controllers.add(new FTPController());
+        controllers.add(new LogSearchController());
+        controllers.add(new LogFetchController());
         controllers.add(new HomeController());
     }
 

@@ -8,11 +8,11 @@ import org.simpleframework.http.Response;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AnalysisController extends BaseController implements Controller {
+public class LogSearchController extends BaseController implements Controller {
 
-    private static final Logger log = Logger.getLogger(AnalysisController.class);
+    private static final Logger log = Logger.getLogger(LogSearchController.class);
 
-    public AnalysisController() {
+    public LogSearchController() {
         super("analyse");
     }
 
@@ -29,6 +29,6 @@ public class AnalysisController extends BaseController implements Controller {
         Map<String, Object> model = new HashMap<String, Object>();
         model.put("keyLines", timeLine.keyLines());
         model.put("errorLines", timeLine.errorLines());
-        renderer.render("results", model, response);
+        renderer.render("log-search-results", model, response);
     }
 }

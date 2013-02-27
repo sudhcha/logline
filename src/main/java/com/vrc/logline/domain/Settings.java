@@ -20,6 +20,7 @@ public class Settings {
     public static String USERNAME;
     public static String PASSWORD;
     public static String LOG_DIR;
+    public static String USER_DIR;
 
     static {
         Properties config = new Properties();
@@ -35,9 +36,10 @@ public class Settings {
             USERNAME = (String) config.get("user.name");
             PASSWORD = (String) config.get("user.password");
 
+            USER_DIR = System.getProperty("user.dir");
             LOG_DIR = (String) config.get("user.log.dir");
             if (StringUtils.isBlank(LOG_DIR))
-                LOG_DIR = System.getProperty("user.dir") + "\\logs\\";
+                LOG_DIR = USER_DIR + "\\logs\\";
             File logDirFile = new File(LOG_DIR);
             if (!logDirFile.exists()) logDirFile.mkdir();
         } catch (IOException e) {
