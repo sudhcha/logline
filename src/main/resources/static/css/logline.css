@@ -139,3 +139,7 @@ h2{
     border-right: lightgrey solid 1px;
     padding-right: 40px;
 }
+
+.bigspan{
+    width:95% !important;
+}

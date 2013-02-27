@@ -37,7 +37,7 @@ public class Settings {
 
             LOG_DIR = (String) config.get("user.log.dir");
             if (StringUtils.isBlank(LOG_DIR))
-                LOG_DIR = System.getProperty("user.dir") + "/logs/";
+                LOG_DIR = System.getProperty("user.dir") + "\\logs\\";
             File logDirFile = new File(LOG_DIR);
             if (!logDirFile.exists()) logDirFile.mkdir();
         } catch (IOException e) {

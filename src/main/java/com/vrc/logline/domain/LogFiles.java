@@ -19,7 +19,7 @@ public class LogFiles {
 
     public LogFiles(String machine) {
         this.machine = machine;
-        this.pattern = Pattern.compile("node1|log");
+        this.pattern = Pattern.compile("log");
         this.allMachines = new AllMachines();
     }
 

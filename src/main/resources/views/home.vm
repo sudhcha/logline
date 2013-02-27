@@ -7,7 +7,7 @@
             <div id="main_box">
                 <div id="fetch-log" class="span4">#logFetch()</div>
                 <div class="span6">#logSearch()</div>
-                <div class="span12">#resultsPanel()</div>
+                <div class="bigspan">#resultsPanel()</div>
             </div>
         </div>
     </div>

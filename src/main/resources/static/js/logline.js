@@ -50,7 +50,7 @@ LogTabs = function(){
           $(this).before("<p class='expand-xml'><img src='/static/images/icon_xml.jpg'/></p>");
        });
        $('.expand-xml').click(function(e){
-          $(this).siblings('.content-xml').slideToggle('slow');
+          $(this).next('.content-xml').slideToggle('slow');
           e.preventDefault();
        });
     };
