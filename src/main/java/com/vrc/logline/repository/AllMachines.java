@@ -10,10 +10,9 @@ public class AllMachines {
     private List<Machine> machines = new ArrayList<Machine>();
 
     public AllMachines() {
-        machines.add(new Machine("nasnmasdev", "/was7blue2/logs", ""));
-        machines.add(new Machine("nasnmasmo", "/was7blue2/logs", ""));
-        machines.add(new Machine("nasnmas3", "/was7blue2/logs", ""));
-        machines.add(new Machine("localhost", "/pub/", ""));
+        machines.add(new Machine("nasnmasdev", "/was7blue2/logs/", ""));
+        machines.add(new Machine("nasnmasmo", "/was7blue2/logs/", ""));
+        machines.add(new Machine("nasnmas3", "/was7blue2/logs/", ""));
     }
 
     public Machine getFor(String environment) {

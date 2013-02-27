@@ -24,9 +24,7 @@ public class FTPController extends BaseController {
         addHeaders(response);
         String machine = request.getParameter("machine");
         LogFiles logFiles = new LogFiles(machine);
-//        List<String> logNames = logFiles.pull();
-        List<String> logNames = Arrays.asList("name1","name2");
-
+        List<String> logNames = logFiles.pull();
 
         Map<String, Object> model = new HashMap<String, Object>();
         model.put("logNames", logNames);

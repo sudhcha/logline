@@ -19,7 +19,7 @@ public class Settings {
     public static Boolean RUN_MODE;
     public static String USERNAME;
     public static String PASSWORD;
-    public static String DIRECTORY;
+    public static String LOG_DIR;
 
     static {
         Properties config = new Properties();
@@ -34,10 +34,12 @@ public class Settings {
             CONTEXT = Integer.parseInt((String) config.get("log.context"));
             USERNAME = (String) config.get("user.name");
             PASSWORD = (String) config.get("user.password");
-            DIRECTORY = (String) config.get("user.local.directory");
-            if (StringUtils.isBlank(DIRECTORY))
-                DIRECTORY = System.getProperty("user.dir")+"/logs";
 
+            LOG_DIR = (String) config.get("user.log.dir");
+            if (StringUtils.isBlank(LOG_DIR))
+                LOG_DIR = System.getProperty("user.dir") + "/logs/";
+            File logDirFile = new File(LOG_DIR);
+            if (!logDirFile.exists()) logDirFile.mkdir();
         } catch (IOException e) {
             e.printStackTrace();
         }

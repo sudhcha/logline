@@ -21,7 +21,7 @@ public class HomeController extends BaseController {
         addHeaders(response);
         response.setValue("Content-Type", "text/html");
         Map<String, Object> model = new HashMap<String, Object>();
-        model.put("folder", Settings.DIRECTORY);
+        model.put("folder", Settings.LOG_DIR);
         renderer.render("home", model, response);
         log.info(request.getPath());
     }
