@@ -34,11 +34,12 @@ public class ExceptionRule extends BaseRule {
                 timeStamp = matcher.group("timestamp");
             } else {
                 matcher = datePattern2.matcher(title);
-                if (matcher.find()) timeStamp = matcher.group();
+                if (matcher.find())
+                    timeStamp = matcher.group();
             }
             Line errorLine = new Line(processedLine).ofFile(allLines.file()).markError();
             errorLine.markTime(timeStamp);
-            errorLine.markErrorTitle(title.replaceAll("\\[.*\\]", ""));
+            errorLine.markErrorTitle(title.replaceAll("\\[.*\\]", "").replaceAll(timeStamp, ""));
             allLines.addErrorLine(errorLine);
         }
     }
