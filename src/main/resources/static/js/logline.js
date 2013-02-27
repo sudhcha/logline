@@ -24,7 +24,6 @@ LogForm = function(){
         $("#loading-div-background").hide();
         new LogLight().boot(keys);
         new LogTabs().boot();
-        new ToolDialog().boot();
     };
 
     this.boot = function(){
@@ -197,7 +196,33 @@ ToolDialog = function(){
   };//end of boot
 
   };
+
+//-------------------------------------------------------------------------------------------------
+LogFetch = function(){
+    var post = function(){
+        var machine = $("#machine").val();
+        $("#loading-div-background").show();
+            $.ajax({
+            	url : "ftp",
+            	data : {
+            		machine : machine
+            	},
+            	type : "POST"
+            }).done(displayResults);
+        };
+
+    var displayResults = function(response){
+       $("#results").html(response);
+       $("#loading-div-background").hide();
+    };
+
+
+    this.boot = function(){
+        $('#fetch_logs').click(post);
+    };
+};
 //-------------------------------------------------------------------------------------------------
 $(document).ready(function() {
 	new LogForm().boot();
+	new LogFetch().boot();
 });

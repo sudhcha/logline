@@ -13,18 +13,18 @@ import java.util.regex.Pattern;
 public class LogFiles {
     private static final Logger log = Logger.getLogger(LogFiles.class);
     private Pattern pattern;
-    private String environment;
+    private String machine;
     private AllMachines allMachines;
 
-    public LogFiles(String environment) {
-        this.environment = environment;
-        this.pattern = Pattern.compile("node1|postprocess");
+    public LogFiles(String machine) {
+        this.machine = machine;
+        this.pattern = Pattern.compile("node1|postprocess|log");
         this.allMachines = new AllMachines();
     }
 
     public List<String> pull() throws Exception {
         List<String> fileNames = new ArrayList<String>();
-        Machine machine = allMachines.getFor(environment);
+        Machine machine = allMachines.getFor(this.machine);
 
         FTPClient ftpClient = new FTPClient();
         ftpClient.connect(machine.name());

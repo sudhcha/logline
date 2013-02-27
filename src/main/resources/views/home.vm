@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row-fluid mainbox">
             <div id="main_box">
-                <div class="span4">#logFetch()</div>
+                <div id="fetch-log" class="span4">#logFetch()</div>
                 <div class="span6">#logSearch()</div>
                 <div class="span12">#resultsPanel()</div>
             </div>
@@ -22,6 +22,7 @@
             <div class="nav-collapse">
                 <ul class="nav">
                     <li><a href="#">Logs</a></li>
+                    <li><a href="#">Configuration</a></li>
                 </ul>
             </div>
         </div>
@@ -35,7 +36,7 @@
     <form id="log_form" class="form-horizontal" action="">
         <div class="control-group">
             <label for="folder" class="control-label">Logs Folder</label>
-            <div class="controls"><input id="folder" type="text" class="required"/></div>
+            <div class="controls"><input id="folder" type="text" class="required" value="${folder}"/></div>
         </div>
         <div class="control-group">
             <label for="keys" class="control-label">Keys</label>
@@ -53,7 +54,14 @@
 <h3>Fetch Logs</h3>
 <div class="control-group">
      <label for="folder" class="control-label">Machine</label>
-     <div class="controls"><input id="folder" type="text" class="required"/></div>
+     <div class="controls">
+        <select id="machine">
+            <option>nasnmasdev</option>
+            <option>nasnmasmo</option>
+            <option>nasnmas3</option>
+            <option>localhost</option>
+        </select>
+     </div>
 </div>
 <div id="buttons" class="form-actions">
     <input type="button" id="fetch_logs" value="Download"/>

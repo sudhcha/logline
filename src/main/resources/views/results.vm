@@ -14,7 +14,7 @@
         <p>Under 3</p>
     </div>
 </div>
-#toolbox()
+
 
 #macro(toolbox)
 <div id="tool-dialog" title="ToolBox">

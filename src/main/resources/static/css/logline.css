@@ -129,3 +129,12 @@ h2{
 .error-time{
    color:maroon !important;
 }
+
+.form-actions{
+    border-bottom: none !important;
+}
+
+#fetch-log{
+    border-right: lightgrey solid 1px;
+    padding-right: 40px;
+}
