@@ -8,14 +8,14 @@ import java.util.Map;
 
 public class SettingsController extends BaseController {
 
-    protected SettingsController() {
+    public SettingsController() {
         super("settings");
     }
 
     @Override
     public void act(Request request, Response response) throws Exception {
         Map<String, Object> model = new HashMap<String, Object>();
-        model.put("configLines", config.toString());
+        model.put("settings", config.toString());
         renderer.render("settings", model, response);
     }
 }

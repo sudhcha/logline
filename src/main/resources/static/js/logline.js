@@ -216,7 +216,6 @@ LogFetch = function(){
        $("#loading-div-background").hide();
     };
 
-
     this.boot = function(){
         $('#fetch_logs').click(post);
     };

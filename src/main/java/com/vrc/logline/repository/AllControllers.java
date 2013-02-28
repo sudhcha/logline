@@ -14,6 +14,7 @@ public class AllControllers {
         controllers.add(new StaticController());
         controllers.add(new LogSearchController());
         controllers.add(new LogFetchController());
+        controllers.add(new SettingsController());
         controllers.add(new HomeController());
     }
 
