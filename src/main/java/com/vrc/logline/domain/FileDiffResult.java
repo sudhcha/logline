@@ -6,7 +6,7 @@ import java.util.List;
 public class FileDiffResult {
     
     private String name;
-    private List<String> deltas = new ArrayList<>();
+    private List<String> deltas = new ArrayList<String>();
 
     public FileDiffResult(String name) {
         this.name = name;

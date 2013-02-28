@@ -1,6 +1,6 @@
 package com.vrc.logline.controller;
 
-import com.vrc.logline.domain.Settings;
+import com.vrc.logline.domain.Config;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -8,7 +8,6 @@ import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 
 import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -25,7 +24,7 @@ public class StaticController extends BaseController {
     public void act(Request request, Response response) throws Exception {
         String path = request.getPath().toString();
         String fileName = StringUtils.substringAfter(path, "static");
-        String directory = Settings.RUN_MODE ? System.getProperty("user.dir") : ClassLoader.getSystemResource("static").getFile();
+        String directory = config.runMode() ? config.userDir() : config.getPath("static");
         File file = new File(directory + fileName);
         if (!file.exists()) return;
         addHeaders(response);

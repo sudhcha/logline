@@ -1,17 +1,18 @@
 package com.vrc.logline.controller;
 
+import com.vrc.logline.domain.Config;
 import com.vrc.logline.domain.Renderer;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 
 public abstract class BaseController implements Controller{
 
+    private String url;
+    protected Config config = Config.get();
     protected Renderer renderer = new Renderer("/views/");
 
-    private String urlKey;
-
-    protected BaseController(String urlKey) {
-        this.urlKey = urlKey;
+    protected BaseController(String url) {
+        this.url = url;
     }
 
     protected void addHeaders(Response response) {
@@ -26,7 +27,7 @@ public abstract class BaseController implements Controller{
 
     @Override
     public boolean canTake(Request request) {
-        return request.getPath().toString().contains(urlKey);
+        return request.getPath().toString().contains(url);
     }
 
 

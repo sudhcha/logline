@@ -1,6 +1,6 @@
 package com.vrc.logline.controller;
 
-import com.vrc.logline.domain.TimeLine;
+import com.vrc.logline.service.LogSearchService;
 import org.apache.log4j.Logger;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LogSearchController extends BaseController implements Controller {
-
     private static final Logger log = Logger.getLogger(LogSearchController.class);
 
     public LogSearchController() {
@@ -23,12 +22,12 @@ public class LogSearchController extends BaseController implements Controller {
 
         String keys = request.getParameter("keys");
         String folder = request.getParameter("folder");
-        TimeLine timeLine = new TimeLine(keys, folder);
-        timeLine.process();
+        LogSearchService logSearchService = new LogSearchService(keys, folder);
+        logSearchService.process();
 
         Map<String, Object> model = new HashMap<String, Object>();
-        model.put("keyLines", timeLine.keyLines());
-        model.put("errorLines", timeLine.errorLines());
+        model.put("keyLines", logSearchService.keyLines());
+        model.put("errorLines", logSearchService.errorLines());
         renderer.render("log-search-results", model, response);
     }
 }

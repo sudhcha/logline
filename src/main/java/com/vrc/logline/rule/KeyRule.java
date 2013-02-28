@@ -1,7 +1,7 @@
 package com.vrc.logline.rule;
 
+import com.vrc.logline.domain.Config;
 import com.vrc.logline.domain.Line;
-import com.vrc.logline.domain.Settings;
 import com.vrc.logline.repository.AllLines;
 import org.apache.commons.lang.StringUtils;
 
@@ -13,9 +13,11 @@ public class KeyRule extends BaseRule {
 
     private Pattern threadPattern;
     private Pattern keyPattern;
+    private Config config;
 
     public KeyRule(List<String> keys) {
-        threadPattern = Pattern.compile(Settings.DATE_REGEX1);
+        config = Config.get();
+        threadPattern = config.datePattern1();
         keyPattern = Pattern.compile("(?i)" + StringUtils.join(keys.toArray(), "|"));
     }
 
@@ -36,18 +38,19 @@ public class KeyRule extends BaseRule {
             if (matcher != null && matcher.find()) {
                 String thread = matcher.group("thread");
                 allLines.addKeyLine(new Line(processedLine).ofThread(thread));
-                for (int j = i + Settings.CONTEXT; j != i && j < processedLines.size(); j--)
+                for (int j = i + config.context(); j != i && j < processedLines.size(); j--) {
                     if (processedLines.get(j).contains(thread))
                         allLines.addKeyLine(new Line(processedLines.get(j)).ofThread(thread));
-                for (int k = i - Settings.CONTEXT; k != i && k > 0; k++)
+                }
+                for (int k = i - config.context(); k != i && k > 0; k++)
                     if (processedLines.get(k).contains(thread))
                         allLines.addKeyLine(new Line(processedLines.get(k)).ofThread(thread));
             } else {
                 allLines.addKeyLine(new Line(processedLine));
-                for (int j = i + Settings.CONTEXT; j != i && j < processedLines.size(); j--)
+                for (int j = i + config.context(); j != i && j < processedLines.size(); j--)
                     if (!threadPattern.matcher(processedLines.get(j)).find())
                         allLines.addKeyLine(new Line(processedLines.get(j)));
-                for (int k = i - Settings.CONTEXT; k != i && k > 0; k++)
+                for (int k = i - config.context(); k != i && k > 0; k++)
                     if (!threadPattern.matcher(processedLines.get(k)).find())
                         allLines.addKeyLine(new Line(processedLines.get(k)));
             }

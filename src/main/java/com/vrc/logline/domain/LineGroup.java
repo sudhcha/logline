@@ -7,7 +7,6 @@ import java.util.*;
 
 public class LineGroup {
     private static final Logger log = Logger.getLogger(LineGroup.class);
-    private Settings settings = new Settings();
     private Set<Line> lines;
 
     public LineGroup(Set<Line> lines) {
@@ -30,13 +29,18 @@ public class LineGroup {
         return groups;
     }
 
-    public LineGroup strip() {
+    public Map<String, Set<Line>> byTitle() {
         StopWatch watch = new StopWatch();
         watch.start();
-        for (Line line : lines)
-            line.replace(settings.shorts());
+        Map<String, Set<Line>> groups = new HashMap<String, Set<Line>>();
+        for (Line line : lines) {
+            if (!groups.containsKey(line.errorTitle()))
+                groups.put(line.errorTitle(), new HashSet<Line>());
+            groups.get(line.errorTitle()).add(line);
+        }
         watch.stop();
-        log.info("Time taken to strip: "+watch);
-        return this;
+        log.info("Time taken to group: " + watch + "|groups=" + groups.size());
+        return groups;
     }
+
 }

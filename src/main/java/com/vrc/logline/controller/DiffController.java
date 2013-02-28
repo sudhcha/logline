@@ -11,6 +11,6 @@ public class DiffController extends BaseController{
 
     @Override
     public void act(Request request, Response response) throws Exception {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //To change body of implemented methods use File | Config | File Templates.
     }
 }

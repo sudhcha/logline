@@ -8,7 +8,6 @@ import org.simpleframework.transport.Server;
 import org.simpleframework.transport.connect.Connection;
 import org.simpleframework.transport.connect.SocketConnection;
 
-import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 
@@ -21,7 +20,7 @@ public class AppServer {
         Container container = new AsynchContainer(10);
         server = new ContainerServer(container);
         Connection connection = new SocketConnection(server);
-        SocketAddress address = new InetSocketAddress(Settings.PORT);
+        SocketAddress address = new InetSocketAddress(Config.get().port());
         connection.connect(address);
         log.info("logline server started, ready to process request...");
     }

@@ -95,7 +95,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.vrc.logline.LogLine</mainClass>
+                            <mainClass>com.vrc.logline.Blue2Support</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

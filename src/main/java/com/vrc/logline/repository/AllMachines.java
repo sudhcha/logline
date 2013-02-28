@@ -1,5 +1,6 @@
 package com.vrc.logline.repository;
 
+import com.vrc.logline.domain.Config;
 import com.vrc.logline.domain.Machine;
 
 import java.util.ArrayList;
@@ -8,16 +9,17 @@ import java.util.List;
 public class AllMachines {
 
     private List<Machine> machines = new ArrayList<Machine>();
+    private Config config = Config.get();
 
     public AllMachines() {
-        machines.add(new Machine("nasnmasdev").add("logs", "/was7blue2/logs/"));
-        machines.add(new Machine("nasnmasmo").add("logs", "/was7blue2/logs/"));
-        machines.add(new Machine("nasnmas3").add("logs", "/was7blue2/logs/"));
+        machines.add(new Machine("nasnmasdev").withLogDir(config.devLogDir()).withConfigDir(config.devConfigDir()));
+        machines.add(new Machine("nasnmasmo").withLogDir(config.moLogDir()).withConfigDir(config.moConfigDir()));
+        machines.add(new Machine("nasnmas3").withLogDir(config.prodLogDir()).withConfigDir(config.prodConfigDir()));
     }
 
-    public Machine getFor(String environment) {
+    public Machine getFor(String name) {
         for (Machine machine : machines)
-            if (machine.nameIs(environment))
+            if (machine.nameIs(name))
                 return machine;
         return null;
     }

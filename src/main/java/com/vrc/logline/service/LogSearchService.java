@@ -1,5 +1,7 @@
-package com.vrc.logline.domain;
+package com.vrc.logline.service;
 
+import com.vrc.logline.domain.LineGroup;
+import com.vrc.logline.domain.Line;
 import com.vrc.logline.repository.AllLines;
 import com.vrc.logline.repository.AllProcessors;
 import com.vrc.logline.repository.AllRules;
@@ -10,14 +12,14 @@ import org.apache.log4j.Logger;
 import java.io.File;
 import java.util.*;
 
-public class TimeLine {
-    private static final Logger log = Logger.getLogger(TimeLine.class);
+public class LogSearchService {
+    private static final Logger log = Logger.getLogger(LogSearchService.class);
     private String folder;
     private AllRules allRules;
     private AllLines allLines;
     private AllProcessors allProcessors;
 
-    public TimeLine(String keys, String folder) {
+    public LogSearchService(String keys, String folder) {
         this.folder = folder;
         this.allLines = new AllLines();
         this.allProcessors = new AllProcessors();
@@ -60,7 +62,7 @@ public class TimeLine {
     }
 
     public Map<String, Set<Line>> errorLines() {
-        return new ErrorGroup(allLines.errorLines()).byTitle();
+        return new LineGroup(allLines.errorLines()).byTitle();
     }
 
 }
