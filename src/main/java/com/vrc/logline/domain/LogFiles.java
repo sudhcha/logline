@@ -31,11 +31,11 @@ public class LogFiles {
         ftpClient.login(Settings.USERNAME, Settings.PASSWORD);
 
         List<String> fileNames = new ArrayList<String>();
-        for (FTPFile ftpFile : ftpClient.listFiles(machine.logsDirectory())) {
+        for (FTPFile ftpFile : ftpClient.listFiles(machine.getLocation("logs"))) {
             String ftpFileName = ftpFile.getName();
             if (!pattern.matcher(ftpFileName).find()) continue;
             FileOutputStream fos = new FileOutputStream(Settings.LOG_DIR + ftpFileName);
-            ftpClient.retrieveFile(machine.logsDirectory() + ftpFileName, fos);
+            ftpClient.retrieveFile(machine.getLocation("logs") + ftpFileName, fos);
             fos.close();
             log.info("downloaded " + ftpFileName);
             fileNames.add(ftpFileName);

@@ -1,31 +1,33 @@
 package com.vrc.logline.domain;
 
 import java.net.InetAddress;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Machine {
     private String name;
-    private String logsDirectory;
-    private String configDirectory;
+    private Map<String,String> locations;
 
-    public Machine(String name, String logsDirectory, String configDirectory) {
+    public Machine(String name) {
         this.name = name;
-        this.logsDirectory = logsDirectory;
-        this.configDirectory = configDirectory;
+        this.locations = new HashMap<>();
     }
 
     public boolean nameIs(String name) {
         return this.name.equals(name);
     }
 
-    public String logsDirectory() {
-        return logsDirectory;
-    }
-
-    public String configDirectory() {
-        return configDirectory;
-    }
-
     public String name() {
         return name;
     }
+    
+    public Machine add(String key, String path){
+        locations.put(key,path);
+        return this;
+    }
+
+    public String getLocation(String key) {
+        return locations.get(key);
+    }
 }
+                                                                              
