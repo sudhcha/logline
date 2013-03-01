@@ -6,27 +6,36 @@ import difflib.Patch;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileDiff {
     private String name;
-    private String cvs;
-    private String server;
+    private String file1;
+    private String file2;
+    private List<String> deltas;
 
-    public FileDiff(String name, String cvs, String server) {
+    public FileDiff(String name, String file1, String file2) {
         this.name = name;
-        this.cvs = cvs;
-        this.server = server;
+        this.file1 = file1;
+        this.file2 = file2;
+        this.deltas = new ArrayList<String>();
     }
 
-    public FileDiffResult process() throws Exception {
+    public void process() throws Exception {
         Patch patch = DiffUtils.diff(
-                FileUtils.readLines(new File(cvs)), 
-                FileUtils.readLines(new File(server)));
-        FileDiffResult result = new FileDiffResult(name);
-        for (Delta delta: patch.getDeltas())
-            result.add(delta.toString());
-        return result;
+                FileUtils.readLines(new File(file1)),
+                FileUtils.readLines(new File(file2)));
+        for (Delta delta : patch.getDeltas())
+            deltas.add(delta.toString());
     }
-    
+
+    public List<String> deltas() {
+        return deltas;
+    }
+
+    public String name() {
+        return name;
+    }
 }
 
