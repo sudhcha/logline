@@ -1,5 +1,6 @@
 package com.vrc.logline.domain;
 
+import com.vrc.logline.util.MyFileUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.net.ftp.FTPClient;
@@ -8,10 +9,12 @@ import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import static com.vrc.logline.util.MyFileUtil.getFilePaths;
+import static com.vrc.logline.util.MyFileUtil.recreate;
 
 public class Machine {
     private static final Logger log = Logger.getLogger(Machine.class);
@@ -28,30 +31,30 @@ public class Machine {
     public List<String> getLogFiles(String type) throws Exception {
         String target = config.userDir() + "/logs/";
         download(logDir, target, type, false);
-        return Arrays.asList(new File(target).list());
+        return getFilePaths(target);
     }
 
     public List<String> getConfigFiles() throws Exception {
         String target = config.userDir() + "/config/";
         download(configDir, target, null, true);
-        return Arrays.asList(new File(target).list());
+        return getFilePaths(target);
     }
 
     public Machine download(String source, String target, String type, Boolean recurse) throws Exception {
         Pattern pattern = pattern(type);
         FTPClient ftpClient = ftpClient();
-        digAndDownload(source, target, recurse, pattern, ftpClient);
+        downloadRecurse(source, target, recurse, pattern, ftpClient);
         ftpClient.disconnect();
         return this;
     }
 
-    private void digAndDownload(String source, String target, Boolean recurse, Pattern pattern, FTPClient ftpClient) throws Exception {
-        clean(target);
+    private void downloadRecurse(String source, String target, Boolean recurse, Pattern pattern, FTPClient ftpClient) throws Exception {
+        recreate(target);
         for (FTPFile ftpFile : ftpClient.listFiles(source)) {
             if (ftpFile.isDirectory() && recurse) {
                 String sourceDir = source + "/" + ftpFile.getName();
                 String targetDir = target + "/" + ftpFile.getName();
-                digAndDownload(sourceDir, targetDir, recurse, pattern, ftpClient);
+                downloadRecurse(sourceDir, targetDir, recurse, pattern, ftpClient);
                 continue;
             }
             String fileName = ftpFile.getName();
@@ -74,14 +77,6 @@ public class Machine {
     private Pattern pattern(String type) {
         if (StringUtils.isBlank(type)) return Pattern.compile(".*");
         return Pattern.compile(type.replaceAll(",", "|"));
-    }
-
-    private void clean(String path) throws Exception {
-        File dir = new File(path);
-        if (dir.exists())
-            FileUtils.deleteDirectory(dir);
-        else
-            dir.mkdir();
     }
 
     private FTPClient ftpClient() throws Exception {

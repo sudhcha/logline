@@ -16,10 +16,7 @@ public class FileDiffService {
         List<FileDiff> fileDiffs = new ArrayList<FileDiff>();
         Machine machine = allMachines.getFor(machineName);
         List<String> machineFiles = machine.getConfigFiles();
-
-
-
-
+        System.out.println(machineFiles);
         return fileDiffs;
     }
 }
