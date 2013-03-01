@@ -4,12 +4,14 @@ import difflib.Delta;
 import difflib.DiffUtils;
 import difflib.Patch;
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileDiff {
+    private static final Logger log = Logger.getLogger(FileDiff.class);
     private String name;
     private String filePath1;
     private String filePath2;
@@ -26,16 +28,22 @@ public class FileDiff {
         File file1 = new File(filePath1);
         File file2 = new File(filePath2);
         if (!file1.exists()) {
-            deltas.add(filePath1 + "|missing file");
+            String message = filePath1 + "|missing file";
+            deltas.add(message);
+            log.info(message);
             return this;
         }
         if (!file2.exists()) {
-            deltas.add(filePath2 + "|missing file");
+            String message = filePath2 + "|missing file";
+            deltas.add(message);
+            log.info(message);
             return this;
         }
         Patch patch = DiffUtils.diff(FileUtils.readLines(file1), FileUtils.readLines(file2));
         for (Delta delta : patch.getDeltas())
             deltas.add(delta.toString());
+
+        log.info(name + "|" + deltas);
         return this;
     }
 
@@ -47,14 +55,5 @@ public class FileDiff {
         return name;
     }
 
-    @Override
-    public String toString() {
-        return "FileDiff{" +
-                "name='" + name + '\'' +
-                ", file1='" + filePath1 + '\'' +
-                ", file2='" + filePath2 + '\'' +
-                ", deltas=" + deltas +
-                '}';
-    }
 }
 

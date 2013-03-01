@@ -1,0 +1,14 @@
+<ul>
+#foreach($fileDiff in $fileDiffs)
+<li>
+    <span class="expand-diff">$fileDiff.name()</span>
+    <div class="content-diff">
+        <ul>
+        #foreach($delta in $fileDiff.deltas())
+          <li>$delta</li>
+        #end
+        </ul>
+    </div>
+</li>
+#end
+</ul>

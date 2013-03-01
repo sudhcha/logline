@@ -15,6 +15,7 @@ public class AllControllers {
         controllers.add(new LogSearchController());
         controllers.add(new LogFetchController());
         controllers.add(new FileDiffController());
+        controllers.add(new FileDiffResultController());
         controllers.add(new SettingsController());
         controllers.add(new HomeController());
     }

@@ -1,0 +1,26 @@
+<form id="diff_tool_form" class="form-horizontal" action="">
+<h3>Configuration Matcher</h3>
+<div class="control-group">
+     <label for="machine" class="control-label">Machine</label>
+     <div class="controls">
+        <select id="machine">
+            <option>nasnmasdev</option>
+            <option>nasnmasmo</option>
+            <option>nasnmas3</option>
+        </select>
+     </div>
+</div>
+<div class="control-group">
+     <label for="release" class="control-label">Release</label>
+     <div class="controls">
+        <select id="release">
+            <option>12.0.1</option>
+            <option>13.0</option>
+            <option>13.0.1</option>
+        </select>
+     </div>
+</div>
+<div id="buttons" class="form-actions">
+    <input type="button" id="fetch_diff" value="Start"/>
+</div>
+</form>

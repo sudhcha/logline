@@ -27,7 +27,7 @@ public class MyFileUtil {
     public static void recreate(String path) throws Exception {
         File dir = new File(path);
         if (dir.exists())
-            FileUtils.deleteDirectory(dir);
+            FileUtils.forceDelete(dir);
         dir.mkdir();
     }
 }

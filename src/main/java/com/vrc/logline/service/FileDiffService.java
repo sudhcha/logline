@@ -4,11 +4,13 @@ import com.vrc.logline.domain.CVSRepo;
 import com.vrc.logline.domain.FileDiff;
 import com.vrc.logline.domain.Machine;
 import com.vrc.logline.repository.AllMachines;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileDiffService {
+    private static final Logger log = Logger.getLogger(FileDiffService.class);
     private AllMachines allMachines = new AllMachines();
 
     public List<FileDiff> process(String machineName, String releaseName) throws Exception {
@@ -21,6 +23,8 @@ public class FileDiffService {
             String cvsFile = cvsRepo.getFor(releaseName, machine.shortName(), configFile);
             fileDiffs.add(new FileDiff(configFile, configFile, cvsFile).process());
         }
+        log.info("completed processing: " + fileDiffs.size());
         return fileDiffs;
     }
 }
+
