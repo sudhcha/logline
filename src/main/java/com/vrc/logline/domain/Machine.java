@@ -32,9 +32,9 @@ public class Machine {
         return getFilePaths(target);
     }
 
-    public List<String> getConfigFiles() throws Exception {
+    public List<String> getConfigFiles(String type) throws Exception {
         String target = config.userDir() + "/config/";
-        download(configDir, target, null, true);
+        download(configDir, target, type, true);
         return getFilePaths(target);
     }
 
@@ -49,18 +49,20 @@ public class Machine {
     private void downloadRecurse(String source, String target, Boolean recurse, Pattern pattern, FTPClient ftpClient) throws Exception {
         recreate(target);
         for (FTPFile ftpFile : ftpClient.listFiles(source)) {
+            String fileName = ftpFile.getName();
+            if (!pattern.matcher(fileName).find()) continue;
             if (ftpFile.isDirectory() && recurse) {
                 String sourceDir = source + "/" + ftpFile.getName();
                 String targetDir = target + "/" + ftpFile.getName();
                 downloadRecurse(sourceDir, targetDir, recurse, pattern, ftpClient);
                 continue;
             }
-            String fileName = ftpFile.getName();
-            if (!pattern.matcher(fileName).find()) continue;
-            FileOutputStream fileOutputStream = new FileOutputStream(new File(target + "/" + fileName));
-            ftpClient.retrieveFile(source + fileName, fileOutputStream);
+            String targetFile = target + "/" + fileName;
+            String sourceFile = source + fileName;
+            FileOutputStream fileOutputStream = new FileOutputStream(new File(targetFile));
+            ftpClient.retrieveFile(sourceFile, fileOutputStream);
             fileOutputStream.close();
-            log.info("downloaded " + fileName);
+            log.info("downloaded [" + sourceFile + "]=>[" + targetFile + "]");
         }
     }
 

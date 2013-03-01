@@ -14,14 +14,13 @@ public class FileDiffService {
     public List<FileDiff> process(String machineName, String releaseName) throws Exception {
         Machine machine = allMachines.getFor(machineName);
         CVSRepo cvsRepo = new CVSRepo();
-        List<FileDiff> fileDiffs = new ArrayList<FileDiff>();
-        List<String> serverFiles = machine.getConfigFiles();
 
-        for (String serverFile : serverFiles) {
-            String cvsFile = cvsRepo.getFor(releaseName, machine.shortName(), serverFile);
-            fileDiffs.add(new FileDiff(serverFile, serverFile, cvsFile));
+        List<FileDiff> fileDiffs = new ArrayList<FileDiff>();
+        List<String> configFiles = machine.getConfigFiles("home|scripts|.properties\\z|.xml\\z|.xsd\\z|.py\\z|.sh\\z|blue2");
+        for (String configFile : configFiles) {
+            String cvsFile = cvsRepo.getFor(releaseName, machine.shortName(), configFile);
+            fileDiffs.add(new FileDiff(configFile, configFile, cvsFile).process());
         }
-        System.out.println(fileDiffs);
         return fileDiffs;
     }
 }

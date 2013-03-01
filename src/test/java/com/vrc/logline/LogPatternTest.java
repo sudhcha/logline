@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
 public class LogPatternTest {
@@ -85,6 +86,14 @@ public class LogPatternTest {
 
         String toStrip = "[b2_node1.log.2][2013-01-23 10:43:24,606] [WebContainer : 23644] INFO com.bcbsa.blue2.service.dataservice.ClaimSummaryHandler - FindClaimDetailsInput.isRetrieveClaim = false";
         System.out.println(toStrip.replaceAll("\\[.*\\]",""));
+    }
+
+    @Test
+    public void shouldMatchFilePattern(){
+        Pattern pattern = Pattern.compile("home|scripts|.properties\\z|.xml\\z|.xsd|.py|.sh|blue2");
+        assertFalse(pattern.matcher("vijay.properties.3456").find());
+        assertTrue(pattern.matcher("vijay.properties").find());
+
     }
 
 }

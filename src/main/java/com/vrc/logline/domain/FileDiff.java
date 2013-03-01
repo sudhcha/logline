@@ -22,21 +22,21 @@ public class FileDiff {
         this.deltas = new ArrayList<String>();
     }
 
-    public void process() throws Exception {
+    public FileDiff process() throws Exception {
         File file1 = new File(filePath1);
         File file2 = new File(filePath2);
-
         if (!file1.exists()) {
             deltas.add(filePath1 + "|missing file");
-            return;
+            return this;
         }
         if (!file2.exists()) {
             deltas.add(filePath2 + "|missing file");
-            return;
+            return this;
         }
         Patch patch = DiffUtils.diff(FileUtils.readLines(file1), FileUtils.readLines(file2));
         for (Delta delta : patch.getDeltas())
             deltas.add(delta.toString());
+        return this;
     }
 
     public List<String> deltas() {
