@@ -12,9 +12,9 @@ public class AllMachines {
     private Config config = Config.get();
 
     public AllMachines() {
-        machines.add(new Machine("nasnmasdev").withLogDir(config.devLogDir()).withConfigDir(config.devConfigDir()));
-        machines.add(new Machine("nasnmasmo").withLogDir(config.moLogDir()).withConfigDir(config.moConfigDir()));
-        machines.add(new Machine("nasnmas3").withLogDir(config.prodLogDir()).withConfigDir(config.prodConfigDir()));
+        machines.add(new Machine("nasnmasdev").withShortName("dev").withLogDir(config.devLogDir()).withConfigDir(config.devConfigDir()));
+        machines.add(new Machine("nasnmasmo").withShortName("mo").withLogDir(config.moLogDir()).withConfigDir(config.moConfigDir()));
+        machines.add(new Machine("nasnmas3").withShortName("prod").withLogDir(config.prodLogDir()).withConfigDir(config.prodConfigDir()));
     }
 
     public Machine getFor(String name) {

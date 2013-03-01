@@ -1,7 +1,5 @@
 package com.vrc.logline.domain;
 
-import com.vrc.logline.util.MyFileUtil;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -9,7 +7,6 @@ import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -20,6 +17,7 @@ public class Machine {
     private static final Logger log = Logger.getLogger(Machine.class);
     private Config config;
     private String name;
+    private String shortName;
     private String logDir;
     private String configDir;
 
@@ -59,15 +57,15 @@ public class Machine {
             }
             String fileName = ftpFile.getName();
             if (!pattern.matcher(fileName).find()) continue;
-            FileOutputStream fos = new FileOutputStream(target + "/" + fileName);
-            ftpClient.retrieveFile(source + fileName, fos);
-            fos.close();
+            FileOutputStream fileOutputStream = new FileOutputStream(new File(target + "/" + fileName));
+            ftpClient.retrieveFile(source + fileName, fileOutputStream);
+            fileOutputStream.close();
             log.info("downloaded " + fileName);
         }
     }
 
     public boolean nameIs(String name) {
-        return this.name.equals(name);
+        return this.name.equals(name) || this.shortName.equals(name);
     }
 
     public String name() {
@@ -94,6 +92,15 @@ public class Machine {
     public Machine withConfigDir(String configDir) {
         this.configDir = configDir;
         return this;
+    }
+
+    public Machine withShortName(String shortName) {
+        this.shortName = shortName;
+        return this;
+    }
+
+    public String shortName() {
+        return shortName;
     }
 }
                                                                               

@@ -11,21 +11,30 @@ import java.util.List;
 
 public class FileDiff {
     private String name;
-    private String file1;
-    private String file2;
+    private String filePath1;
+    private String filePath2;
     private List<String> deltas;
 
-    public FileDiff(String name, String file1, String file2) {
+    public FileDiff(String name, String filePath1, String filePath2) {
         this.name = name;
-        this.file1 = file1;
-        this.file2 = file2;
+        this.filePath1 = filePath1;
+        this.filePath2 = filePath2;
         this.deltas = new ArrayList<String>();
     }
 
     public void process() throws Exception {
-        Patch patch = DiffUtils.diff(
-                FileUtils.readLines(new File(file1)),
-                FileUtils.readLines(new File(file2)));
+        File file1 = new File(filePath1);
+        File file2 = new File(filePath2);
+
+        if (!file1.exists()) {
+            deltas.add(filePath1 + "|missing file");
+            return;
+        }
+        if (!file2.exists()) {
+            deltas.add(filePath2 + "|missing file");
+            return;
+        }
+        Patch patch = DiffUtils.diff(FileUtils.readLines(file1), FileUtils.readLines(file2));
         for (Delta delta : patch.getDeltas())
             deltas.add(delta.toString());
     }
@@ -36,6 +45,16 @@ public class FileDiff {
 
     public String name() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return "FileDiff{" +
+                "name='" + name + '\'' +
+                ", file1='" + filePath1 + '\'' +
+                ", file2='" + filePath2 + '\'' +
+                ", deltas=" + deltas +
+                '}';
     }
 }
 
