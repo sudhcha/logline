@@ -5,9 +5,9 @@
     <div class="container-fluid">
         <div class="row-fluid mainbox">
             <div id="main_box">
-                #logBox()
+               <div id="tool_box" class="span12">#logBox()</div>
+               <div id="result_box" class="span12">#resultsBox()</div>
             </div>
-            <div class="result_box">#resultsBox()</div>
         </div>
     </div>
 </body>

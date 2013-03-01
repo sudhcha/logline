@@ -30,9 +30,7 @@ h2{
     color: red !important;
 }
 
-#main_box{
-    padding-top:60px;
-}
+
 
 #loading-div-background {
     display:none;
@@ -140,6 +138,10 @@ h2{
     padding-right: 40px;
 }
 
-.result_box{
+#result_box, #tool_box{
     width:95% !important;
+}
+
+#main_box{
+    padding-top:60px;
 }
