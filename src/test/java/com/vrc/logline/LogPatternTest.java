@@ -109,7 +109,6 @@ public class LogPatternTest {
             System.out.println(change+"|"+pattern3.matcher(change).find());
         }
 
-
     }
 
 }

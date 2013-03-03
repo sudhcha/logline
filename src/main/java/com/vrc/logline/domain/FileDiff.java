@@ -39,7 +39,7 @@ public class FileDiff {
             for (Delta delta : patch.getDeltas()) {
                 Matcher matcher = pattern.matcher(delta.toString());
                 if (matcher.find() && changeExistPattern.matcher(matcher.group("change")).find())
-                    buffer.append(delta + "\n");
+                    buffer.append(StringUtils.deleteWhitespace(delta.toString()) + "\n");
             }
             result = buffer.toString();
         }
