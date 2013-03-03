@@ -222,6 +222,5 @@ LogFetch = function(){
 };
 //-------------------------------------------------------------------------------------------------
 $(document).ready(function() {
-	new LogForm().boot();
-	new LogFetch().boot();
+
 });

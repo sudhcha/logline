@@ -5,7 +5,15 @@
     <div class="container-fluid">
         <div class="row-fluid mainbox">
             <div id="main_box">
-               <div id="tool_box" class="span12">#logBox()</div>
+               <div id="tool_box" class="span12">
+                <h2>Select...</h3>
+                    <table class="table table-hover">
+                        <tr><td><a href="#" class="logs">Logs</a></td><td><span class="link-detail">Download and analyse logs from servers</span></td></tr>
+                        <tr><td><a href="#" class="config">Configuration</a></td><td><span class="link-detail">Fetch configuration files from servers and compare with CVS</span></td></tr>
+                        <tr><td><a href="#" class="webservice">WebServices</a></td><td><span class="link-detail">Trigger tests of WebServices</span></td></tr>
+                        <tr><td><a href="#" class="settings">Settings</a></td><td><span class="link-detail">Tool Settings</span></td></tr>
+                    </table>
+                </div>
                <div id="result_box" class="span12">#resultsBox()</div>
             </div>
         </div>
@@ -20,8 +28,9 @@
             <a class="brand" href="admin/monitor">Blue2 Support</a>
             <div class="nav-collapse">
                 <ul class="nav">
-                    <li><a href="/">Logs</a></li>
+                    <li><a href="#" class="logs">Logs</a></li>
                     <li><a href="#" class="config">Configuration</a></li>
+                    <li><a href="#" class="webservice">WebServices</a></li>
                     <li><a href="#" class="settings">Settings</a></li>
                 </ul>
             </div>
@@ -30,48 +39,6 @@
 </div
 #end
 
-#macro(logBox)
-<div id="fetch-log" class="span4">#logFetch()</div>
-<div class="span6">#logSearch()</div>
-#end
-
-#macro(logSearch)
-<h3>Search Logs</h3>
-<div id="form_table" class="span8">
-    <form id="log_form" class="form-horizontal" action="">
-        <div class="control-group">
-            <label for="folder" class="control-label">Logs Folder</label>
-            <div class="controls"><input id="folder" type="text" class="required" value="${folder}"/></div>
-        </div>
-        <div class="control-group">
-            <label for="keys" class="control-label">Keys</label>
-            <div class="controls"><input id="keys" type="text" class="required"/></div>
-        </div>
-        <div id="buttons" class="form-actions">
-            <input type="button" id="analyse" value="Analyse"/>
-        </div>
-    </form>
-</div>
-#end
-
-#macro(logFetch)
-<form id="log_fetch_form" class="form-horizontal" action="">
-<h3>Fetch Logs</h3>
-<div class="control-group">
-     <label for="folder" class="control-label">Machine</label>
-     <div class="controls">
-        <select id="machine">
-            <option>nasnmasdev</option>
-            <option>nasnmasmo</option>
-            <option>nasnmas3</option>
-        </select>
-     </div>
-</div>
-<div id="buttons" class="form-actions">
-    <input type="button" id="fetch_logs" value="Download"/>
-</div>
-</form>
-#end
 
 #macro(resultsBox)
 <div id="results"></div>

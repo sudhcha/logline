@@ -7,19 +7,21 @@ import org.simpleframework.http.Response;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HomeController extends BaseController {
-    private static final Logger log = Logger.getLogger(HomeController.class);
+public class LogToolController extends BaseController {
+    private static final Logger log = Logger.getLogger(LogToolController.class);
 
-    public HomeController() {
-        super("");
+    public LogToolController() {
+        super("log-tool");
     }
 
     @Override
     public void act(Request request, Response response) throws Exception {
         addHeaders(response);
         response.setValue("Content-Type", "text/html");
+
         Map<String, Object> model = new HashMap<String, Object>();
-        renderer.render("home", model, response);
+        model.put("folder", config.userDir() + "\\logs");
+        renderer.render("log-tool", model, response);
         log.info(request.getPath());
     }
 }

@@ -1,0 +1,40 @@
+<div id="fetch-log" class="span4">#logFetch()</div>
+<div class="span6">#logSearch()</div>
+
+#macro(logSearch)
+<h3>Search Logs</h3>
+<div id="form_table" class="span8">
+    <form id="log_form" class="form-horizontal" action="">
+        <div class="control-group">
+            <label for="folder" class="control-label">Logs Folder</label>
+            <div class="controls"><input id="folder" type="text" class="required" value="${folder}"/></div>
+        </div>
+        <div class="control-group">
+            <label for="keys" class="control-label">Keys</label>
+            <div class="controls"><input id="keys" type="text" class="required"/></div>
+        </div>
+        <div id="buttons" class="form-actions">
+            <input type="button" id="analyse" value="Analyse"/>
+        </div>
+    </form>
+</div>
+#end
+
+#macro(logFetch)
+<form id="log_fetch_form" class="form-horizontal" action="">
+<h3>Fetch Logs</h3>
+<div class="control-group">
+     <label for="folder" class="control-label">Machine</label>
+     <div class="controls">
+        <select id="machine">
+            <option>nasnmasdev</option>
+            <option>nasnmasmo</option>
+            <option>nasnmas3</option>
+        </select>
+     </div>
+</div>
+<div id="buttons" class="form-actions">
+    <input type="button" id="fetch_logs" value="Download"/>
+</div>
+</form>
+#end
