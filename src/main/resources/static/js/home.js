@@ -11,7 +11,7 @@ HomePage = function(){
 
       var updateMainBox = function(response){
         $('#tool_box').html(response);
-        $('#result_box').html('<p>Awaiting input...</p>');
+        $('#results').html('<p>Awaiting input...</p>');
         new FileDiffForm().boot();
       };
 

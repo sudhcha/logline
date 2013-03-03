@@ -57,8 +57,8 @@ public class Machine {
                 downloadRecurse(sourceDir, targetDir, recurse, pattern, ftpClient);
                 continue;
             }
-            String targetFile = target + "/" + fileName;
-            String sourceFile = source + fileName;
+            String targetFile = target +"\\"+ fileName;
+            String sourceFile = source +"/"+ fileName;
             FileOutputStream fileOutputStream = new FileOutputStream(new File(targetFile));
             ftpClient.retrieveFile(sourceFile, fileOutputStream);
             fileOutputStream.close();

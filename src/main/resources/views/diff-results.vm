@@ -3,11 +3,7 @@
 <li>
     <span class="expand-diff">$fileDiff.name()</span>
     <div class="content-diff">
-        <ul>
-        #foreach($delta in $fileDiff.deltas())
-          <li>$delta</li>
-        #end
-        </ul>
+          <pre>$fileDiff.result()</pre>
     </div>
 </li>
 #end
