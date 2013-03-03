@@ -1,10 +1,12 @@
 <ul>
 #foreach($fileDiff in $fileDiffs)
+#if($fileDiff.hasResult())
 <li>
     <span class="expand-diff">$fileDiff.name()</span>
     <div class="content-diff">
           <pre>$fileDiff.result()</pre>
     </div>
 </li>
+#end
 #end
 </ul>

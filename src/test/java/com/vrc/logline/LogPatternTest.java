@@ -94,6 +94,22 @@ public class LogPatternTest {
         assertFalse(pattern.matcher("vijay.properties.3456").find());
         assertTrue(pattern.matcher("vijay.properties").find());
 
+        String fileDiffs = "[DeleteDelta, position: 375, lines: [, , ]]\n" +
+                "[DeleteDelta, position: 392, lines: [, ]]\n" +
+                "[DeleteDelta, position: 400, lines: [,    , ]]\n" +
+                "[DeleteDelta, position: 410, lines: [, , , ]]"+
+                "[DeleteDelta, position: 410, lines: [ABC]]";
+
+        Pattern pattern2 = Pattern.compile("lines:\\s*\\[(?<change>.*?)\\]\\]");
+        Matcher matcher = pattern2.matcher(fileDiffs);
+
+        Pattern pattern3 = Pattern.compile("[^(,\\s+)]+");
+        while(matcher.find()){
+            String change = matcher.group("change");
+            System.out.println(change+"|"+pattern3.matcher(change).find());
+        }
+
+
     }
 
 }
