@@ -13,12 +13,12 @@ import java.util.regex.Pattern;
 
 public class FileDiff {
     private static final Logger log = Logger.getLogger(FileDiff.class);
+    private Pattern pattern = Pattern.compile("lines:\\s*\\[(?<change>.*?)\\]\\]");
+    private Pattern changeExistPattern = Pattern.compile("[^(,\\s+)]+");
     private String name;
     private String filePath1;
     private String filePath2;
     private String result;
-    private Pattern pattern = Pattern.compile("lines:\\s*\\[(?<change>.*?)\\]\\]");
-    private Pattern changeExistPattern = Pattern.compile("[^(,\\s+)]+");
     private boolean missing;
 
     public FileDiff(String name, String filePath1, String filePath2) {
@@ -43,8 +43,8 @@ public class FileDiff {
                     buffer.append(StringUtils.deleteWhitespace(delta.toString()) + "\n");
             }
             result = buffer.toString();
+            log.info(result);
         }
-        log.info(result);
         return this;
     }
 

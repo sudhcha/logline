@@ -21,10 +21,14 @@ public class AllControllers {
     }
 
     public void act(Request request, Response response) throws Exception {
-        for (Controller controller : controllers)
-            if (controller.canTake(request)) {
-                controller.act(request, response);
-                break;
-            }
+        try {
+            for (Controller controller : controllers)
+                if (controller.canTake(request)) {
+                    controller.act(request, response);
+                    break;
+                }
+        } catch (Exception e) {
+            new ErrorController().addError(e).act(request,response);
+        }
     }
 }
