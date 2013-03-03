@@ -1,11 +1,13 @@
 package com.vrc.logline.controller;
 
+import com.vrc.logline.domain.FileDiff;
 import com.vrc.logline.service.FileDiffService;
 import org.apache.log4j.Logger;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FileDiffResultController extends BaseController {
@@ -22,9 +24,13 @@ public class FileDiffResultController extends BaseController {
         String machineName = request.getParameter("machine");
         String releaseName = request.getParameter("release");
 
-        Map<String, Object> model = new HashMap<String, Object>();
         FileDiffService fileDiffService = new FileDiffService();
-        model.put("fileDiffs", fileDiffService.process(machineName, releaseName));
+        fileDiffService.process(machineName, releaseName);
+
+
+        Map<String, Object> model = new HashMap<String, Object>();
+        model.put("changedFileDiffs", fileDiffService.changedFileDiffs());
+        model.put("missingFileDiffs", fileDiffService.missingFileDiffs());
         renderer.render("diff-results", model, response);
     }
 }

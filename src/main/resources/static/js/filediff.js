@@ -8,6 +8,7 @@ FileDiffForm = function(){
 
     var post = function(){
         pick();
+        $("#loading-div-background").show();
         $.ajax({
             url:"config-result",
             data:{machine:machine, release:release}
@@ -16,10 +17,21 @@ FileDiffForm = function(){
 
     var displayResults = function(response){
         $("#results").html(response);
+        $("#loading-div-background").hide();
+        tabs();
+    };
+
+    var tabs = function(){
+        $('.expand-diff').click(function(e){
+            $(this).siblings('.content-diff').slideToggle('slow');
+            e.preventDefault();
+        });
     };
 
     this.boot = function(){
        $("#fetch_diff").click(post);
+       $("#loading-div-background").css({ opacity: 0.7 });
+
     };
 };
 

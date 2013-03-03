@@ -1,5 +1,6 @@
+<h2>Changed Files [Server] to [CVS]</h2>
 <ul>
-#foreach($fileDiff in $fileDiffs)
+#foreach($fileDiff in $changedFileDiffs)
 #if($fileDiff.hasResult())
 <li>
     <span class="expand-diff">$fileDiff.name()</span>
@@ -8,5 +9,13 @@
     </div>
 </li>
 #end
+#end
+</ul>
+<h2>Missing Files [CVS]</h2>
+<ul>
+#foreach($fileDiff in $missingFileDiffs)
+<li>
+    $fileDiff.name();
+</li>
 #end
 </ul>

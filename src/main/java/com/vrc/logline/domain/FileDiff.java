@@ -19,6 +19,7 @@ public class FileDiff {
     private String result;
     private Pattern pattern = Pattern.compile("lines:\\s*\\[(?<change>.*?)\\]\\]");
     private Pattern changeExistPattern = Pattern.compile("[^(,\\s+)]+");
+    private boolean missing;
 
     public FileDiff(String name, String filePath1, String filePath2) {
         this.name = name;
@@ -30,9 +31,9 @@ public class FileDiff {
         File file1 = new File(filePath1);
         File file2 = new File(filePath2);
         if (!file1.exists()) {
-            result = filePath1 + "|missing file";
+            missing = true;
         } else if (!file2.exists()) {
-            result = filePath2 + "|missing file";
+            missing = true;
         } else {
             Patch patch = DiffUtils.diff(FileUtils.readLines(file1), FileUtils.readLines(file2));
             StringBuffer buffer = new StringBuffer();
@@ -57,6 +58,10 @@ public class FileDiff {
 
     public String name() {
         return name;
+    }
+
+    public boolean isMissing(){
+        return missing;
     }
 
 }
