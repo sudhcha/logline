@@ -5,6 +5,7 @@ import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 import com.vrc.logline.domain.Config;
+import org.apache.commons.lang.time.StopWatch;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -33,6 +34,9 @@ public class MyJsch implements MyRemote {
         session = jsch.getSession(config.username(), machine, 22);
         session.setConfig("StrictHostKeyChecking", "no");
         session.setPassword(config.password());
+        session.setConfig("compression.s2c", "zlib@openssh.com,zlib,none");
+        session.setConfig("compression.c2s", "zlib@openssh.com,zlib,none");
+        session.setConfig("compression_level", "9");
         session.connect();
 
         Channel channel = session.openChannel("sftp");
@@ -67,9 +71,13 @@ public class MyJsch implements MyRemote {
 
     @Override
     public void download(String sourcePath, String targetPath, Boolean recurse, Pattern pattern) throws Exception {
+        StopWatch watch = new StopWatch();
+        watch.start();
         connect();
         downloadRecurse(sourcePath, targetPath, recurse, pattern);
         disconnect();
+        watch.stop();
+        log.info("time taken to download: " + watch);
     }
 
     private void downloadRecurse(String sourcePath, String targetPath, Boolean recurse, Pattern pattern) throws Exception {
@@ -93,7 +101,7 @@ public class MyJsch implements MyRemote {
                     log.info("downloaded [" + targetFile + "]");
                 }
             } catch (Exception e) {
-                log.error("Error with fetching file: "+fileName, e);
+                log.error("Error with fetching file: " + fileName, e);
             }
         }
     }

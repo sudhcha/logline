@@ -1,6 +1,7 @@
 package com.vrc.logline.remote;
 
 import com.vrc.logline.domain.Config;
+import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.log4j.Logger;
@@ -56,9 +57,13 @@ public class MyFtp implements MyRemote {
 
     @Override
     public void download(String sourcePath, String targetPath, Boolean recurse, Pattern pattern) throws Exception {
+        StopWatch watch = new StopWatch();
+        watch.start();
         connect();
         downloadRecurse(sourcePath, targetPath, recurse, pattern);
         disconnect();
+        watch.stop();
+        log.info("time taken to download: " + watch);
     }
 
     private void downloadRecurse(String sourcePath, String targetPath, Boolean recurse, Pattern pattern) throws Exception {
@@ -82,7 +87,7 @@ public class MyFtp implements MyRemote {
                     log.info("downloaded [" + targetFile + "]");
                 }
             } catch (Exception e) {
-                log.error("Error with fetching file: "+fileName, e);
+                log.error("Error with fetching file: " + fileName, e);
             }
         }
     }
