@@ -1,4 +1,4 @@
-package com.vrc.logline.util;
+package com.vrc.logline.remote;
 
 import org.apache.commons.io.FileUtils;
 
@@ -6,15 +6,28 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyFileUtil {
+public class MyFile {
 
-    public static List<String> getFilePaths(String path) {
+    private String path;
+
+    public MyFile(String path) {
+        this.path = path;
+    }
+
+    public List<String> getChildren() {
         List<String> paths = new ArrayList<String>();
         recurseFile(new File(path), paths);
         return paths;
     }
 
-    private static void recurseFile(File target, List<String> paths) {
+    public void recreate() throws Exception {
+        File dir = new File(path);
+        if (dir.exists())
+            FileUtils.forceDelete(dir);
+        dir.mkdir();
+    }
+
+    private void recurseFile(File target, List<String> paths) {
         for (File file : target.listFiles()) {
             if (file.isDirectory()) {
                 recurseFile(file, paths);
@@ -22,12 +35,5 @@ public class MyFileUtil {
             }
             paths.add(file.getAbsolutePath());
         }
-    }
-
-    public static void recreate(String path) throws Exception {
-        File dir = new File(path);
-        if (dir.exists())
-            FileUtils.forceDelete(dir);
-        dir.mkdir();
     }
 }

@@ -1,87 +1,46 @@
 package com.vrc.logline.domain;
 
+import com.vrc.logline.remote.MyFile;
+import com.vrc.logline.remote.MyFtp;
+import com.vrc.logline.remote.MyRemote;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.net.ftp.FTPClient;
-import org.apache.commons.net.ftp.FTPFile;
 import org.apache.log4j.Logger;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import static com.vrc.logline.util.MyFileUtil.getFilePaths;
-import static com.vrc.logline.util.MyFileUtil.recreate;
-
 public class Machine {
     private static final Logger log = Logger.getLogger(Machine.class);
-    private Config config;
-    private Pattern logPattern = Pattern.compile("[\\w]+.log(.\\d)*");
+
     private String name;
     private String shortName;
     private String logDir;
     private String configDir;
+
+    private Config config;
+    private Pattern logPattern = Pattern.compile("[\\w]+.log(.\\d)*");
 
     public Machine(String name) {
         this.name = name;
         this.config = Config.get();
     }
 
-    public List<String> getLogFiles(String type) throws Exception {
-        String target = config.userDir() + "/logs/";
-        download(logDir, target, type, false);
-        return getFilePaths(target);
+    public List<String> browseLogFiles() throws Exception {
+        return new MyFtp(name).browse(logDir, logPattern);
     }
 
-    public List<String> browseLogFiles() throws Exception {
-        return browse(logDir, logPattern, ftpClient());
+    public List<String> getLogFiles(String type) throws Exception {
+        String targetDir = config.userDir() + "/logs/";
+        new MyFtp(name).download(logDir, targetDir, false, pattern(type));
+        log.info("all log files downloaded");
+        return new MyFile(targetDir).getChildren();
     }
 
     public List<String> getConfigFiles(String type) throws Exception {
-        String target = config.userDir() + "/config/";
-        download(configDir, target, type, true);
-        return getFilePaths(target);
-    }
-
-    public Machine download(String source, String target, String type, Boolean recurse) throws Exception {
-        Pattern pattern = pattern(type);
-        FTPClient ftpClient = ftpClient();
-        downloadRecurse(source, target, recurse, pattern, ftpClient);
-        ftpClient.disconnect();
-        return this;
-    }
-
-    private List<String> browse(String source, Pattern pattern, FTPClient ftpClient) throws Exception {
-        List<String> filteredFiles = new ArrayList<String>();
-        for (FTPFile ftpFile : ftpClient.listFiles(source)) {
-            if (!pattern.matcher(ftpFile.getName()).find()) continue;
-            filteredFiles.add(ftpFile.getName() + "   [" + ftpFile.getTimestamp().getTime() + "]");
-        }
-        return filteredFiles;
-    }
-
-    private void downloadRecurse(String source, String target, Boolean recurse, Pattern pattern, FTPClient ftpClient) throws Exception {
-        recreate(target);
-        for (FTPFile ftpFile : ftpClient.listFiles(source)) {
-            String fileName = ftpFile.getName();
-            if (!pattern.matcher(fileName).find())
-                continue;
-            if (ftpFile.isDirectory() && recurse) {
-                String sourceDir = source + "/" + ftpFile.getName();
-                String targetDir = target + "/" + ftpFile.getName();
-                downloadRecurse(sourceDir, targetDir, recurse, pattern, ftpClient);
-            } else {
-                String targetFile = target + "\\" + fileName;
-                String sourceFile = source + "/" + fileName;
-                log.info("downloading [" + sourceFile + "]");
-                FileOutputStream fileOutputStream = new FileOutputStream(new File(targetFile));
-                ftpClient.retrieveFile(sourceFile, fileOutputStream);
-                fileOutputStream.close();
-                log.info("downloaded [" + targetFile + "]");
-            }
-        }
+        String targetDir = config.userDir() + "/config/";
+        new MyFtp(name).download(configDir, targetDir, true, pattern(type));
+        log.info("all config files downloaded");
+        return new MyFile(targetDir).getChildren();
     }
 
     public boolean nameIs(String name) {
@@ -92,18 +51,8 @@ public class Machine {
         return name;
     }
 
-    private Pattern pattern(String type) {
-        if (StringUtils.isBlank(type)) return Pattern.compile(".*");
-        return Pattern.compile(type.replaceAll(",", "|"));
-    }
-
-    private FTPClient ftpClient() throws Exception {
-        log.info("connecting to " + name + " as " + config.username());
-        FTPClient ftpClient = new FTPClient();
-        ftpClient.connect(name);
-        ftpClient.login(config.username(), config.password());
-        log.info("connected to " + name + " as " + config.username());
-        return ftpClient;
+    public String shortName() {
+        return shortName;
     }
 
     public Machine withLogDir(String logDir) {
@@ -121,8 +70,9 @@ public class Machine {
         return this;
     }
 
-    public String shortName() {
-        return shortName;
+    private Pattern pattern(String type) {
+        if (StringUtils.isBlank(type)) return Pattern.compile(".*");
+        return Pattern.compile(type.replaceAll(",", "|"));
     }
 }
                                                                               
