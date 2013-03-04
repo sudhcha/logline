@@ -158,3 +158,8 @@ h2{
 #pick-log{
     font-weight:bold;
 }
+
+#settings-content{
+    height: 262px;
+    width: 718px;
+}

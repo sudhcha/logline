@@ -1,5 +1,9 @@
 package com.vrc.logline.domain;
 
+import com.vrc.logline.controller.FileDiffResultController;
+import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,6 +12,8 @@ import java.util.Properties;
 import java.util.regex.Pattern;
 
 public class Config {
+    private static final Logger log = Logger.getLogger(Config.class);
+
     private static Config instance = new Config();
     private Integer port;
     private Integer context;
@@ -26,11 +32,13 @@ public class Config {
     private Pattern datePattern2;
 
     private Config() {
+        load();
+    }
+
+    private void load() {
         Properties properties = new Properties();
         userDir = System.getProperty("user.dir");
-        File file = new File(userDir + "/config.properties");
-        if (!file.exists())
-            file = new File(ClassLoader.getSystemResource("config.properties").getFile());
+        File file = getFile();
         try {
             properties.load(new FileReader(file));
             port = Integer.parseInt((String) properties.get("app.run.port"));
@@ -52,6 +60,13 @@ public class Config {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private File getFile() {
+        File file = new File(userDir + "/config.properties");
+        if (!file.exists())
+            file = new File(ClassLoader.getSystemResource("config.properties").getFile());
+        return file;
     }
 
     public static Config get() {
@@ -122,22 +137,18 @@ public class Config {
         return datePattern2;
     }
 
-    @Override
-    public String toString() {
-        return "Config[" +
-                "port=" + port + "\n" +
-                ", context=" + context + "\n" +
-                ", runMode=" + runMode + "\n" +
-                ", username='" + username + "\n" +
-                ", password='" + password + "\n" +
-                ", userDir='" + userDir + "\n" +
-                ", userCvsDir='" + userCvsDir + "\n" +
-                ", devLogDir='" + devLogDir + "\n" +
-                ", devConfigDir='" + devConfigDir + "\n" +
-                ", moLogDir='" + moLogDir + "\n" +
-                ", moConfigDir='" + moConfigDir + "\n" +
-                ", prodLogDir='" + prodLogDir + "\n" +
-                ", prodConfigDir='" + prodConfigDir +
-                ']';
+    public String read() throws Exception {
+        StringBuffer buffer = new StringBuffer();
+        for (String line : FileUtils.readLines(getFile())) {
+            buffer.append(line + "\n");
+        }
+        return buffer.toString();
+    }
+
+    public void reload(String content) throws Exception {
+        FileUtils.write(getFile(), content);
+        load();
+        instance = new Config();
+        log.info("updated config");
     }
 }

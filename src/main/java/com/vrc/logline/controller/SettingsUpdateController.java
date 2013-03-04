@@ -6,17 +6,18 @@ import org.simpleframework.http.Response;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SettingsController extends BaseController {
+public class SettingsUpdateController extends BaseController {
 
-    public SettingsController() {
-        super("settings-view");
+    public SettingsUpdateController() {
+        super("settings-update");
     }
 
     @Override
     public void act(Request request, Response response) throws Exception {
         addHeaders(response);
+        String content = request.getParameter("content");
+        config.reload(content);
         Map<String, Object> model = new HashMap<String, Object>();
-        model.put("settings", config.read());
-        renderer.render("settings", model, response);
+        renderer.render("settings-update-results", model, response);
     }
 }

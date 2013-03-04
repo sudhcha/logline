@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ErrorController extends BaseController {
-    private static final Logger log = Logger.getLogger(FileDiffResultController.class);
+    private static final Logger log = Logger.getLogger(ErrorController.class);
 
     private Exception exception;
 

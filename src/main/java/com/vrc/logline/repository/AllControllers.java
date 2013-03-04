@@ -18,6 +18,7 @@ public class AllControllers {
         controllers.add(new LogBrowseController());
         controllers.add(new FileDiffController());
         controllers.add(new FileDiffResultController());
+        controllers.add(new SettingsUpdateController());
         controllers.add(new SettingsController());
         controllers.add(new HomeController());
     }

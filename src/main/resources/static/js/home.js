@@ -5,12 +5,13 @@ HomePage = function(){
           $.ajax({url : "log-tool",type : "GET"}).done(updateMainBoxForLog);
         });
         $('a.settings').click(function(){
-          $.ajax({url : "settings",type : "GET"}).done(updateMainBox);
+          $.ajax({url : "settings-view",type : "GET"}).done(updateMainBoxForSettings);
         });
         $('a.config').click(function(){
           $.ajax({url : "config-tool",type : "GET"}).done(updateMainBoxForDiff);
         });
       };
+
       var updateMainBox = function(response){
         $('#tool_box').html(response);
         $('#results').html('<p>Awaiting input...</p>');
@@ -19,6 +20,11 @@ HomePage = function(){
       var updateMainBoxForDiff = function(response){
         updateMainBox(response);
         new FileDiffForm().boot();
+      };
+
+      var updateMainBoxForSettings = function(response){
+        updateMainBox(response);
+        new Settings().boot();
       };
 
       var updateMainBoxForLog = function(response){
