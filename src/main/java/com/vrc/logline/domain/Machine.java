@@ -75,10 +75,11 @@ public class Machine {
             } else {
                 String targetFile = target + "\\" + fileName;
                 String sourceFile = source + "/" + fileName;
+                log.info("downloading [" + sourceFile + "]");
                 FileOutputStream fileOutputStream = new FileOutputStream(new File(targetFile));
                 ftpClient.retrieveFile(sourceFile, fileOutputStream);
                 fileOutputStream.close();
-                log.info("downloaded [" + sourceFile + "]=>[" + targetFile + "]");
+                log.info("downloaded [" + targetFile + "]");
             }
         }
     }
