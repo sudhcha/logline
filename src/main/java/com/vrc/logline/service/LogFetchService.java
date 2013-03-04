@@ -19,7 +19,7 @@ public class LogFetchService {
     public List<String> getFiles(String machineName, List<String> logFileNames) throws Exception {
         StringBuffer buffer = new StringBuffer();
         for (String logFileName : logFileNames)
-            buffer.append(logFileName.replaceAll("\\[.*\\]", "").trim() + "|");
+            buffer.append(logFileName.replaceAll("\\[.*\\]", "").trim() + "\\z|");
 
         String regex = StringUtils.removeEnd(buffer.toString(), "|");
         log.info("selected logs regex: " + regex);

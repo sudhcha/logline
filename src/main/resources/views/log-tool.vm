@@ -14,7 +14,7 @@
             <div class="controls"><input id="keys" type="text" class="required"/></div>
         </div>
         <div id="buttons" class="form-actions">
-            <input type="button" id="analyse" value="Analyse"/>
+            <input type="button" class="btn btn-primary" id="analyse" value="Analyse"/>
         </div>
     </form>
 </div>

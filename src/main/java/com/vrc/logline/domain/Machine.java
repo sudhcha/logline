@@ -98,9 +98,11 @@ public class Machine {
     }
 
     private FTPClient ftpClient() throws Exception {
+        log.info("connecting to " + name + " as " + config.username());
         FTPClient ftpClient = new FTPClient();
         ftpClient.connect(name);
         ftpClient.login(config.username(), config.password());
+        log.info("connected to " + name + " as " + config.username());
         return ftpClient;
     }
 

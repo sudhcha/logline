@@ -112,6 +112,11 @@ public class LogPatternTest {
         System.out.println("node1.log   [2013-01-23 10:43:24,606]".replaceAll("\\[.*\\]", "").trim());
         System.out.println(StringUtils.removeEnd("A|B|","|"));
 
+        Pattern pattern4 = Pattern.compile("b2_node1.log\\z|(b2_postprocess.log.1\\z)");
+        System.out.println(pattern4.matcher("b2_node1.log.1").find());
+        System.out.println(pattern4.matcher("b2_node1.log").find());
+        System.out.println(pattern4.matcher("b2_postprocess.log").find());
+
     }
 
 }
