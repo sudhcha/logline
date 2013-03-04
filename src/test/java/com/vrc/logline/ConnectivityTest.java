@@ -15,14 +15,14 @@ import java.util.Vector;
 public class ConnectivityTest {
 
     @Test
-    public void shouldConnectViaFTPToFetchFile() throws Exception {
+    public void shouldConnect() throws Exception {
         InetAddress address = InetAddress.getByName("nasnmasmo");
         System.out.println(address.getHostAddress());
-//        System.out.println(address.isReachable(4000));
-        SocketAddress sockaddr = new InetSocketAddress(address, 22);
-        Socket socket1 = new Socket();
-        socket1.connect(sockaddr, 22);
-        System.out.println(socket1.isConnected());
+        System.out.println(address.isReachable(4000));
+        SocketAddress socketAddress = new InetSocketAddress(address, 22);
+        Socket socket = new Socket();
+        socket.connect(socketAddress, 22);
+        System.out.println(socket.isConnected());
     }
 
     @Test
@@ -49,22 +49,20 @@ public class ConnectivityTest {
         try {
             session = jsch.getSession("vichakra", "nasnmas3", 22);
             session.setConfig("StrictHostKeyChecking", "no");
-            session.setPassword("bender555fry");
+            session.setPassword("######");
             session.connect();
 
             Channel channel = session.openChannel("sftp");
             channel.connect();
             ChannelSftp sftpChannel = (ChannelSftp) channel;
-//            sftpChannel.get("public/csrs-timesheets", "csr.txt");
+            sftpChannel.get("public/csrs-timesheets", "C:/work/csr.txt");
             Vector vector = sftpChannel.ls("public/tests");
             for (Object o : vector) {
                 System.out.println(o);
                 ChannelSftp.LsEntry lsEntry = (ChannelSftp.LsEntry) o;
-                System.out.println(lsEntry.getFilename()+"|"+lsEntry.getAttrs().getMtimeString()+"|"+lsEntry.getAttrs().isDir());
+                System.out.println(lsEntry.getFilename() + "|" + lsEntry.getAttrs().getMtimeString() + "|" + lsEntry.getAttrs().isDir());
 
             }
-
-
             sftpChannel.exit();
             session.disconnect();
         } catch (JSchException e) {

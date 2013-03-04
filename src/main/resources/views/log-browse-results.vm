@@ -1,4 +1,4 @@
-<div class="span4">
+<div class="span8">
     <form class="form-horizontal" action="">
     <p id="pick-log">Pick files to download</p>
     <div class="control-group">

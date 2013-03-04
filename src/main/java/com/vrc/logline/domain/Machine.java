@@ -2,6 +2,7 @@ package com.vrc.logline.domain;
 
 import com.vrc.logline.remote.MyFile;
 import com.vrc.logline.remote.MyFtp;
+import com.vrc.logline.remote.MyJsch;
 import com.vrc.logline.remote.MyRemote;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -26,19 +27,19 @@ public class Machine {
     }
 
     public List<String> browseLogFiles() throws Exception {
-        return new MyFtp(name).browse(logDir, logPattern);
+        return remote().browse(logDir, logPattern);
     }
 
     public List<String> getLogFiles(String type) throws Exception {
         String targetDir = config.userDir() + "/logs/";
-        new MyFtp(name).download(logDir, targetDir, false, pattern(type));
+        remote().download(logDir, targetDir, false, pattern(type));
         log.info("all log files downloaded");
         return new MyFile(targetDir).getChildren();
     }
 
     public List<String> getConfigFiles(String type) throws Exception {
         String targetDir = config.userDir() + "/config/";
-        new MyFtp(name).download(configDir, targetDir, true, pattern(type));
+        remote().download(configDir, targetDir, true, pattern(type));
         log.info("all config files downloaded");
         return new MyFile(targetDir).getChildren();
     }
@@ -73,6 +74,10 @@ public class Machine {
     private Pattern pattern(String type) {
         if (StringUtils.isBlank(type)) return Pattern.compile(".*");
         return Pattern.compile(type.replaceAll(",", "|"));
+    }
+
+    private MyRemote remote() {
+        return new MyJsch(name);
     }
 }
                                                                               
