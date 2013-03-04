@@ -109,6 +109,9 @@ public class LogPatternTest {
             System.out.println(change+"|"+pattern3.matcher(change).find());
         }
 
+        System.out.println("node1.log   [2013-01-23 10:43:24,606]".replaceAll("\\[.*\\]", "").trim());
+        System.out.println(StringUtils.removeEnd("A|B|","|"));
+
     }
 
 }

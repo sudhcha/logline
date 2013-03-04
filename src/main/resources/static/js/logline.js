@@ -199,28 +199,46 @@ ToolDialog = function(){
 
 //-------------------------------------------------------------------------------------------------
 LogFetch = function(){
-    var post = function(){
-        var machine = $("#machine").val();
+    var machine, logFileNames;
+
+    var browseLogs = function(){
+        machine = $("#machine").val();
         $("#loading-div-background").show();
-            $.ajax({
-            	url : "ftp",
+        $.ajax({
+            	url : "log-browse",
             	data : {
             		machine : machine
             	},
             	type : "POST"
             }).done(displayResults);
-        };
+    };
 
     var displayResults = function(response){
        $("#results").html(response);
        $("#loading-div-background").hide();
+       $('#download_logs').click(downloadLogs);
+    };
+
+    var downloadLogs = function(){
+        machine = $("#machine").val();
+        logFileNames = "";
+        $("#logFileNames option:selected").each(function () {
+            logFileNames += $(this).text() + ",";
+        });
+
+        $("#loading-div-background").show();
+        $.ajax({
+            	url : "log-download",
+            	data : {
+            		machine : machine,
+            		logFileNames:logFileNames
+            	},
+            	type : "POST"
+            }).done(displayResults);
     };
 
     this.boot = function(){
-        $('#fetch_logs').click(post);
+        $('#browse_logs').click(browseLogs);
     };
 };
 //-------------------------------------------------------------------------------------------------
-$(document).ready(function() {
-
-});

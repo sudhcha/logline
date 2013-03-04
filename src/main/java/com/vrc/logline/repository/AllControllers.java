@@ -13,8 +13,9 @@ public class AllControllers {
     public AllControllers() {
         controllers.add(new StaticController());
         controllers.add(new LogSearchController());
-        controllers.add(new LogFetchController());
+        controllers.add(new LogDownloadController());
         controllers.add(new LogToolController());
+        controllers.add(new LogBrowseController());
         controllers.add(new FileDiffController());
         controllers.add(new FileDiffResultController());
         controllers.add(new SettingsController());

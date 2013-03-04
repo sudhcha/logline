@@ -21,6 +21,6 @@
      </div>
 </div>
 <div id="buttons" class="form-actions">
-    <input type="button" id="fetch_diff" value="Start"/>
+    <input type="button" class="btn btn-primary" id="fetch_diff" value="Start"/>
 </div>
 </form>

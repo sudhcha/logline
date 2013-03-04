@@ -9,23 +9,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LogFetchController extends BaseController {
-    private static final Logger log = Logger.getLogger(LogFetchController.class);
+public class LogBrowseController extends BaseController {
+    private static final Logger log = Logger.getLogger(LogDownloadController.class);
 
-    public LogFetchController() {
-        super("ftp");
+    public LogBrowseController() {
+        super("log-browse");
     }
 
     @Override
     public void act(Request request, Response response) throws Exception {
         log.info(request.getPath());
         addHeaders(response);
-
         String machine = request.getParameter("machine");
-        List<String> logNames = new LogFetchService().getFiles(machine);
+        List<String> logFiles = new LogFetchService().browseFiles(machine);
 
         Map<String, Object> model = new HashMap<String, Object>();
-        model.put("logNames", logNames);
-        renderer.render("log-fetch-results", model, response);
+        model.put("logFiles", logFiles);
+        renderer.render("log-browse-results", model, response);
     }
 }

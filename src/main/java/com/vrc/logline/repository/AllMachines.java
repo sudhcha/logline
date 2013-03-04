@@ -20,7 +20,6 @@ public class AllMachines {
     public Machine getFor(String name) {
         for (Machine machine : machines)
             if (machine.nameIs(name))
-
                 return machine;
         return null;
     }

@@ -34,7 +34,7 @@
      </div>
 </div>
 <div id="buttons" class="form-actions">
-    <input type="button" id="fetch_logs" value="Download"/>
+    <input type="button" class="btn btn-primary" id="browse_logs" value="Browse"/>
 </div>
 </form>
 #end

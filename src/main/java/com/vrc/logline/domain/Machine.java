@@ -7,6 +7,8 @@ import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -16,6 +18,7 @@ import static com.vrc.logline.util.MyFileUtil.recreate;
 public class Machine {
     private static final Logger log = Logger.getLogger(Machine.class);
     private Config config;
+    private Pattern logPattern = Pattern.compile("[\\w]+.log(.\\d)*");
     private String name;
     private String shortName;
     private String logDir;
@@ -32,6 +35,10 @@ public class Machine {
         return getFilePaths(target);
     }
 
+    public List<String> browseLogFiles() throws Exception {
+        return browse(logDir, logPattern, ftpClient());
+    }
+
     public List<String> getConfigFiles(String type) throws Exception {
         String target = config.userDir() + "/config/";
         download(configDir, target, type, true);
@@ -46,23 +53,33 @@ public class Machine {
         return this;
     }
 
+    private List<String> browse(String source, Pattern pattern, FTPClient ftpClient) throws Exception {
+        List<String> filteredFiles = new ArrayList<String>();
+        for (FTPFile ftpFile : ftpClient.listFiles(source)) {
+            if (!pattern.matcher(ftpFile.getName()).find()) continue;
+            filteredFiles.add(ftpFile.getName() + "   [" + ftpFile.getTimestamp().getTime() + "]");
+        }
+        return filteredFiles;
+    }
+
     private void downloadRecurse(String source, String target, Boolean recurse, Pattern pattern, FTPClient ftpClient) throws Exception {
         recreate(target);
         for (FTPFile ftpFile : ftpClient.listFiles(source)) {
             String fileName = ftpFile.getName();
-            if (!pattern.matcher(fileName).find()) continue;
+            if (!pattern.matcher(fileName).find())
+                continue;
             if (ftpFile.isDirectory() && recurse) {
                 String sourceDir = source + "/" + ftpFile.getName();
                 String targetDir = target + "/" + ftpFile.getName();
                 downloadRecurse(sourceDir, targetDir, recurse, pattern, ftpClient);
-                continue;
+            } else {
+                String targetFile = target + "\\" + fileName;
+                String sourceFile = source + "/" + fileName;
+                FileOutputStream fileOutputStream = new FileOutputStream(new File(targetFile));
+                ftpClient.retrieveFile(sourceFile, fileOutputStream);
+                fileOutputStream.close();
+                log.info("downloaded [" + sourceFile + "]=>[" + targetFile + "]");
             }
-            String targetFile = target +"\\"+ fileName;
-            String sourceFile = source +"/"+ fileName;
-            FileOutputStream fileOutputStream = new FileOutputStream(new File(targetFile));
-            ftpClient.retrieveFile(sourceFile, fileOutputStream);
-            fileOutputStream.close();
-            log.info("downloaded [" + sourceFile + "]=>[" + targetFile + "]");
         }
     }
 

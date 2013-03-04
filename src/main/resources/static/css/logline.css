@@ -149,3 +149,12 @@ h2{
 .expand-diff{
   color:maroon;
 }
+
+#logFileNames{
+    height:600px;
+    width: 500px;
+}
+
+#pick-log{
+    font-weight:bold;
+}
