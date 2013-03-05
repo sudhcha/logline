@@ -1,5 +1,6 @@
 package com.vrc.logline.controller;
 
+import com.vrc.logline.domain.NameGroup;
 import com.vrc.logline.service.LogFetchService;
 import org.apache.log4j.Logger;
 import org.simpleframework.http.Request;
@@ -24,7 +25,7 @@ public class LogBrowseController extends BaseController {
         List<String> logFiles = new LogFetchService().browseFiles(machine);
 
         Map<String, Object> model = new HashMap<String, Object>();
-        model.put("logFiles", logFiles);
+        model.put("logFileMap", new NameGroup(logFiles).byName());
         renderer.render("log-browse-results", model, response);
     }
 }

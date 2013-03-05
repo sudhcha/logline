@@ -3,8 +3,12 @@
     <p id="pick-log">Pick files to download</p>
     <div class="control-group">
          <select multiple="multiple" id="logFileNames">
-         #foreach($logFile in $logFiles)
-            <option>$logFile</option>
+         #foreach($key in $logFileMap.keySet())
+            <optgroup label="${key}">
+            #foreach($logFile in $logFileMap.get($key))
+                <option>$logFile</option>
+            #end
+            </optgroup>
          #end
          </select>
     </div>
