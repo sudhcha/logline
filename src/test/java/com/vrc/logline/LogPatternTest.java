@@ -3,6 +3,9 @@ package com.vrc.logline;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 
 import java.io.File;
@@ -66,6 +69,9 @@ public class LogPatternTest {
         for (String key : StringUtils.split(keys, ",")) {
             System.out.println(StringUtils.deleteWhitespace(key));
         }
+        System.out.println(DateTimeFormat.forPattern("MM/dd/yyyy HH:mm:ss").parseDateTime("03/12/2013 16:30:15"));
+        System.out.println(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss,SSS").parseDateTime("2013-02-04 09:57:58,574"));
+        System.out.println(DateTimeFormat.forPattern("dd MMM yyyy HH:mm:ss").parseDateTime("02 Mar 2013 03:49:45"));
     }
 
     @Test

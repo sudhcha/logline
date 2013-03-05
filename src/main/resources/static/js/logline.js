@@ -1,9 +1,11 @@
 LogForm = function(){
-    var folder, keys;
+    var folder, keys, startDate, endDate;
 
     var pick = function() {
 		folder = $("#folder").val();
 		keys = $("#keys").val();
+		startDate = $("#start_date").val();
+		endDate = $("#end_date").val();
 	};
 
     var post = function(){
@@ -13,7 +15,9 @@ LogForm = function(){
         	url : "analyse",
         	data : {
         		folder : folder,
-        		keys : keys
+        		keys : keys,
+        		startDate:startDate,
+        		endDate:endDate
         	},
         	type : "POST"
         }).done(displayResults);
@@ -29,6 +33,8 @@ LogForm = function(){
     this.boot = function(){
         $("#analyse").click(post);
         $("#loading-div-background").css({ opacity: 0.7 });
+        $("#start_date").datetimepicker();
+        $("#end_date").datetimepicker();
     };
 };
 //-------------------------------------------------------------------------------------------------

@@ -7,12 +7,24 @@
     <form id="log_form" class="form-horizontal" action="">
         <div class="control-group">
             <label for="folder" class="control-label">Logs Folder</label>
-            <div class="controls"><input id="folder" type="text" class="required" value="${folder}"/></div>
+            <div class="controls"><input id="folder" type="text"  class="input-xxlarge" value="${folder}"/></div>
         </div>
         <div class="control-group">
             <label for="keys" class="control-label">Keys</label>
-            <div class="controls"><input id="keys" type="text" class="required"/></div>
+            <div class="controls"><input id="keys" type="text"  class="input-xxlarge"/></div>
         </div>
+        <div class="control-group">
+		    <label for="start_date" class="control-label">Start Date</label>
+		    <div class="controls">
+		        <input id="start_date" class="input-large" type="text"/>
+		    </div>
+		</div>
+		<div class="control-group">
+		    <label for="end_date" class="control-label">End Date</label>
+		    <div class="controls">
+		        <input id="end_date" class="input-large" type="text"/>
+		    </div>
+		</div>
         <div id="buttons" class="form-actions">
             <input type="button" class="btn btn-primary" id="analyse" value="Analyse"/>
         </div>

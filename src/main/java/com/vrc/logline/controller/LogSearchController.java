@@ -22,7 +22,9 @@ public class LogSearchController extends BaseController implements Controller {
 
         String keys = request.getParameter("keys");
         String folder = request.getParameter("folder");
-        LogSearchService logSearchService = new LogSearchService(keys, folder);
+        String startDate = request.getParameter("startDate");
+        String endDate = request.getParameter("endDate");
+        LogSearchService logSearchService = new LogSearchService(keys, folder, startDate, endDate);
         logSearchService.process();
 
         Map<String, Object> model = new HashMap<String, Object>();

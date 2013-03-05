@@ -19,10 +19,10 @@ public class LogSearchService {
     private AllLines allLines;
     private AllProcessors allProcessors;
 
-    public LogSearchService(String keys, String folder) {
+    public LogSearchService(String keys, String folder, String startDate, String endDate) {
         this.folder = folder;
         this.allLines = new AllLines();
-        this.allProcessors = new AllProcessors();
+        this.allProcessors = new AllProcessors(startDate,endDate);
         this.allRules = new AllRules(split(keys));
     }
 

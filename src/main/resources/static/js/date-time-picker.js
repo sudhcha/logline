@@ -56,7 +56,7 @@
 
 			return {
 				showOn: "button",
-				buttonImage: "css/images/calendar.gif",
+				buttonImage: "static/images/arrow.gif",
 				buttonImageOnly: true,
 				changeMonth: true,
 				changeYear: true,

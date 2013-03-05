@@ -1,6 +1,4 @@
-input{
-    width:500px;
-}
+
 input, button, select, textarea {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
 }
@@ -162,4 +160,12 @@ h2{
 #settings-content{
     height: 262px;
     width: 718px;
+}
+
+select{
+ width: 200px !important;
+}
+
+.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
+    margin-left: -28px !important;
 }
