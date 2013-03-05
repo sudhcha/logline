@@ -163,3 +163,7 @@ h2{
 .ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
     margin-left: -28px !important;
 }
+
+#tool_box{
+    border-bottom: 1px solid lightgray;
+}
