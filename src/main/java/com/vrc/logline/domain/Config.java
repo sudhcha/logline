@@ -142,6 +142,7 @@ public class Config {
         for (String line : FileUtils.readLines(getFile())) {
             buffer.append(line + "\n");
         }
+        log.info("read from config [" + buffer + "]");
         return buffer.toString();
     }
 
@@ -149,6 +150,6 @@ public class Config {
         FileUtils.write(getFile(), content);
         load();
         instance = new Config();
-        log.info("updated config");
+        log.info("updated config with [" + content + "]");
     }
 }

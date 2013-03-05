@@ -14,7 +14,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 
 public class StaticController extends BaseController {
-    private static final Logger log = Logger.getLogger(HomeController.class);
+    private static final Logger log = Logger.getLogger(StaticController.class);
 
     public StaticController() {
         super("static");

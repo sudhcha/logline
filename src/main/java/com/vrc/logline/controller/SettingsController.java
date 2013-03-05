@@ -14,7 +14,6 @@ public class SettingsController extends BaseController {
 
     @Override
     public void act(Request request, Response response) throws Exception {
-        addHeaders(response);
         Map<String, Object> model = new HashMap<String, Object>();
         model.put("settings", config.read());
         renderer.render("settings", model, response);

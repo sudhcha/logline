@@ -17,13 +17,14 @@ public class LogSearchController extends BaseController implements Controller {
 
     @Override
     public void act(Request request, Response response) throws Exception {
-        log.info(request.getPath());
         addHeaders(response);
-
+        log.info(request.getPath());
         String keys = request.getParameter("keys");
         String folder = request.getParameter("folder");
         String startDate = request.getParameter("startDate");
         String endDate = request.getParameter("endDate");
+        log.info("keys=" + keys + "|folder=" + folder + "|startDate=" + startDate + "|endDate=" + endDate);
+
         LogSearchService logSearchService = new LogSearchService(keys, folder, startDate, endDate);
         logSearchService.process();
 

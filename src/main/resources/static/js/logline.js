@@ -16,8 +16,8 @@ LogForm = function(){
         	data : {
         		folder : folder,
         		keys : keys,
-        		startDate:startDate,
-        		endDate:endDate
+        		startDate: startDate,
+        		endDate: endDate
         	},
         	type : "POST"
         }).done(displayResults);

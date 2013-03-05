@@ -14,7 +14,6 @@ public class SettingsUpdateController extends BaseController {
 
     @Override
     public void act(Request request, Response response) throws Exception {
-        addHeaders(response);
         String content = request.getParameter("content");
         config.reload(content);
         Map<String, Object> model = new HashMap<String, Object>();
