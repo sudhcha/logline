@@ -41,19 +41,19 @@ public class Config {
         File file = getFile();
         try {
             properties.load(new FileReader(file));
-            port = Integer.parseInt((String) properties.get("app.run.port"));
+            port = Integer.parseInt(((String) properties.get("app.run.port")).trim());
             runMode = (properties.get("app.run.mode")).equals("jar");
-            context = Integer.parseInt((String) properties.get("log.context"));
-            username = (String) properties.get("user.name");
-            password = (String) properties.get("user.password");
+            context = Integer.parseInt(((String) properties.get("log.context")).trim());
+            username = ((String) properties.get("user.name")).trim();
+            password = ((String) properties.get("user.password")).trim();
 
-            userCvsDir = (String) properties.get("user.cvs.dir");
-            devLogDir = (String) properties.get("dev.log.dir");
-            devConfigDir = (String) properties.get("dev.config.dir");
-            moLogDir = (String) properties.get("mo.log.dir");
-            moConfigDir = (String) properties.get("mo.config.dir");
-            prodLogDir = (String) properties.get("prod.log.dir");
-            prodConfigDir = (String) properties.get("prod.config.dir");
+            userCvsDir = ((String) properties.get("user.cvs.dir")).trim();
+            devLogDir = ((String) properties.get("dev.log.dir")).trim();
+            devConfigDir = ((String) properties.get("dev.config.dir")).trim();
+            moLogDir = ((String) properties.get("mo.log.dir")).trim();
+            moConfigDir = ((String) properties.get("mo.config.dir")).trim();
+            prodLogDir = ((String) properties.get("prod.log.dir")).trim();
+            prodConfigDir = ((String) properties.get("prod.config.dir")).trim();
 
             datePattern1 = Pattern.compile("(?<timestamp>[0-9]{4}-[0-9]{2}-[0-9]{2}\\s*[0-9]{1,2}:[0-9]{2}:[0-9]{2},[0-9]{0,3})]\\s*(?<thread>.*)\\s*(INFO|WARN|FATAL|ERROR|DEBUG)");
             datePattern2 = Pattern.compile("[0-9]{2}\\s*(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\s*[0-9]{4}\\s*[0-9]{1,2}:[0-9]{2}:[0-9]{2}");
