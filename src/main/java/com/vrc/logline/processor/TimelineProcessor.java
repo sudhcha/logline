@@ -20,6 +20,7 @@ public class TimelineProcessor implements Processor {
     private final String pattern1 = "MM/dd/yyyy HH:mm:ss";
     private final String pattern2 = "yyyy-MM-dd HH:mm:ss,SSS";
     private final String pattern3 = "dd MMM yyyy HH:mm:ss";
+    private final String pattern4 = "MM/dd/yyyy";
 
     public TimelineProcessor(String startDate, String endDate) {
         this.startDate = parse(startDate, pattern1);
@@ -53,6 +54,9 @@ public class TimelineProcessor implements Processor {
     }
 
     private DateTime parse(String date, String pattern) {
-        return StringUtils.isNotBlank(date) ? DateTimeFormat.forPattern(pattern).parseDateTime(date) : DateTime.now();
+        if (StringUtils.isBlank(date)) return DateTime.now();
+        date = date.trim();
+        return date.contains(":") ? DateTimeFormat.forPattern(pattern).parseDateTime(date)
+                : DateTimeFormat.forPattern(pattern4).parseDateTime(date);
     }
 }
